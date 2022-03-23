@@ -10,8 +10,9 @@ start = time.time()
 
 # Now the numbers of the form 2 * a * n where n is odd can be more conveniently
 # expressed in the form (4 * k + 2) * a where k >= 0 is arbitrary. The possible
-# remainders r upon division by are: 0 * a, 1 * a, ..., (a - 1) * a. Let us try
-# to find out when the maximum possible remainder (a - 1) * a can be realized.
+# remainders r upon division by a **2 are: 0 * a, 1 * a, ..., (a - 1) * a. Let
+# us try to find out when the maximum possible remainder (a - 1) * a can be
+# realized.
 
 # For this to hold, we need that (4 * k + 2) * a = (a - 1) * a (mod a**2), that
 # is, (4 * k + 3) * a = 0 (mod a**2). If a is _odd_, then 4 is a unit in
