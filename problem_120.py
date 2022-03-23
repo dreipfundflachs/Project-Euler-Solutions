@@ -5,7 +5,7 @@ start = time.time()
 # The problem becomes quite easy with the appropriate mathematical background.
 # Notice that using binomial expansion, (a - 1)**n + (a + 1)**n equals
 # [1 + (-1)**n] + n * a * [1 - (-1)**n] + {other terms divisible by a**2}.
-# Hence, the remainder upon division by a**2 equal 2 if n is even and 2 * a * n
+# Hence, the remainder upon division by a**2 equals 2 if n is even and 2 * a * n
 # (mod a**2) if n is odd. 
 
 # Now the numbers of the form 2 * a * n where n is odd can be more conveniently
