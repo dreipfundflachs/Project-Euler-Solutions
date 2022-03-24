@@ -3,7 +3,7 @@ Contains solutions to some [Project Euler](https://www.projecteuler.net) problem
 My badge is available [here](https://projecteuler.net/profile/dreipfundflachs.png) 
 and my [friend key](https://projecteuler.net/minimal=friends) is 1912870_zicXUiSA5Mv6wAvcZOOv8FMAfCtCClsu
 
-*Favorite Problems* (in ascending order):
+Favorite Problems (in ascending order):
   59, 81, 82, 83, 164, 191
 
 
