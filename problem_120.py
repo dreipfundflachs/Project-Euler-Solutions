@@ -20,7 +20,7 @@ start = time.time()
 # then take k = k_0 + (a - 1) - 3 to realize the maximum possible remainder.
 
 # On the other hand, if a is even, then a**2 cannot divide (4 * k + 3) * a,
-# because if m is the largest power of 2 dividing a, the largest power of 2
+# since if m is the largest power of 2 dividing a, the largest power of 2
 # dividing (4 * k + 3) * a is also 2, while for a**2 this largest power is 
 # 2 * m.
 

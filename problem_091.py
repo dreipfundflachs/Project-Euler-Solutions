@@ -1,11 +1,11 @@
-# PROJECT EULER PROBLEM
+# PROJECT EULER PROBLEM 091
 import time
 
 start = time.time()
 
 N = 50
 total = 0
-# Consider each possible pair of points (x_1, y_1) and (x_2, y_2). 
+# Iterate over each possible pair of points (x_1, y_1) and (x_2, y_2). 
 for x_1 in range(N + 1):
     for y_1 in range(N + 1):
         for x_2 in range(N + 1):
