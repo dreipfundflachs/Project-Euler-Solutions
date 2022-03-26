@@ -1,80 +1,44 @@
 # PROJECT EULER PROBLEM 112
 import time
 
-# DEFINE FUNCTION TO COMPUTE PROPORTION OF BOUNCY NUMBERS UP TO N GIVEN THE
-# LIST BELOW OF ALL NON-BOUNCY NUMBERS
-
 start = time.time()
-increasing = []
-decreasing = []
-constant = [str(k) for k in range(1, 10)]
-constant += [str(k) + str(k) for k in range(1, 10)]
 
+# The value of N below was set after finding the answer to, decrease runtime.
+N = 16 * 10**5
 
-for i in range(1, 10):
-    for j in range(i + 1, 10):
-        s = str(i) + str(j)
-        increasing.append(s)
+# Begin by initializing dictionaries to flag all decreasing and increasing
+# numbers. Note that a number may be both increasing and decreasing
+# simultaneously if its digits form a constant sequence, but this will be
+# irrelevant below.  We use strings instead of integers as keys in order to
+# consider cases such as '01' or '00' as valid.
+decreasing = {str(n): False for n in range(10, N + 1)}
+increasing = {str(n): False for n in range(10, N + 1)}
 
-print(increasing)
-print(constant)
-both = increasing + constant
-ls_100 = [str(k) for k in range(1, 100)]
-decreasing = list(set(ls_100).difference(both))
-decreasing.sort()
-print(decreasing)
+# Flag all increasing and all decreasing strings between '00' and '99'.
+for a in range(0, 10):
+    for b in range(a, 10):
+        increasing[str(a) + str(b)] = True
+        decreasing[str(b) + str(a)] = True
 
-curr_decreasing = decreasing
-curr_increasing = increasing
-curr_constant = constant[9:]
-
-new_increasing = []
-new_constant = []
-new_decreasing = []
-
-for r in range(3, 8):
-
-    for x in curr_increasing:
-        m = int(x[-1])
-        for k in range(m, 10):
-            y = x + str(k)
-            new_increasing.append(y)
-
-    new_decreasing = []
-    for x in curr_decreasing:
-        m = int(x[-1])
-        for k in range(0, m + 1):
-            y = x + str(k)
-            new_decreasing.append(y)
-
-    for x in curr_constant:
-        m = int(x[-1])
-        y = x + str(m)
-        new_constant.append(y)
-        for k in range(0, m):
-            y = x + str(k)
-            new_decreasing.append(y)
-        for k in range(m + 1, 10):
-            y = x + str(k)
-            new_increasing.append(y)
-
-    increasing += new_increasing
-    decreasing += new_decreasing
-    constant += new_constant
-    curr_constant = new_constant
-    new_constant = []
-    curr_increasing = new_increasing
-    new_increasing = []
-    curr_decreasing = new_decreasing
-    new_decreasing = []
-    print(increasing)
-    print(decreasing)
-    print(constant)
-
-    bouncy = 10**r - len(increasing) - len(decreasing) - len(constant)
-    prop = bouncy / (10**r)
-    print(prop)
-
+bouncy = 0
+# To identify new increasing or decreasing numbers n, we compare its trailing
+# digit to its next-to-last digit, and also verify whether the substring
+# obtained by discarding the trailing digit is increasing or decreasing.
+for n in range(100, N + 1):
+    s = str(n)
+    trailing_digit = int(s[-1])
+    next_to_last_digit = int(s[-2])
+    if trailing_digit <= next_to_last_digit and decreasing[s[:-1]]:
+        decreasing[str(n)] = True
+    if trailing_digit >= next_to_last_digit and increasing[s[:-1]]:
+        increasing[str(n)] = True
+    # If n is neither increasing nor decreasing, it must be bouncy.
+    if not (increasing[str(n)] or decreasing[str(n)]):
+        bouncy += 1
+        proportion = bouncy / n
+        if proportion >= 0.99:
+            print(n, proportion)
+            break
 
 end = time.time()
 print(f"Program runtime is: {end - start} seconds")

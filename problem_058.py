@@ -31,17 +31,10 @@ for k in range(1, m):
         if is_prime_simple(new):
             count += 1
     if count / total < 0.100000:
-        print(side_length)
-#        print(relevant)
-        print(f"The total number of primes in a square of side {side_length} "
-                f"is {count} out of a total of {total} numbers along the "
+        print(f"The total number of primes in a square of side {side_length}\n"
+                f"is {count} out of a total of {total} numbers along the\n"
                 f"diagonals, yielding the ratio {count/total}")
         break
-# print(diagonals[0])
-# print(diagonals[1])
-# print(diagonals[2])
-
-print(side_length, count, total, count/total)
 
 end = time.time()
 print(f"Program runtime is: {end - start} seconds")

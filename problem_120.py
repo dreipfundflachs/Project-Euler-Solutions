@@ -21,7 +21,7 @@ start = time.time()
 
 # On the other hand, if a is even, then a**2 cannot divide (4 * k + 3) * a,
 # since if m is the largest power of 2 dividing a, the largest power of 2
-# dividing (4 * k + 3) * a is also 2, while for a**2 this largest power is 
+# dividing (4 * k + 3) * a is also m, while for a**2 this largest power is 
 # 2 * m.
 
 # Hence if a is even, we attempt to realize the second largest possible
@@ -36,7 +36,6 @@ N = 1000
 total = 0
 
 for a in range(3, N + 1):
-    # Let n = 1, 3, 5, ..., up to a (or a -1).
     current_remainders = []
     if a % 2 == 0:
         r = a * (a - 2)

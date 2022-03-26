@@ -1,30 +1,36 @@
-# PROJECT EULER PROBLEM 076
-
+# PROJECT EULER PROBLEM 078
 import time
+from itertools import cycle, count
 
-# Initialize the number of ways in which all integers <= N can be written as a
-# sum of positive integers (possibly a single integer). For the math to work
-# out, we also set ways[0] = 1. Later on we need to subtract 1 from ways[n] for
-# all n since the problem statement explicitly excludes the case where there is
-# a single summand.
+
+def pentagonal(n):
+    return n * (3 * n - 1) // 2
+
+
+def partition(n):
+    global partitions
+    if n <= 1:
+        return 1
+    if n not in partitions:
+        signs = cycle([1, 1, -1, -1])
+        pentagonals = [p for p in generalized_pentagonals if p <= n]
+        partitions[n] = sum(sign * partition(n - p) \
+                for sign, p in zip(signs, pentagonals)) % 10**6
+
+    return partitions[n]
+
+
 start = time.time()
-N = 10**5
-ways = [1] * (N + 1)
 
-# For increasing k and n >= k, compute the number of ways that n can be written
-# as a sum of positive integers in which the largest summand is exactly k by
-# subtracting k from n and referring to the number of ways to write (n - k) as
-# a sum of integers, none of which is larger than k (which has been calculated
-# previously).
-for largest_k in range(2, N + 1):
-    for n in range(largest_k, N + 1):
-        ways[n] = (ways[n] + ways[n - largest_k]) % 6
+P = 250
+partitions = {0: 1, 1: 1}
+generalized_pentagonals = \
+        sorted([ k * (3 * k - 1)//2 for k in range(-P, P) if k != 0])
 
-for n in ways:
-    if ways[n] == 0:
-        print(n)
-        break
+print(next((n for n in count(0) if partition(n) == 0)))
 
 end = time.time()
+
+
 print(f"Program runtime is: {end - start} seconds")
 

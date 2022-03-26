@@ -22,5 +22,6 @@ for largest_k in range(2, N + 1):
 
 # Subtract 1 from the number of ways to discard the sum 100 = 0 + 100.
 print(ways[100] - 1)
+
 end = time.time()
 print(f"Program runtime is: {end - start} seconds")
