@@ -35,7 +35,7 @@ for n in range(2, N + 1):
 total_increasing = sum(map(sum, increasing))
 total_decreasing = sum(map(sum, decreasing))
 
-# The set of 'constant' numbers, i.e., of the form 'dd...d' having a given
+# The set of 'constant' numbers, i.e., of the form 'dd...d', having a given
 # length is always 9. Note that these are exactly the numbers that are
 # both increasing and decreasing. They were thus counted twice above.
 total_constant = 9 * N
