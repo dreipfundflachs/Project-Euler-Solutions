@@ -8,5 +8,6 @@ Favorite Problems (in ascending order):
 [81](https://projecteuler.net/problem=81),
 [82](https://projecteuler.net/problem=82),
 [83](https://projecteuler.net/problem=83),
+[113](https://projecteuler.net/problem=113),
 [164](https://projecteuler.net/problem=164),
 [191](https://projecteuler.net/problem=191)
