@@ -1,8 +1,5 @@
 __pycache__/
-private_solutions
-.swp
 *.swp
-*swp
 test.py
 number.txt
 problems_200_plus
