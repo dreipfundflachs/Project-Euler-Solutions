@@ -32,6 +32,16 @@ def gcd(a, b):
         return gcd(a, b % a)
 
 
+def powmod(base: int, exp: int, m: int) -> int:
+    """ Computes base**exp (mod m) efficiently (log(exp) time). """
+    if exp == 1:
+        return base % m
+    elif exp % 2 == 0:
+        return (powmod(base, exp // 2, m)**2) % m
+    else:
+        return ((base * powmod(base, (exp - 1)//2, m)**2) % m)
+
+
 def prime_sieve(n):
     """ Returns a list of all primes <= n using Erasthotenes' sieve """
     primes = []
