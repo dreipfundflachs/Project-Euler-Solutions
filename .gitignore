@@ -1,4 +1,7 @@
 __pycache__/
 private_solutions
-*.swp
 .swp
+*.swp
+*swp
+test.py
+number.txt
