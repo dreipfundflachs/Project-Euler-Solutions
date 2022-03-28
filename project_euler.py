@@ -81,7 +81,7 @@ def is_prime(n, primes):
     return True
 
 
-def is_prime_simple(n):
+def is_prime(n):
     """ Verifies directly whether a number is prime. """
     if n % 2 == 0:
         return False
