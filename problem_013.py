@@ -1,7 +1,6 @@
 # PROJECT EULER PROBLEM 13
 import time
 
-
 start = time.time()
 with open('p013_numbers.txt') as file_object:
     numbers = []

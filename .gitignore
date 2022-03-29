@@ -1,6 +1,0 @@
-.gitignore
-__pycache__/
-*.swp
-test.py
-number.txt
-problems_200_plus

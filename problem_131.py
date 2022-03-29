@@ -4,13 +4,18 @@ import time
 # This is more of a math problem than a programming problem. The original
 # equation n**3 + n**2 * p = m**3 is equivalent to n**3 * ((n + p) / n) = m**3.
 # Taking cube roots we deduce that the cube root of (n + p) / n must be
-# rational. This can happen if and only if (n + p) / n is the cube of a
-# rational number. If n + p and n have no common prime factors, then the only
-# way that this can happen is for both n + p and n to be cubes. If n + p and n
-# do have common prime factors, then the only possible such factor is p itself
-# (indeed, if a prime q != p divides n, it cannot divide n + p, since it does
-# not divide q). After clearing this common factor p we deduce by the first
-# case that both (n / p + 1) and n / p have to be cubes, which is impossible.
+# rational. In turn, this holds if and only if (n + p) / n is the cube of a
+# rational number.
+
+# If n + p and n have no common prime factors, then the only way that this can
+# happen is for both n + p and n to be cubes.
+
+# If n + p and n do have common prime factors, then the only possible such
+# factor is p itself (indeed, if a prime q != p divides n, it cannot divide n +
+# p, since it does not divide p).  After clearing this common factor p we
+# deduce by the first case that both (n / p + 1) and n / p have to be cubes,
+# which is impossible since the difference between two cubes cannot be 1.
+
 # In conclusion, both n + p and n have to be cubes, that is, p is a difference
 # of two cubes.
 

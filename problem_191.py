@@ -21,6 +21,7 @@ import time
 # at the beginning for clarity. The reader will easily be able to prove the
 # validity of the formulas.
 
+
 def s_O(n):
     """ Computes the number of strings of length n which end in an 'O' and do
     not contain the letter 'L'. """
@@ -72,7 +73,7 @@ def s_O_contains_L(n):
     elif n == 2:
         return 1
     else:
-        return (s_O_contains_L(n - 1) + s_A_contains_L(n - 1) +\
+        return (s_O_contains_L(n - 1) + s_A_contains_L(n - 1) +
                 + s_AA_contains_L(n - 1) + s_L(n - 1))
 
 
@@ -97,34 +98,37 @@ def s_AA_contains_L(n):
     else:
         return s_A_contains_L(n - 1)
 
-start = time.time()
 
-N = 30
-# Initialize a list s containing the various types of prize strings for n = 4.
-s = [0] * 7
-s[0] = s_O(4)
-s[1] = s_A(4)
-s[2] = s_AA(4)
-s[3] = s_L(4)
-s[4] = s_O_contains_L(4)
-s[5] = s_A_contains_L(4)
-s[6] = s_AA_contains_L(4)
+if __name__ == "__main__":
 
-# Define a temporary list t to hold the results of computation in each step.
-# The formulas below just mimic the function definitions above in list format.
-t = [0] * 7
-for n in range(5, N + 1):
-    t[0] = s[0] + s[1] + s[2]
-    t[1] = s[0]
-    t[2] = s[1]
-    t[3] = s[0] + s[1] + s[2]
-    t[4] = s[3] + s[4] + s[5] + s[6]
-    t[5] = s[4] + s[3]
-    t[6] = s[5]
-    s = t[:]
+    start = time.time()
 
-# Print the answer.
-print(sum(t))
+    N = 30
+    s = [0] * 7     # List containing the various types of prize strings.
+    s[0] = s_O(4)
+    s[1] = s_A(4)
+    s[2] = s_AA(4)
+    s[3] = s_L(4)
+    s[4] = s_O_contains_L(4)
+    s[5] = s_A_contains_L(4)
+    s[6] = s_AA_contains_L(4)
 
-end = time.time()
-print(f"Program runtime is: {end - start} seconds")
+    # Use a temporary list 't' to hold the results of computation in each
+    # step.
+    t = [0] * 7
+    # The formulas below mimic the function definitions above in list format.
+    for n in range(5, N + 1):
+        t[0] = s[0] + s[1] + s[2]
+        t[1] = s[0]
+        t[2] = s[1]
+        t[3] = s[0] + s[1] + s[2]
+        t[4] = s[3] + s[4] + s[5] + s[6]
+        t[5] = s[4] + s[3]
+        t[6] = s[5]
+        s = t[:]
+
+    # Print the answer.
+    print(sum(t))
+
+    end = time.time()
+    print(f"Program runtime is: {end - start} seconds")
