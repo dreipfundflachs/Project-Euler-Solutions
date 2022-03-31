@@ -30,7 +30,7 @@ end = time.time()
 print(f"Program runtime is: {end - start} seconds")
 
 # Here is an initial failed attempt using dynamic programming
-# which gives a wrong answer 1584, off by 2. 
+# which gives the wrong answer: 1584, off by 2. 
 def fill(ms) -> int:
     """ Returns the value of the function m(n) described in the statement. """
     dynamic = [[] for k in range(N + 1)]
