@@ -2,7 +2,11 @@ from math import prod, isqrt
 import itertools
 
 
-# %%%%% Functions involving primes, factorization, etc. %%%%%% #
+#################################################################
+#  FUNCTIONS INVOLVING PRIMES, FACTORIZATION, DIVISORS, ETC...  #
+#################################################################
+
+
 def even(n: int) -> bool:
     """ Decides whether a number is even """
     if n % 2 == 0:
@@ -42,7 +46,7 @@ def powmod(base: int, exp: int, m: int) -> int:
         return ((base * powmod(base, (exp - 1)//2, m)**2) % m)
 
 
-def prime_sieve(n: int) -> list(int):
+def prime_sieve(n: int) -> list[int]:
     """ Returns a list of all primes <= n using Erasthotenes' sieve """
     primes = []
     flags = [True] * (n+1)
@@ -56,7 +60,7 @@ def prime_sieve(n: int) -> list(int):
     return primes
 
 
-def prime_sieve_flags(n: int) -> list(bool):
+def prime_sieve_flags(n: int) -> list[bool]:
     """ Returns a 'flags' of primes <=n, such that
     flags[p] = True if and only if p is a prime number."""
     flags = [True] * (n+1)
@@ -69,10 +73,9 @@ def prime_sieve_flags(n: int) -> list(bool):
     return flags
 
 
-def is_prime_given_primes(n: int, primes: list(int)) -> bool:
+def is_prime_given_primes(n: int, primes: list[int]) -> bool:
     """ Tells whether a number n is prime,
-    given a list of all primes from 2 to the square root of n
-    """
+    given a list of all primes from 2 to the square root of n """
     for p in primes:
         if n == p:
             return True
@@ -94,7 +97,7 @@ def is_prime(n: int) -> bool:
         return True
 
 
-def integer_product(list_of_integers: list(int)) -> int:
+def integer_product(list_of_integers: list[int]) -> int:
     """ Takes a list of integers and returns their product """
     p = 1
     for k in list_of_integers:
@@ -102,10 +105,9 @@ def integer_product(list_of_integers: list(int)) -> int:
     return p
 
 
-def prime_factors(n: int) -> list(int):
+def prime_factors(n: int) -> list[int]:
     """ Returns the list of all prime factors of n.
-        Determines all necessary primes on the fly.
-    """
+        Determines all necessary primes on the fly.  """
     number = n
     primes = []
     factors = []
@@ -127,8 +129,7 @@ def prime_factors(n: int) -> list(int):
 
 def divisor_count(n: int) -> int:
     """ Counts the number of divisors of n,
-        including 1 and the number itself.
-    """
+        including 1 and the number itself.  """
     list_of_factors = prime_factors(n)
     set_of_factors = set(list_of_factors)
     prod = 1
@@ -138,13 +139,27 @@ def divisor_count(n: int) -> int:
     return prod
 
 
-def prime_factors_given_primes(n: int, primes: list(int)) -> int:
+def divisor_count_given_primes(n: int, primes: list[int]) -> int:
+    """ Counts the number of divisors of n,
+        including 1 and the number itself.  """
+    prod = 1
+    for p in primes:
+        if n == 1:
+            break
+        multiplicity = 0
+        while (n % p) == 0:
+            multiplicity += 1
+            n //= p
+        prod *= multiplicity + 1
+    return prod
+
+
+def prime_factors_given_primes(n: int, primes: list[int]) -> int:
     """
     Returns the list of all prime factors of n,
     each prime appearing the same number of times as its multiplicity,
     given a list that includes all primes less than n
-    Ex.: prime_factors(60, [2, 3, 5, 7, 11]) -> [2, 2, 3, 5]
-    """
+    Ex.: prime_factors(60, [2, 3, 5, 7, 11]) -> [2, 2, 3, 5] """
     prime_factors = []
     for p in primes:
         if n == 1:
@@ -155,12 +170,11 @@ def prime_factors_given_primes(n: int, primes: list(int)) -> int:
     return prime_factors
 
 
-def prime_tuples_given_primes(n: int, primes: list(int)) -> int:
+def prime_tuples_given_primes(n: int, primes: list[int]) -> int:
     """
     Returns the set of all prime factors of n in tuple form,
     given a list that includes all primes less than n
-    Ex.: prime_factors(60, [2, 3, 5, 7, 11]) -> {(2,2), (3,1), (5, 1)}
-    """
+    Ex.: prime_factors(60, [2, 3, 5, 7, 11]) -> {(2,2), (3,1), (5, 1)} """
     prime_tuples = set()
     for p in primes:
         if n == 1:
@@ -174,11 +188,10 @@ def prime_tuples_given_primes(n: int, primes: list(int)) -> int:
     return prime_tuples
 
 
-def proper_divisors_given_primes(n: int, primes: list(int)) -> list(int):
+def proper_divisors_given_primes(n: int, primes: list[int]) -> list[int]:
     """
     Returns the list of all proper divisors of n (i.e., < n)
-    given a list that includes all primes less than n
-    """
+    given a list that includes all primes less than n """
     list_of_prime_factors = prime_factors_given_primes(n, primes)
     m = len(list_of_prime_factors)
     tuples = set()
@@ -188,6 +201,13 @@ def proper_divisors_given_primes(n: int, primes: list(int)) -> list(int):
     result = [prod(t) for t in tuples]
     result.append(1)
     return result
+
+
+def sum_of_proper_divisors(n: int, primes: list[int]) -> int:
+    """
+    Returns the sum of all proper divisors of n
+    given a list that includes all primes less than n """
+    return(sum(proper_divisors_given_primes(n, primes)))
 
 
 def number_of_digits(n: int) -> int:
@@ -210,12 +230,15 @@ def get_digital_sum(n: int) -> int:
     return s
 
 
-# %%%%% Functions involving matrices and arrays %%%%% #
+#############################################
+#  FUNCTIONS INVOLVING MATRICES AND ARRAYS  #
+#############################################
+
+
 def transpose(A: list) -> list:
     """
     Transposes a (not necessarily square nor numeric) matrix
-    (list of lists, each of the same size)
-    """
+    (list of lists, each of the same size) """
     m = len(A)
     n = len(A[0])
     # Initialize the transpose
@@ -228,31 +251,11 @@ def transpose(A: list) -> list:
     return B
 
 
-def proper_divisors(n: int, primes: list(int)) -> list(int):
-    """
-    Returns the list of all divisors of n distinct from n
-    given a list that includes all primes less than n
-    """
-    list_of_prime_factors = prime_factors_given_primes(n, primes)
-    m = len(list_of_prime_factors)
-    tuples = set()
-    for k in range(1, m):
-        new_tuples = set(itertools.combinations(list_of_prime_factors, k))
-        tuples = tuples.union(new_tuples)
-    result = [prod(t) for t in tuples]
-    result.append(1)
-    return result
 
+#################
+#  MISCELLANEA  #
+#################
 
-def sum_of_proper_divisors(n: int, primes: list(int)) -> int:
-    """
-    Returns the sum of all proper divisors of n
-    given a list that includes all primes less than n
-    """
-    return(sum(proper_divisors(n, primes)))
-
-
-# %%%%% Miscellanea %%%%% #
 
 def sum_of_digits(n: int) -> int:
     """ Returns the sum of all the digits of n """
@@ -281,7 +284,7 @@ def palindromic(string: str) -> bool:
     return (string == string[::-1])
 
 
-def palindromes(n: int) -> list(int):
+def palindromes(n: int) -> list[int]:
     """ Produces a list of all palindromic numbers having at most n digits."""
     palindromes = [False] * (10**n)
     half = n // 2
@@ -317,9 +320,13 @@ def uniquify(lst: list) -> list:
             new_lst.append(x)
     return new_lst
 
-# %%%%% Characters and strings %%%%% #
 
-def convert_list_to_int(lst: list(int)) -> int:
+################################################
+#  FUNCTIONS INVOLVING STRINGS AND CHARACTERS  #
+################################################
+
+
+def convert_list_to_int(lst: list[int]) -> int:
     return int(''.join(str(i) for i in lst))
 
 
@@ -337,8 +344,7 @@ def name_score(name: str) -> int:
     return score
 
 
-def flatten(t: list(list)) -> list:
+def flatten(t: list[list]) -> list:
     """ Converts a list of lists into a single list by joining all sublists,
-    e.g., flatten([[1, 2], [2, 3]]) --> [1, 2, 2, 3]
-    """
+    e.g., flatten([[1, 2], [2, 3]]) --> [1, 2, 2, 3] """
     return [item for sublist in t for item in sublist]
