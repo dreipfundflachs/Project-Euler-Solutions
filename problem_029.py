@@ -1,4 +1,4 @@
-# PROJECT EULER PROBLEM 029
+# PROJECT EULER - PROBLEM 029
 import time
 from project_euler import prime_sieve, uniquify
 from project_euler import prime_tuples_given_primes as pt

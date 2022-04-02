@@ -1,4 +1,4 @@
-# PROJECT EULER PROBLEM 24
+# PROJECT EULER - PROBLEM 24
 import time
 from itertools import permutations
 

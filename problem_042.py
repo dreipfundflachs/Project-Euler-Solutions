@@ -1,4 +1,4 @@
-# PROJECT EULER PROBLEM 042
+# PROJECT EULER - PROBLEM 042
 import time
 import csv
 from project_euler import name_score

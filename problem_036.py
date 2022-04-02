@@ -1,4 +1,4 @@
-# PROJECT EULER PROBLEM 036
+# PROJECT EULER - PROBLEM 036
 import time
 from project_euler import dec_to_bin, palindromic
 

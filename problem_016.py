@@ -1,4 +1,4 @@
-# PROJECT EULER PROBLEM 16
+# PROJECT EULER - PROBLEM 16
 
 def sum_of_digits(n):
     """ Returns the sum of all the digits of n """

@@ -1,4 +1,4 @@
-# PROJECT EULER PROBLEM 027
+# PROJECT EULER - PROBLEM 027
 import time
 from project_euler import prime_sieve
 

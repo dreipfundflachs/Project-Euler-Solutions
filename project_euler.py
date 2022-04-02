@@ -1,3 +1,7 @@
+##############################################################
+#  SOME USEFUL FUNCTIONS FOR SOLVING PROJECT EULER PROBLEMS  #
+##############################################################
+
 from math import prod, isqrt
 import itertools
 

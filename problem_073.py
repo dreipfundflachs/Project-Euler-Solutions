@@ -1,4 +1,4 @@
-# PROJECT EULER PROBLEM 073
+# PROJECT EULER - PROBLEM 073
 import time
 from project_euler import gcd
 

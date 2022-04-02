@@ -1,4 +1,4 @@
-# PROJECT EULER PROBLEM 095
+# PROJECT EULER - PROBLEM 095
 import time
 from functools import reduce
 

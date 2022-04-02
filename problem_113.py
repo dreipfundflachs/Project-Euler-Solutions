@@ -1,4 +1,4 @@
-# PROJECT EULER PROBLEM 113
+# PROJECT EULER - PROBLEM 113
 import time
 
 # We begin by initializing two lists of lists, increasing and decreasing,

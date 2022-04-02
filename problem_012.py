@@ -1,4 +1,4 @@
-# PROJECT EULER PROBLEM 12
+# PROJECT EULER - PROBLEM 12
 def prime_factors(n):
     """ Returns the list of all prime factors of n """
     number = n

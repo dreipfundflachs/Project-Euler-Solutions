@@ -1,4 +1,4 @@
-# PROJECT EULER PROBLEM
+# PROJECT EULER - PROBLEM
 import time
 from project_euler import prime_sieve
 from itertools import permutations, combinations

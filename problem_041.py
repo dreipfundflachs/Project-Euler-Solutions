@@ -1,4 +1,4 @@
-# PROJECT EULER PROBLEM 041
+# PROJECT EULER - PROBLEM 041
 import time
 from project_euler import prime_sieve, is_prime, convert_list_to_int
 from itertools import permutations

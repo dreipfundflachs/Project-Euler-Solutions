@@ -1,4 +1,4 @@
-# PROJECT EULER PROBLEM 066
+# PROJECT EULER - PROBLEM 066
 import time
 from math import isqrt
 from project_euler import is_square

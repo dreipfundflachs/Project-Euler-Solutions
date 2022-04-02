@@ -1,4 +1,4 @@
-# PROJECT EULER PROBLEM 6
+# PROJECT EULER - PROBLEM 6
 
 # Note first that the difference is simply the sum of 2*a*b for a < b and
 # a, b between 1 and n

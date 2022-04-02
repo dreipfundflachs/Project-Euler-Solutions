@@ -1,4 +1,4 @@
-# PROJECT EULER PROBLEM 8
+# PROJECT EULER - PROBLEM 8
 
 def list_product(list):
     """ Takes a list of integers and returns their product """

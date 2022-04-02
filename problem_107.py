@@ -1,4 +1,4 @@
-# PROJECT EULER PROBLEM 107
+# PROJECT EULER - PROBLEM 107
 # The problem is easily solved by Kruskal's algorithm.
 import time
 

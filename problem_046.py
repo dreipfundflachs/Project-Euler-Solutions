@@ -1,4 +1,4 @@
-# PROJECT EULER PROBLEM 046
+# PROJECT EULER - PROBLEM 046
 import time
 from project_euler import prime_sieve, is_square
 

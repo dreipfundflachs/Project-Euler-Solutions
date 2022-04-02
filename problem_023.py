@@ -1,4 +1,4 @@
-# PROJECT EULER PROBLEM 023
+# PROJECT EULER - PROBLEM 023
 import time
 from project_euler import prime_sieve
 from project_euler import proper_divisors_given_primes as pd

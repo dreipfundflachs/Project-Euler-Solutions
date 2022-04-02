@@ -1,5 +1,5 @@
 ###############################
-#  PROJECT EULER PROBLEM 116  #
+#  PROJECT EULER - PROBLEM 116  #
 ###############################
 
 import time

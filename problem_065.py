@@ -1,4 +1,4 @@
-# PROJECT EULER PROBLEM 065
+# PROJECT EULER - PROBLEM 065
 import time
 from project_euler import get_digital_sum
 

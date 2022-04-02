@@ -1,4 +1,4 @@
-# PROJECT EULER PROBLEM 060
+# PROJECT EULER - PROBLEM 060
 import time
 from project_euler import prime_sieve, is_prime_simple
 from itertools import combinations

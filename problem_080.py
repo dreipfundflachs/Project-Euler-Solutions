@@ -1,4 +1,4 @@
-# PROJECT EULER PROBLEM 080
+# PROJECT EULER - PROBLEM 080
 import time
 from decimal import *
 

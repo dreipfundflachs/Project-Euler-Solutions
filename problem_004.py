@@ -1,4 +1,4 @@
-# PROJECT EULER PROBLEM 4
+# PROJECT EULER - PROBLEM 4
 
 def palindrome(n):
     """ Return the largest palindromic number that is the product

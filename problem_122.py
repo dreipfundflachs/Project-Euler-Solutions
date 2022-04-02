@@ -1,4 +1,4 @@
-# PROJECT EULER PROBLEM 122
+# PROJECT EULER - PROBLEM 122
 import time
 from itertools import combinations_with_replacement as cwr
 

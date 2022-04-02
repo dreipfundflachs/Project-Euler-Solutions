@@ -1,4 +1,4 @@
-# PROJECT EULER PROBLEM 21
+# PROJECT EULER - PROBLEM 21
 import time
 import itertools
 import math

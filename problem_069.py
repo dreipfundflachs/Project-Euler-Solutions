@@ -1,4 +1,4 @@
-# PROJECT EULER PROBLEM 069
+# PROJECT EULER - PROBLEM 069
 import time
 from project_euler import prime_sieve
 from functools import reduce

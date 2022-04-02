@@ -1,4 +1,4 @@
-# PROJECT EULER PROBLEM 102
+# PROJECT EULER - PROBLEM 102
 import time
 
 start = time.time()

@@ -1,6 +1,6 @@
-###############################
-#  PROJECT EULER PROBLEM 124  #
-###############################
+#################################
+#  PROJECT EULER - PROBLEM 124  #
+#################################
 
 import time
 from functools import reduce

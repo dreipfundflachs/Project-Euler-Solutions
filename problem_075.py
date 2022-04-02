@@ -1,4 +1,4 @@
-# PROJECT EULER PROBLEM 075
+# PROJECT EULER - PROBLEM 075
 import time
 from math import isqrt
 

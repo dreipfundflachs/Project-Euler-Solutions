@@ -1,4 +1,4 @@
-# PROJECT EULER PROBLEM 053
+# PROJECT EULER - PROBLEM 053
 import time
 from scipy.special import comb
 

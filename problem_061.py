@@ -1,4 +1,4 @@
-# PROJECT EULER PROBLEM 066
+# PROJECT EULER - PROBLEM 066
 import time
 from itertools import combinations
 

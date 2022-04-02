@@ -1,4 +1,4 @@
-# PROJECT EULER PROBLEM 10
+# PROJECT EULER - PROBLEM 10
 
 def prime_sieve(n):
     """ Returns a list of all primes <= n using Erasthotenes' sieve """

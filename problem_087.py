@@ -1,4 +1,4 @@
-# PROJECT EULER PROBLEM 087
+# PROJECT EULER - PROBLEM 087
 import time
 from project_euler import prime_sieve
 from math import isqrt

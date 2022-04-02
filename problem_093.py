@@ -1,4 +1,4 @@
-# PROJECT EULER PROBLEM 093
+# PROJECT EULER - PROBLEM 093
 import time
 from itertools import combinations, product
 

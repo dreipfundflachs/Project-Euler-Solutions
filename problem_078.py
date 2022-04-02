@@ -1,4 +1,4 @@
-# PROJECT EULER PROBLEM 078
+# PROJECT EULER - PROBLEM 078
 import time
 from itertools import cycle, count
 

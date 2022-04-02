@@ -1,4 +1,4 @@
-# PROJECT EULER PROBLEM 057
+# PROJECT EULER - PROBLEM 057
 import time
 from project_euler import number_of_digits
 

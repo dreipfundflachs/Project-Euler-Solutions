@@ -1,4 +1,4 @@
-# PROJECT EULER PROBLEM 099
+# PROJECT EULER - PROBLEM 099
 import time
 from math import log10
 

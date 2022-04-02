@@ -1,4 +1,4 @@
-# PROJECT EULER PROBLEM 101
+# PROJECT EULER - PROBLEM 101
 import time
 from operator import mul
 from functools import reduce

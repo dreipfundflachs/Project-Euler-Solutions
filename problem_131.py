@@ -1,4 +1,4 @@
-# PROJECT EULER PROBLEM 131
+# PROJECT EULER - PROBLEM 131
 import time
 
 # This is more of a math problem than a programming problem. The original

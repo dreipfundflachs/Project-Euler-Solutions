@@ -1,4 +1,4 @@
-# PROJECT EULER PROBLEM
+# PROJECT EULER - PROBLEM
 import time
 from math import factorial
 

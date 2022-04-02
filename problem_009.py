@@ -1,4 +1,4 @@
-# PROJECT EULER PROBLEM 9
+# PROJECT EULER - PROBLEM 9
 
 flag = False
 for b in range(250, 1000, 1):

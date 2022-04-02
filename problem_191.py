@@ -1,4 +1,4 @@
-# PROJECT EULER PROBLEM 191
+# PROJECT EULER - PROBLEM 191
 import time
 
 # This problem can easily be solved by finding recursive formulas for the

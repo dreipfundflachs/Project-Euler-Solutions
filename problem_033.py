@@ -1,4 +1,4 @@
-# PROJECT EULER PROBLEM 033
+# PROJECT EULER - PROBLEM 033
 import time
 from fractions import Fraction
 
