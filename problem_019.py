@@ -37,4 +37,4 @@ for year in range(1901, 2001):
 print(sunday_count)
 
 end = time.time()
-print(f"Program runtime is: {end - start} seconds")
+print(f"Program runtime: {end - start} seconds")

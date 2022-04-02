@@ -82,4 +82,4 @@ for n1 in figurates[8]:
 
 
 end = time.time()
-print(f"Program runtime is: {end - start} seconds")
+print(f"Program runtime: {end - start} seconds")

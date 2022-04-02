@@ -43,4 +43,4 @@ for i in range(len(primes) + 1):
 print(count)
 
 end = time.time()
-print(f"Program runtime is: {end - start} seconds")
+print(f"Program runtime: {end - start} seconds")

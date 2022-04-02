@@ -27,4 +27,4 @@ for a in range(1, 100):
 print(ma, mb, m)
 
 end = time.time()
-print(f"Program runtime is: {end - start} seconds")
+print(f"Program runtime: {end - start} seconds")

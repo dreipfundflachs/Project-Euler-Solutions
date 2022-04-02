@@ -76,4 +76,4 @@ s = sum(list_of_counts) + 3 + 8
 print(s)
 
 end = time.time()
-print(f"Program runtime is: {end - start} seconds")
+print(f"Program runtime: {end - start} seconds")

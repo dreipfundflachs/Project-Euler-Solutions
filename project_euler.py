@@ -154,7 +154,7 @@ def divisor_count_given_primes(n: int, primes: list[int]) -> int:
     return prod
 
 
-def prime_factors_given_primes(n: int, primes: list[int]) -> int:
+def prime_factors_given_primes(n: int, primes: list[int]) -> list[int]:
     """
     Returns the list of all prime factors of n,
     each prime appearing the same number of times as its multiplicity,

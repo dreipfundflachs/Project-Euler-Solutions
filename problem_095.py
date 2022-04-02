@@ -43,4 +43,4 @@ for n in range(N + 1):
 print(min(max_chain))
 
 end = time.time()
-print(f"Program runtime is: {end - start} seconds")
+print(f"Program runtime: {end - start} seconds")

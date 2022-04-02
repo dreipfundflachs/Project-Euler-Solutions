@@ -32,5 +32,5 @@ print(next((n for n in count(0) if partition(n) == 0)))
 end = time.time()
 
 
-print(f"Program runtime is: {end - start} seconds")
+print(f"Program runtime: {end - start} seconds")
 

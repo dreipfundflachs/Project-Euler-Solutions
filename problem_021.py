@@ -72,4 +72,4 @@ for n in range(1, 10_000):
             amicable += n + m
 print(amicable)
 end = time.time()
-print(f"Program runtime is: {end - start} seconds")
+print(f"Program runtime: {end - start} seconds")

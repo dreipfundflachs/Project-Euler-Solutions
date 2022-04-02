@@ -126,4 +126,4 @@ for d in range(6, dmax):
 
 
 end = time.time()
-print(f"Program runtime is: {end - start} seconds")
+print(f"Program runtime: {end - start} seconds")

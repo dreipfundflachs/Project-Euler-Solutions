@@ -27,7 +27,7 @@ print(sum([bound(k) for k in range(1, N + 1)]))
 
 
 end = time.time()
-print(f"Program runtime is: {end - start} seconds")
+print(f"Program runtime: {end - start} seconds")
 
 # Here is an initial failed attempt using dynamic programming
 # which gives the wrong answer: 1584, off by 2. 

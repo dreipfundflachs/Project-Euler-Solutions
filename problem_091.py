@@ -26,4 +26,4 @@ for x_1 in range(N + 1):
 print(total // 2)
 
 end = time.time()
-print(f"Program runtime is: {end - start} seconds")
+print(f"Program runtime: {end - start} seconds")

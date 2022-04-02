@@ -17,4 +17,4 @@ for k in range(1, 10**3):
         count += 1
 
 end = time.time()
-print(f"Program runtime is: {end - start} seconds")
+print(f"Program runtime: {end - start} seconds")

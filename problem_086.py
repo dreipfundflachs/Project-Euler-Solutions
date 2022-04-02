@@ -38,4 +38,4 @@ while total < 10**6:
 print(n, total)
 
 end = time.time()
-print(f"Program runtime is: {end - start} seconds")
+print(f"Program runtime: {end - start} seconds")

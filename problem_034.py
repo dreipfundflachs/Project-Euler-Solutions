@@ -26,4 +26,4 @@ for n in range(3, 7*factorial_list[9]):
 
 print(sum(special))
 end = time.time()
-print(f"Program runtime is: {end - start} seconds")
+print(f"Program runtime: {end - start} seconds")

@@ -43,4 +43,4 @@ for j in reversed(range(N - 1)):
 print(A[0][0])
 
 end = time.time()
-print(f"Program runtime is: {end - start} seconds")
+print(f"Program runtime: {end - start} seconds")

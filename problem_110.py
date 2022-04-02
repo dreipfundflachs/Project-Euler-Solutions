@@ -1,5 +1,5 @@
 ###############################
-#  PROJECT EULER PROBLEM 108  #
+#  PROJECT EULER PROBLEM 110  #
 ###############################
 
 # First note that x, y must be greater than n. Hence we can write them in the

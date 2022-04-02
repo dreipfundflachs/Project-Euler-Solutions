@@ -1,4 +1,7 @@
-# PROJECT EULER PROBLEM
+###############################
+#  PROJECT EULER PROBLEM 038  #
+###############################
+
 import time
 
 
@@ -40,4 +43,4 @@ for base in range(10**4):
 print(mbase, mn, m)
 
 end = time.time()
-print(f"Program runtime is: {end - start} seconds")
+print(f"Program runtime: {end - start} seconds")

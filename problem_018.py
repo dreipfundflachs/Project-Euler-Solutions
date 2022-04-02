@@ -39,4 +39,4 @@ for k in range(n - 1, 0, -1):
 
 print(numbers)
 end = time.time()
-print(f"Program runtime is: {end - start} seconds")
+print(f"Program runtime: {end - start} seconds")

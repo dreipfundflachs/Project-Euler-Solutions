@@ -9,4 +9,4 @@ with open('p013_numbers.txt') as file_object:
     print(sum(numbers))
 
 end = time.time()
-print(f"Program runtime is: {end - start} seconds")
+print(f"Program runtime: {end - start} seconds")

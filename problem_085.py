@@ -38,4 +38,4 @@ print(special_m, special_n, special_m * special_n)
 print(number_of_subrectangles(special_m, special_n), diff)
 
 end = time.time()
-print(f"Program runtime is: {end - start} seconds")
+print(f"Program runtime: {end - start} seconds")

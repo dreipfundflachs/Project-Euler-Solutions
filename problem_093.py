@@ -97,4 +97,4 @@ print((f"Combining the digits in {max_digits} under all possible\n"
        f"natural number between 1 and {m}."))
 
 end = time.time()
-print(f"Program runtime is: {end - start} seconds")
+print(f"Program runtime: {end - start} seconds")

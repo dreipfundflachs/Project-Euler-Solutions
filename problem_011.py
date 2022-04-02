@@ -86,4 +86,4 @@ print(max(p_1, p_2, p_3, p_4))
 
 
 end = time.time()
-print(f"Program runtime is: {end - start} seconds")
+print(f"Program runtime: {end - start} seconds")

@@ -29,4 +29,4 @@ print(pentagonal)
 print(hexagonal)
 
 end = time.time()
-print(f"Program runtime is: {end - start} seconds")
+print(f"Program runtime: {end - start} seconds")

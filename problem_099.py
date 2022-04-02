@@ -27,4 +27,4 @@ for (l, a, b) in triples:
 print(ml)
 
 end = time.time()
-print(f"Program runtime is: {end - start} seconds")
+print(f"Program runtime: {end - start} seconds")

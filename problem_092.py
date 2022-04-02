@@ -56,4 +56,4 @@ for n in range(r + 1, 10**7):
 print(count_89)
 
 end = time.time()
-print(f"Program runtime is: {end - start} seconds")
+print(f"Program runtime: {end - start} seconds")

@@ -24,4 +24,4 @@ for largest_k in range(2, N + 1):
 print(ways[100] - 1)
 
 end = time.time()
-print(f"Program runtime is: {end - start} seconds")
+print(f"Program runtime: {end - start} seconds")

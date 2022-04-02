@@ -131,4 +131,4 @@ if __name__ == "__main__":
     print(sum(t))
 
     end = time.time()
-    print(f"Program runtime is: {end - start} seconds")
+    print(f"Program runtime: {end - start} seconds")

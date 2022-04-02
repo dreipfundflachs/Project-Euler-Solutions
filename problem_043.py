@@ -21,4 +21,4 @@ pandigitals = permutations((str(i) for i in range(0, 10)))
 print(sum(convert_list_to_int(p) for p in pandigitals if has_property(p)))
 
 end = time.time()
-print(f"Program runtime is: {end - start} seconds")
+print(f"Program runtime: {end - start} seconds")

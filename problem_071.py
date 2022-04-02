@@ -41,4 +41,4 @@ for q in range(8, C + 1):
 print(max_p, max_q, max_frac)
 
 end = time.time()
-print(f"Program runtime is: {end - start} seconds")
+print(f"Program runtime: {end - start} seconds")

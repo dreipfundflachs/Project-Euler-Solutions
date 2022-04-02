@@ -22,4 +22,4 @@ for k in reversed(range(0, m - 1)):
 # Print the answer.
 print(rows[0])
 end = time.time()
-print(f"Program runtime is: {end - start} seconds")
+print(f"Program runtime: {end - start} seconds")
