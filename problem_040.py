@@ -16,10 +16,10 @@ start = time.time()
 
 numbers = list(range(1, 7*10**5))
 str_numbers = [str(number) for number in numbers]
-print(str_numbers)
+# print(str_numbers)
 digits = concatenate_list(str_numbers)
-print(digits)
-print(digits[10])
+# print(digits)
+# print(digits[10])
 product = 1
 for n in range(0, 7):
     index = 10**n - 1

@@ -5,21 +5,21 @@ import time
 
 start = time.time()
 
-# Extract the numerals to a list, each entry being a string
+# Extract the numerals to a list, each entry being a string.
 numerals = []
 with open('p089_roman.txt') as file_object:
     for line in file_object:
         numerals.append(line.strip())
 
 # Here are the patterns which can be replaced by shorter ones (in each case,
-# the substitution will have only two characters)
+# the substitution will have only two characters).
 five_patterns = ['VIIII', 'LXXXX', 'DCCCC']
 four_patterns = ['IIII', 'XXXX', 'CCCC']
 
-# For each string in the list, moving from the beginning to the end of the
-# string, consider each substring of five or four subsequent characters. If it
-# matches one of the above, compute the number of characters that could be
-# saved in this segment and move the head by 5 or 4 units to the right.
+# For each string in the list, moving from the beginning to the end, consider
+# the substring consisting of the next five or four subsequent characters. If
+# it matches one of the above, compute the number of characters that could be
+# saved in this segment and move the head by 5 or 4 units to the right, resp.
 characters_saved = 0
 for string in numerals:
     k = 0
