@@ -10,7 +10,7 @@ import time
 # cover(a, b, n) = 2(a + b) + 4 * (n - 1)
 
 # Using the same reasoning, one again sees by induction that the number of
-# cubes in the n-th layer (n >= 1) of the covering of a cube of dimensions
+# cubes in the n-th layer (n >= 1) of the covering of a cuboid of dimensions
 # a <= b <= c is given by:
 # cover(a, b, c, n) = 2 * (a * b + a * c + b * c)
 #                   + 4 * (n - 1) * (a + b + c + n - 2)

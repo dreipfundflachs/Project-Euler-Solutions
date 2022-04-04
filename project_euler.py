@@ -3,7 +3,8 @@
 ##############################################################
 
 from math import prod, isqrt
-import itertools
+from itertools import combinations
+from functools import reduce
 
 
 #################################################################
@@ -29,7 +30,7 @@ def is_square(n: int) -> bool:
 
 
 def gcd(a: int, b: int) -> int:
-    """ Computes the g.c.d. (a.k.a. h.c.f.) of the integers a and b."""
+    """ Computes the g.c.d. (also known as h.c.f.) of the integers a and b."""
     if b == 0 or a == b:
         return a
     elif a == 0:
@@ -38,6 +39,18 @@ def gcd(a: int, b: int) -> int:
         return gcd(b, a % b)
     elif b > a:
         return gcd(a, b % a)
+
+
+def involves_only(n: int, p: int, q: int) -> bool:
+    """ Checks if the prime factors of n all lie in the set {p, q}. """
+    while (n % p) == 0:
+        n //= p
+    while (n % q) == 0:
+        n //= q
+    if n > 1:
+        return False
+    else:
+        return True
 
 
 def powmod(base: int, exp: int, m: int) -> int:
@@ -50,36 +63,50 @@ def powmod(base: int, exp: int, m: int) -> int:
         return ((base * powmod(base, (exp - 1)//2, m)**2) % m)
 
 
-def prime_sieve(n: int) -> list[int]:
-    """ Returns a list of all primes <= n using Erasthotenes' sieve """
+def prime_sieve(N: int) -> list[int]:
+    """ Returns a list of all primes <= N using Erasthotenes' sieve """
     primes = []
-    flags = [True] * (n+1)
-    flags[0] = False
-    flags[1] = False
-    for (k, isprime) in enumerate(flags):
+    prime_flags = [True] * (N + 1)
+    prime_flags[0] = False
+    prime_flags[1] = False
+    for (k, isprime) in enumerate(prime_flags):
         if isprime:
             primes.append(k)
-            for m in range(k*k, n+1, k):
-                flags[m] = False
+            for multiple in range(k * k, N + 1, k):
+                prime_flags[multiple] = False
     return primes
 
 
 def prime_sieve_flags(n: int) -> list[bool]:
-    """ Returns a 'flags' of primes <=n, such that
-    flags[p] = True if and only if p is a prime number."""
-    flags = [True] * (n+1)
+    """ Returns a 'prime_flags' of primes <=n, such that prime_flags[p] = True
+    if and only if p is a prime number."""
+    prime_flags = [True] * (n+1)
+    prime_flags[0] = False
+    prime_flags[1] = False
+    for (k, isprime) in enumerate(prime_flags):
+        if isprime:
+            for m in range(k*k, n+1, k):
+                prime_flags[m] = False
+    return prime_flags
+
+
+def composite_sieve(N: int) -> list[int]:
+    """ Returns a list of all composite numbers <= N, computed using
+    Erasthotenes' sieve """
+    flags = [True] * (N + 1)
     flags[0] = False
     flags[1] = False
     for (k, isprime) in enumerate(flags):
         if isprime:
-            for m in range(k*k, n+1, k):
-                flags[m] = False
-    return flags
+            for multiple in range(2 * k, N + 1, k):
+                flags[multiple] = False
+    composite = [n for n in range(N + 1) if n > 1 and flags[n] is False]
+    return composite
 
 
 def is_prime_given_primes(n: int, primes: list[int]) -> bool:
-    """ Tells whether a number n is prime,
-    given a list of all primes from 2 to the square root of n """
+    """ Tells whether a number n is prime, given a list of all primes from 2 to
+    the square root of n """
     for p in primes:
         if n == p:
             return True
@@ -101,6 +128,14 @@ def is_prime(n: int) -> bool:
         return True
 
 
+def product(set_of_integers: set[int]) -> int:
+    """ Takes a set of integers and returns their product """
+    product = 1
+    for k in set_of_integers:
+        product *= k
+    return product
+
+
 def integer_product(list_of_integers: list[int]) -> int:
     """ Takes a list of integers and returns their product """
     p = 1
@@ -110,8 +145,8 @@ def integer_product(list_of_integers: list[int]) -> int:
 
 
 def prime_factors(n: int) -> list[int]:
-    """ Returns the list of all prime factors of n.
-        Determines all necessary primes on the fly.  """
+    """ Returns the list of all prime factors of n.  Determines all necessary
+    primes on the fly.  """
     number = n
     primes = []
     factors = []
@@ -132,8 +167,8 @@ def prime_factors(n: int) -> list[int]:
 
 
 def divisor_count(n: int) -> int:
-    """ Counts the number of divisors of n,
-        including 1 and the number itself.  """
+    """ Counts the number of divisors of n, including 1 and the number itself.
+    """
     list_of_factors = prime_factors(n)
     set_of_factors = set(list_of_factors)
     prod = 1
@@ -144,8 +179,8 @@ def divisor_count(n: int) -> int:
 
 
 def divisor_count_given_primes(n: int, primes: list[int]) -> int:
-    """ Counts the number of divisors of n,
-        including 1 and the number itself.  """
+    """ Counts the number of divisors of n, including 1 and the number itself.
+    """
     prod = 1
     for p in primes:
         if n == 1:
@@ -158,12 +193,60 @@ def divisor_count_given_primes(n: int, primes: list[int]) -> int:
     return prod
 
 
-def prime_factors_given_primes(n: int, primes: list[int]) -> list[int]:
+def radical(n: int, primes: list[int]) -> int:
+    """ Computes the radical of an integer n (the product of each of its prime
+    factors), given a list of primes which includes all prime factors of n. """
+    prime_factors = {1}
+    for p in primes:
+        if n == 1:
+            break
+        while (n % p) == 0:
+            n //= p
+            prime_factors.add(p)
+    return reduce(lambda x, y: x * y, prime_factors)
+
+
+def radical_sieve(N: int) -> list[int]:
+    """ Returns a list whose n-th element is the radical of n for each n <= N.
     """
-    Returns the list of all prime factors of n,
-    each prime appearing the same number of times as its multiplicity,
-    given a list that includes all primes less than n
-    Ex.: prime_factors(60, [2, 3, 5, 7, 11]) -> [2, 2, 3, 5] """
+    prime_flags = [True] * (N + 1)
+    prime_flags[0] = False
+    prime_flags[1] = False
+    radicals = [1] * (N + 1)
+    for (k, isprime) in enumerate(prime_flags):
+        if isprime:
+            for multiple in range(k * k, N + 1, k):
+                prime_flags[multiple] = False
+            for multiple in range(k, N + 1, k):
+                radicals[multiple] *= k
+    return radicals
+
+
+def radical_set_sieve(N: int) -> list[int]:
+    """ Returns a set whose n-th element is the set of all prime factors of n,
+    for each n <= N.  """
+    primes = []
+    prime_flags = [True] * (N + 1)
+    prime_flags[0] = False
+    prime_flags[1] = False
+    radicals = [set() for n in range(N + 1)]
+    radicals[0] = {1}
+    radicals[1] = {1}
+    for (k, isprime) in enumerate(prime_flags):
+        if isprime:
+            primes.append(k)
+            for multiple in range(k * k, N + 1, k):
+                prime_flags[multiple] = False
+            for multiple in range(k, N + 1, k):
+                (radicals[multiple]).add(k)
+    return radicals
+
+
+def prime_factors_given_primes(n: int, primes: list[int]) -> list[int]:
+    """ Returns the list of all prime factors of n, each prime appearing the
+    same number of times as its multiplicity, given a list that includes all
+    primes less than n Ex.: prime_factors(60, [2, 3, 5, 7, 11]) -> [2, 2, 3, 5]
+    """
     prime_factors = []
     for p in primes:
         if n == 1:
@@ -175,10 +258,9 @@ def prime_factors_given_primes(n: int, primes: list[int]) -> list[int]:
 
 
 def prime_tuples_given_primes(n: int, primes: list[int]) -> int:
-    """
-    Returns the set of all prime factors of n in tuple form,
-    given a list that includes all primes less than n
-    Ex.: prime_factors(60, [2, 3, 5, 7, 11]) -> {(2,2), (3,1), (5, 1)} """
+    """ Returns the set of all prime factors of n in tuple form, given a list
+    that includes all primes less than n Ex.: prime_factors(60, [2, 3, 5, 7,
+    11]) -> {(2,2), (3,1), (5, 1)} """
     prime_tuples = set()
     for p in primes:
         if n == 1:
@@ -193,14 +275,13 @@ def prime_tuples_given_primes(n: int, primes: list[int]) -> int:
 
 
 def proper_divisors_given_primes(n: int, primes: list[int]) -> list[int]:
-    """
-    Returns the list of all proper divisors of n (i.e., < n)
-    given a list that includes all primes less than n """
+    """ Returns the list of all proper divisors of n (i.e., < n) given a list
+    that includes all primes less than n """
     list_of_prime_factors = prime_factors_given_primes(n, primes)
     m = len(list_of_prime_factors)
     tuples = set()
     for k in range(1, m):
-        new_tuples = set(itertools.combinations(list_of_prime_factors, k))
+        new_tuples = set(combinations(list_of_prime_factors, k))
         tuples = tuples.union(new_tuples)
     result = [prod(t) for t in tuples]
     result.append(1)
@@ -208,9 +289,8 @@ def proper_divisors_given_primes(n: int, primes: list[int]) -> list[int]:
 
 
 def sum_of_proper_divisors(n: int, primes: list[int]) -> int:
-    """
-    Returns the sum of all proper divisors of n
-    given a list that includes all primes less than n """
+    """ Returns the sum of all proper divisors of n given a list that includes
+    all primes less than n """
     return(sum(proper_divisors_given_primes(n, primes)))
 
 
@@ -240,9 +320,8 @@ def get_digital_sum(n: int) -> int:
 
 
 def transpose(A: list) -> list:
-    """
-    Transposes a (not necessarily square nor numeric) matrix
-    (list of lists, each of the same size) """
+    """ Transposes a (not necessarily square nor numeric) matrix (list of
+    lists, each of the same size) """
     m = len(A)
     n = len(A[0])
     # Initialize the transpose
@@ -253,7 +332,6 @@ def transpose(A: list) -> list:
             column.append(A[i][j])
         B[j] = column
     return B
-
 
 
 #################
