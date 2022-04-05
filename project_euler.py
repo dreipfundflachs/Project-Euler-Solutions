@@ -69,8 +69,8 @@ def prime_sieve(N: int) -> list[int]:
     prime_flags = [True] * (N + 1)
     prime_flags[0] = False
     prime_flags[1] = False
-    for (k, isprime) in enumerate(prime_flags):
-        if isprime:
+    for (k, is_prime) in enumerate(prime_flags):
+        if is_prime:
             primes.append(k)
             for multiple in range(k * k, N + 1, k):
                 prime_flags[multiple] = False
@@ -83,8 +83,8 @@ def prime_sieve_flags(n: int) -> list[bool]:
     prime_flags = [True] * (n+1)
     prime_flags[0] = False
     prime_flags[1] = False
-    for (k, isprime) in enumerate(prime_flags):
-        if isprime:
+    for (k, is_prime) in enumerate(prime_flags):
+        if is_prime:
             for m in range(k*k, n+1, k):
                 prime_flags[m] = False
     return prime_flags
@@ -96,8 +96,8 @@ def composite_sieve(N: int) -> list[int]:
     flags = [True] * (N + 1)
     flags[0] = False
     flags[1] = False
-    for (k, isprime) in enumerate(flags):
-        if isprime:
+    for (k, is_prime) in enumerate(flags):
+        if is_prime:
             for multiple in range(2 * k, N + 1, k):
                 flags[multiple] = False
     composite = [n for n in range(N + 1) if n > 1 and flags[n] is False]
@@ -153,10 +153,10 @@ def prime_factors(n: int) -> list[int]:
     flags = [True] * (n + 1)
     flags[0] = False
     flags[1] = False
-    for (k, isprime) in enumerate(flags):
+    for (k, is_prime) in enumerate(flags):
         if number == 1:
             break
-        if isprime:
+        if is_prime:
             primes.append(k)
             for m in range(k * k, n + 1, k):
                 flags[m] = False
@@ -213,8 +213,8 @@ def radical_sieve(N: int) -> list[int]:
     prime_flags[0] = False
     prime_flags[1] = False
     radicals = [1] * (N + 1)
-    for (k, isprime) in enumerate(prime_flags):
-        if isprime:
+    for (k, is_prime) in enumerate(prime_flags):
+        if is_prime:
             for multiple in range(k * k, N + 1, k):
                 prime_flags[multiple] = False
             for multiple in range(k, N + 1, k):
@@ -232,8 +232,8 @@ def radical_set_sieve(N: int) -> list[int]:
     radicals = [set() for n in range(N + 1)]
     radicals[0] = {1}
     radicals[1] = {1}
-    for (k, isprime) in enumerate(prime_flags):
-        if isprime:
+    for (k, is_prime) in enumerate(prime_flags):
+        if is_prime:
             primes.append(k)
             for multiple in range(k * k, N + 1, k):
                 prime_flags[multiple] = False

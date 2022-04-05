@@ -47,15 +47,14 @@ def cover_fill(a: int, b: int, c: int) -> None:
 
 start = time.time()
 # C is the maximum number of cubes that will be stored. The specific value
-# below was chosen _after_ the solution was found, to decrease runtime.
+# below was chosen _after_ the solution was found, to decrease the runtime.
 C = 2 * 10**4
 # covers[n] will store the number of cuboids which give rise to a collection of
 # n cubes at some stage (layer).
 covers = {}
 
 # In computing the covers, we take a <= b <= c and only consider those counts
-# which are smaller than C. Thus, for example, we must have 2 * (3 * a**2) <=
-# C, or a <= C / 6.
+# which are smaller than C. Thus, e.g., 2 * (3 * a**2) <= C, or a <= C / 6.
 for k in range(C + 1):
     covers[k] = 0
 for a in range(1, C // 6 + 1):

@@ -4,25 +4,27 @@
 import time
 from math import gcd
 
-# We will prove the assertion that given n with gcd(n, 10) == 1, there always
+# We will prove the assertion that given n with gcd(n, 10) = 1, there always
 # exists k such that R(k) is divisible by n. More importantly, the proof will
-# also show that A(n) < n for all n, a fact which is essential to speed up the
-# computation below.
+# actually show that A(n) < n for all n, a fact which is essential to speed up
+# the computation below.
 
 # The set of possible remainders of R(k) upon division by n is restricted to
-# 0, 1, ..., n - 1. Therefore, as we increase k starting from 1, eventually we
-# will obtain the same remainder twice. Let this occur for the first time for
-# k = k_1, i.e., suppose that for any k != k' < k_1, (R(k) % n) != (R(k') % n);
-# but that (R(k_0) % n) = (R(k_1) % n) for some k_0 < k_1. Notice that k_1 <= n
-# by the pigeonhole principle. Then
+# 0, 1, ..., n - 1. Suppose that, as we increase k from 1 to n, the remainder
+# [R(k) % n] is never 0. Then by the pigeonhole principle, as we increase k
+# starting from 1, we will obtain the same (non-zero) remainder twice after at
+# most n steps.  Let this occur for the first time for k_1 <= n, i.e., suppose
+# that for any
+# k != k' < k_1, [R(k) % n] != [R(k') % n]; but that
+# (R(k_0) % n) = [R(k_1) % n] for some 1 <= k_0 < k_1 <= n. Then
 # (1)  [R(k_1) - R(k_0)] % n = 0.
 # Moreover,
 # (2)  [R(k_1) - R(k_0)] = (10**k_0) * R(k_1 - k_0),
-# and since 10 is a unit in the ring Z_n (because gcd(n, 10) = 1 by
-# hypothesis), it follows from (1) and (2) that
+# and since gcd(n, 10) = 1 by hypothesis, it follows from (1) and (2) that
 # (3) R(k_1 - k_0) % n = 0
-# as well. We conclude that for some k < n (_strictly_ less than n!), R(k) is
-# divisible by n. This proves our claim and also establishes that A(n) < n.
+# as well. We conclude that for some k < n (_strictly_ less than n), R(k) is
+# divisible by n. This proves the claim in the statement of the problem and
+# also establishes that A(n) < n.
 
 
 def A(n: int) -> int:
@@ -48,7 +50,7 @@ N = 10**6
 
 # Because the computation of A(n) is reasonably fast, we can just use a
 # straightforward search, starting from N = 10**6 + 2, since, as A(n) < n for
-# all n (as proved above), if n <= 10**6 + 1, then A(n) <= 10**6.
+# all n (established above), if n <= 10**6 + 1, then A(n) <= 10**6.
 n = N + 2
 while True:
     if A(n) > N:

@@ -9,7 +9,7 @@ from math import gcd
 # also divides R(2 * k). By induction, using the same argument, one proves:
 # (1) If p | R(k), then p | R(m * k) for all m >= 1.
 # Let A(p) be the least k such that p | R(k). Then, by (1), p | R(k) for any k
-# which is a multiple of A(p). Suppose that p | A(l) for some l which is _not_
+# which is a multiple of A(p). Suppose that p | R(l) for some l which is _not_
 # a multiple of A(p), say, l = d * A(p) + r where d, r are integers and
 # 1 < r < A(p). Then, since p | R(l) by hypothesis and p | R(d * A(p)), p must
 # also divide R(l) - R(d * A(p)) = R(r) * 10**[d * A(p)]. Since p is relatively
@@ -30,7 +30,7 @@ def A(n: int) -> int:
         # Note that R(k + 1) = 10 * R(k) + 1, so
         # R(k + 1) % n = (10 * [R(k) % n] + 1) % n, and we can assume that
         # R(k) % n has already been computed. This is efficient because
-        # (R(k) % n) is always < n, by definition.
+        # [R(k) % n] is always < n, by definition.
         while remainder != 0:
             k += 1
             remainder = (10 * remainder + 1) % n
@@ -58,8 +58,8 @@ PRIMES = prime_sieve(N)
 PRIMES.remove(2)
 PRIMES.remove(5)
 
-# By remark (3) in the theory above, we need only search for the primes
-# distinct from 2, 5 for which A(p) divides 10**9, then take their sum.
+# By remark (3) above, we need only search for the primes distinct from 2, 5
+# for which A(p) divides 10**9, then take their sum.
 answer = 0
 count = 0
 for p in PRIMES:

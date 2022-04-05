@@ -9,7 +9,7 @@ from math import gcd
 # also divides R(2 * k). By induction, using the same argument, one proves:
 # (1) If p | R(k), then p | R(m * k) for all m >= 1.
 # Let A(p) be the least k such that p | R(k). Then, by (1), p | R(k) for any k
-# which is a multiple of A(p). Suppose that p | A(l) for some l which is _not_
+# which is a multiple of A(p). Suppose that p | R(l) for some l which is _not_
 # a multiple of A(p), say, l = d * A(p) + r where d, r are integers and
 # 1 < r < A(p). Then, since p | R(l) by hypothesis and p | R(d * A(p)), p must
 # also divide R(l) - R(d * A(p)) = R(r) * 10**[d * A(p)]. Since p is relatively
@@ -30,7 +30,7 @@ def A(n: int) -> int:
         # Note that R(k + 1) = 10 * R(k) + 1, so
         # R(k + 1) % n = (10 * [R(k) % n] + 1) % n, and we can assume that
         # R(k) % n has already been computed. This is efficient because
-        # (R(k) % n) is always < n, by definition.
+        # [R(k) % n] is always < n, by definition.
         while remainder != 0:
             k += 1
             remainder = (10 * remainder + 1) % n
@@ -43,8 +43,8 @@ def prime_sieve(N: int) -> list[int]:
     prime_flags = [True] * (N + 1)
     prime_flags[0] = False
     prime_flags[1] = False
-    for (k, isprime) in enumerate(prime_flags):
-        if isprime:
+    for (k, is_prime) in enumerate(prime_flags):
+        if is_prime:
             primes.append(k)
             for multiple in range(k * k, N + 1, k):
                 prime_flags[multiple] = False
@@ -73,9 +73,9 @@ PRIMES.remove(5)
 # By the theory above, in particular remark (3), a prime p distinct from 2 and
 # 5 will divide R(10**n) for some n if and only if A(p) divides 10**n for some
 # n, which in turn occurs if and only if the only prime factors of A(p) are 2
-# and 5. Thus, to find the solution we need only check directly for each prime
-# (distinct from 2 and 5) if the latter condition fails, and if so we update
-# our sum. Finally, we need to add back 2 and 5.
+# or 5. Thus, to find the solution we need only check directly for each
+# prime (distinct from 2 and 5) if the latter condition fails, and if so we
+# update our sum. Finally, we need to add back 2 and 5 to the result.
 answer = 0
 for p in PRIMES:
     if not involves_only(A(p), 2, 5):
