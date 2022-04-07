@@ -12,5 +12,6 @@ Favorite problems (in ascending order):
 [96](https://projecteuler.net/problem=96),
 [113](https://projecteuler.net/problem=113),
 [126](https://projecteuler.net/problem=126),
+[147](https://projecteuler.net/problem=147),
 [164](https://projecteuler.net/problem=164),
 [191](https://projecteuler.net/problem=191)

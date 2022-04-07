@@ -43,8 +43,6 @@ import time
 # the dimension parallel to y = -x we have 2 * k - 1 choices before reaching
 # the bottom edge. However, if try to pick the maximum dimension in both cases
 # _and if w == h_, then we will go past the right edge by 1/2, so we need to
-# discard this choice when w = h, for a total of:
-# (3) Sum_{1 <= k <= h} (2 * k - 1) * [2 * (h - k) + 1]             (if w > h)
 # (3') Sum_{1 <= k <= h} (2 * k - 1) * [2 * (h - k) + 1] - 1        (if w == h)
 # rectangles of this type. Finally, notice that we can also compute these sums
 # explicitly using the well-known formula for the sum of the first h square
@@ -60,38 +58,35 @@ MAX_WIDTH = 47
 rects = {}
 # rects[(width, height)] stores the number of rectangles in a grid
 # of dimensions width x height.
-for height in range(1, MAX_HEIGHT + 1):
-    for width in range(height, MAX_WIDTH + 1):
-        # By symmetry, it suffices to consider the case where width >= height.
-        if height == 1 and width == 1:
-            rects[(width, height)] = 1
-        elif height == 1:
+
+# By symmetry, it suffices to consider the case where w >= h.
+for h in range(1, MAX_HEIGHT + 1):
+    for w in range(h, MAX_WIDTH + 1):
+        if h == 1 and w == 1:
+            rects[(w, h)] = 1
+        elif h == 1:
             # In this case there will be no diagonal rectangles.
-            rects[(width, height)] = rects[(width - 1, height)] + width + 1
-            rects[(height, width)] = rects[(width, height)]
-        elif width == 1:
-            # In this case there will be no diagonal rectangles.
-            rects[(width, height)] = rects[(width, height - 1)] + height + 1
-            rects[(height, width)] = rects[(width, height)]
-        elif width == height:
-            # The formulas here come from equations (1), (2) and (3) above,
-            # where (2) + (3') has already been simplified using pen and paper.
-            rects[(width, height)] = rects[(width - 1, height)]\
-                    + (height + 1) * height * width // 2 \
-                    + 4 * height**2 * (height - 1)\
-                    - 4 * height * (height - 1) * (2 * height - 1) // 3
-        elif width > height:
+            rects[(w, h)] = rects[(w - 1, h)] + w + 1
+            rects[(h, w)] = rects[(w, h)]
+        elif w == h:
             # The formulas here come from equations (1), (2) and (3') above,
+            # where (2) + (3') has already been simplified using pen and paper.
+            rects[(w, h)] = rects[(w - 1, h)] \
+                    + (h + 1) * h * w // 2 \
+                    + 4 * h**2 * (h - 1) \
+                    - 4 * h * (h - 1) * (2 * h - 1) // 3
+        elif w > h:
+            # The formulas here come from equations (1), (2) and (3) above,
             # where (2) + (3) has already been simplified using pen and paper.
-            rects[(width, height)] = rects[(width - 1, height)]\
-                    + (height + 1) * height * width // 2 \
-                    + 4 * height**2 * (height - 1)\
-                    - 4 * height * (height - 1) * (2 * height - 1) // 3\
-                    + height
-            rects[(height, width)] = rects[(width, height)]
+            rects[(w, h)] = rects[(w - 1, h)] \
+                    + (h + 1) * h * w // 2 \
+                    + 4 * h**2 * (h - 1) \
+                    - 4 * h * (h - 1) * (2 * h - 1) // 3 \
+                    + h
+            rects[(h, w)] = rects[(w, h)]
 
 
-# Now we just have to sum number of rectangles over all possible dimnsions.
+# Now we just sum the number of rectangles over all possible dimensions.
 answer = 0
 for height in range(1, MAX_HEIGHT + 1):
     for width in range(1, MAX_WIDTH + 1):
