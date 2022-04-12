@@ -1,40 +1,33 @@
-# PROJECT EULER - PROBLEM 4
+#################################
+#  PROJECT EULER - PROBLEM 004  #
+#################################
+import time
 
-def palindrome(n):
-    """ Return the largest palindromic number that is the product
-    of two numbers having at most n digits each
+
+def get_largest_palindrome(digits: int) -> int:
     """
-    products = [
-        str(a*b)
-        for a in range(10**n, 1, -1)
-        for b in range(10**n, 1, -1)
-    ]
-    palindromic = []
+    Returns the largest palindromic number that is the product of two numbers
+    having 'digits' digits each.
+    """
+    UPPER = 10**digits
+    LOWER = 10**(digits - 1)
+    products: list[str] = [str(a * b)
+                           for a in range(UPPER, LOWER - 1, -1)
+                           for b in range(UPPER, LOWER - 1, -1)
+                           ]
+    largest = 0
+
     for number in products:
-        rebmun = number[::-1]
-        if number == rebmun:
-            palindromic.append(int(number))
-    return palindromic
+        rebmun = number[::-1]  # rebnum is the palindrome of number.
+        if number == rebmun and int(number) > largest:
+            largest = int(number)
+    return largest
 
 
-print(palindrome(3))
-print(max(palindrome(3)))
+start = time.time()
 
+D = 3
+print(get_largest_palindrome(D))
 
-# products = [
-#     str(a*b)
-#     for a in range(1, 10**1, -1)
-#     for b in range(1, 10**1, -1)
-# ]
-#
-# print(products)
-# palindromic = 9
-# for number in products:
-#     rebmun = number[::-1]
-#     print(f"{number} --- {rebmun}")
-#     if number == rebmun:
-#         print("True")
-#         palindromic = int(number)
-#         break
-#     else:
-#         print("False")
+end = time.time()
+print(f"Program runtime: {end - start} seconds")

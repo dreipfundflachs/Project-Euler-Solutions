@@ -1,15 +1,62 @@
-fibonacci = [1, 2]
-for n in range(2, 10**4, 1):
-    current = fibonacci[n - 1]
-    previous = fibonacci[n - 2]
-    next_element = previous + current
-    if next_element < 4*10**6:
-        fibonacci.append(next_element)
-    else:
-        break
+#################################
+#  PROJECT EULER - PROBLEM 002  #
+#################################
 
-size = len(fibonacci)
-s = 0
-for i in range(1, size + 1, 3):
-    s += fibonacci[i]
-print(s)
+# First solution, without observing that the even terms occur with period 3.
+import time
+
+
+start = time.time()
+
+N = 4 * 10**6
+
+previous = 1
+current = 2
+answer = 0
+k = 2
+
+while current <= N:
+    if current % 2 == 0:
+        answer += current
+
+    current, previous = current + previous, current
+# Alternatively:
+#     new = current + previous
+#     previous = current
+#     current = new
+
+print(answer)
+
+end = time.time()
+
+print(f"Program runtime: {end - start} seconds")
+
+
+###########################################################################
+
+
+# Second (faster) solution, using that the even terms occur with period 3.
+
+start = time.time()
+
+N = 4 * 10**6
+
+previous = 1
+current = 2
+answer = 0
+k = 2
+
+while current <= N:
+    if (k - 2) % 3 == 0:
+        answer += current
+
+    k += 1
+    current, previous = current + previous, current
+#     new = current + previous
+#     previous = current
+#     current = new
+
+print(answer)
+end = time.time()
+
+print(f"Program runtime: {end - start} seconds")

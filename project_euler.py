@@ -144,7 +144,7 @@ def integer_product(list_of_integers: list[int]) -> int:
     return p
 
 
-def prime_factors(n: int) -> list[int]:
+def get_prime_factors(n: int) -> list[int]:
     """ Returns the list of all prime factors of n.  Determines all necessary
     primes on the fly.  """
     number = n
@@ -169,7 +169,7 @@ def prime_factors(n: int) -> list[int]:
 def divisor_count(n: int) -> int:
     """ Counts the number of divisors of n, including 1 and the number itself.
     """
-    list_of_factors = prime_factors(n)
+    list_of_factors = get_prime_factors(n)
     set_of_factors = set(list_of_factors)
     prod = 1
     for prime in set_of_factors:

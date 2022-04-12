@@ -1,101 +1,37 @@
-def primes(n):
-    """ Return a list of all primes less than or equal to n """
-    list_of_primes = [2, 3]
-    list_of_nonprimes = [1, 4]
-    for k in range(4, n+1):
-        for p in list_of_primes:
-            if k % p == 0:
-                list_of_nonprimes.append(k)
-                break
-        if list_of_nonprimes[-1] != k:
-            list_of_primes.append(k)
-    return list_of_primes
+#################################
+#  PROJECT EULER - PROBLEM 003  #
+#################################
+import time
+from math import isqrt
 
 
-def factors(n):
-    """ Obtains the list of all prime factors of n """
-    list_of_primes = []
-    list_of_nonprimes = [1, ]
-    factors = []
-    k = 2
-    while k <= n:
-        for p in list_of_primes:
-            if k % p == 0:
-                list_of_nonprimes.append(k)
-                k += 1
-                break
-        if list_of_nonprimes[-1] != k:
-            list_of_primes.append(k)
-            while n % k == 0:
-                factors.append(k)
-                n = n / k
-            k += 1
+def get_prime_factors(n: int) -> set[int]:
+    """ Returns the list of all prime factors of n. Determines all necessary
+    primes on the fly.  """
+    factors: set[int] = set()
+    square_root = isqrt(n)
+    prime_flags: list[bool] = [True] * (square_root + 1)
+    prime_flags[0] = False
+    prime_flags[1] = False
+
+    for (p, is_prime) in enumerate(prime_flags):
+        if n == 1:
+            break
+        if is_prime:
+            for multiple in range(p * p, square_root + 1, p):
+                prime_flags[multiple] = False
+            while n % p == 0:
+                factors.add(p)
+                n = n // p
+
     return factors
 
 
-# Problem 5
+start = time.time()
 
-# multiplicities = []
-# for p in primes(20):
-#     max_mult = 1
-#     for n in range(1, 21):
-#         m = factors(n).count(p)
-#         if max_mult < m:
-#             max_mult = m
-#     multiplicities.append(max_mult)
-#
-# print(primes(20))
-# print(multiplicities)
-# highest = [p**m for p, m in zip(primes(20), multiplicities)]
-# print(highest)
-# number = 1
-# for n in highest:
-#     number = number * n
-# print(number)
+N = 600851475143
 
+print(max(get_prime_factors(N)))
 
-# Problem 7
-
-
-# def nthprime(n):
-#     """ Returns list containing first to nth prime number  """
-#     list_of_primes = [2, ]
-#     k = 3
-#     while k >= 1 and len(list_of_primes) < n:
-#         prime = True
-#         for p in list_of_primes:
-#             if k % p == 0:
-#                 prime = False
-#                 k += 1
-#                 break
-#         if prime is True:
-#             list_of_primes.append(k)
-#             k += 1
-#     return list_of_primes
-#
-#
-# problem_7 = nthprime(10001)
-# print(problem_7[-1])
-
-
-# Problem 10
-
-
-def problem_10(n):
-    """ Calculate the sum of all primes less than or equal to n """
-    list_of_primes = [2, 3]
-#    list_of_nonprimes = [1, 4]
-    s = 0
-    for k in range(4, n+1):
-        is_prime = True
-        for p in list_of_primes:
-            if k % p == 0:
-                is_prime = False
-                break
-        if is_prime is True:
-            list_of_primes.append(k)
-            s += k
-    return s
-
-
-print(problem_10(10**5))
+end = time.time()
+print(f"Program runtime: {end - start} seconds")
