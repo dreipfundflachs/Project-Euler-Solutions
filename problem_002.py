@@ -1,8 +1,6 @@
 #################################
 #  PROJECT EULER - PROBLEM 002  #
 #################################
-
-# First solution, without observing that the even terms occur with period 3.
 import time
 
 
