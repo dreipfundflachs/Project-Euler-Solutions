@@ -63,17 +63,17 @@ def powmod(base: int, exp: int, m: int) -> int:
         return ((base * powmod(base, (exp - 1)//2, m)**2) % m)
 
 
-def prime_sieve(N: int) -> list[int]:
-    """ Returns a list of all primes <= N using Erasthotenes' sieve """
+def get_primes_up_to(n: int) -> list[int]:
+    """ Returns a list of all primes <= n using Erasthotenes' sieve """
     primes = []
-    prime_flags = [True] * (N + 1)
+    prime_flags = [True] * (n + 1)
     prime_flags[0] = False
     prime_flags[1] = False
     for (k, is_prime) in enumerate(prime_flags):
         if is_prime:
             primes.append(k)
-            for multiple in range(k * k, N + 1, k):
-                prime_flags[multiple] = False
+            for m in range(k*k, n+1, k):
+                prime_flags[m] = False
     return primes
 
 

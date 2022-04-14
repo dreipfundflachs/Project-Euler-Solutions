@@ -1,15 +1,23 @@
-# PROJECT EULER - PROBLEM 9
+#################################
+#  PROJECT EULER - PROBLEM 009  #
+#################################
+import time
 
-flag = False
-for b in range(250, 1000, 1):
-    if flag:
+
+start = time.time()
+
+found_triplet = False
+
+for b in range(250, 1000):
+    if found_triplet:
         break
-    for a in range(1, b, 1):
+    for a in range(1, b):
         c = 1000 - a - b
         if a**2 + b**2 == c**2:
-            print(f"a={a}\tb={b}\tc={c}")
-            print(a**2 + b**2)
-            print(c**2)
-            print(a*b*c)
-            flag = True
+            print(f"Triplet: a = {a},  b = {b},  c = {c}")
+            print(f"Product: {a*b*c}")
+            found_triplet = True
             break
+
+end = time.time()
+print(f"Program runtime: {end - start} seconds")

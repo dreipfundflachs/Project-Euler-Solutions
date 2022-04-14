@@ -1,26 +1,34 @@
-# PROJECT EULER - PROBLEM 8
+#################################
+#  PROJECT EULER - PROBLEM 008  #
+#################################
+import time
 
-def list_product(list):
+
+def get_list_product(numbers: list[int]) -> int:
     """ Takes a list of integers and returns their product """
-    p = 1
-    for k in list:
-        p *= int(k)
-    return p
+    product = 1
+    for k in numbers:
+        product *= int(k)
+    return product
 
 
+start = time.time()
+
+# The number in the problem statement was pasted into the file below.
 number = ''
-with open('problem_8_text.txt') as file_object:
+with open('p008_number.txt') as file_object:
     for line in file_object:
         number += line.strip()
 
-print(number)
-p = 1
-for k in number[:13]:
-    p *= int(k)
+N = 1000  # Total number of digits in the given number.
 
-max_p = p
-for k in range(13, 999):
-    p = list_product(number[k - 12: k + 1])
-    if max_p < p:
-        max_p = p
-print(max_p)
+max_product = 1
+
+for k in range(12, N):
+    current_product = get_list_product(number[k - 12: k + 1])
+    max_product = max(max_product, current_product)
+
+print(max_product)
+
+end = time.time()
+print(f"Program runtime: {end - start} seconds")

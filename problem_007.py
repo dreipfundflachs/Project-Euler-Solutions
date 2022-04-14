@@ -1,56 +1,40 @@
-def primes(n):
-    """ Return a list of all primes less than or equal to n """
-    list_of_primes = [2, 3]
-    list_of_nonprimes = [1, 4]
-    for k in range(4, n+1):
-        for p in list_of_primes:
-            if k % p == 0:
-                list_of_nonprimes.append(k)
-                break
-        if list_of_nonprimes[-1] != k:
-            list_of_primes.append(k)
-    return list_of_primes
+#################################
+#  PROJECT EULER - PROBLEM 007  #
+#################################
+import time
 
 
-def factors(n):
-    """ Obtains the list of all prime factors of n """
-    list_of_primes = []
-    list_of_nonprimes = [1, ]
-    factors = []
-    k = 2
-    while k <= n:
-        for p in list_of_primes:
-            if k % p == 0:
-                list_of_nonprimes.append(k)
-                k += 1
-                break
-        if list_of_nonprimes[-1] != k:
-            list_of_primes.append(k)
-            while n % k == 0:
-                factors.append(k)
-                n = n / k
-            k += 1
-    return factors
+def is_prime(n: int) -> bool:
+    """ Verifies directly whether a number is prime. """
+    if n % 2 == 0:
+        return False
+    else:
+        d = 3
+        # Check whether n is divisible by d; no need to check values of d
+        # greater than the square root of n, since if d is a divisor of n, then
+        # so is n / d.
+        while d * d <= n:
+            if n % d == 0:
+                return False
+            d += 2
+        return True
 
 
-# Problem 7
+start = time.time()
 
-def nthprime(n):
-    """ Returns list containing first to nth prime number  """
-    list_of_primes = [2, ]
-    k = 3
-    while k >= 1 and len(list_of_primes) < n:
-        prime = True
-        for p in list_of_primes:
-            if k % p == 0:
-                prime = False
-                k += 1
-                break
-        if prime is True:
-            list_of_primes.append(k)
-            k += 1
-    return list_of_primes
+N = 10**4 + 1
 
+k = 1
+most_recent_prime = 0
+prime_count = 0
 
-problem_7 = nthprime(10001)
-print(problem_7[-1])
+while prime_count < N:
+    if is_prime(k):
+        prime_count += 1
+        most_recent_prime = k
+    k += 1
+
+print(most_recent_prime)
+
+end = time.time()
+print(f"Program runtime: {end - start} seconds")
