@@ -64,7 +64,7 @@ def powmod(base: int, exp: int, m: int) -> int:
 
 
 def get_primes_up_to(n: int) -> list[int]:
-    """ Returns a list of all primes <= n using Erasthotenes' sieve """
+    """ Returns a list of all primes <= n using Eratosthenes' sieve """
     primes = []
     prime_flags = [True] * (n + 1)
     prime_flags[0] = False
@@ -92,7 +92,7 @@ def prime_sieve_flags(n: int) -> list[bool]:
 
 def composite_sieve(N: int) -> list[int]:
     """ Returns a list of all composite numbers <= N, computed using
-    Erasthotenes' sieve """
+    Eratosthenes' sieve """
     flags = [True] * (N + 1)
     flags[0] = False
     flags[1] = False
@@ -147,22 +147,19 @@ def integer_product(list_of_integers: list[int]) -> int:
 def get_prime_factors(n: int) -> list[int]:
     """ Returns the list of all prime factors of n.  Determines all necessary
     primes on the fly.  """
-    number = n
-    primes = []
     factors = []
-    flags = [True] * (n + 1)
-    flags[0] = False
-    flags[1] = False
-    for (k, is_prime) in enumerate(flags):
-        if number == 1:
+    prime_flags = [True] * (n + 1)
+    prime_flags[0] = False
+    prime_flags[1] = False
+    for (p, is_prime) in enumerate(prime_flags):
+        if n == 1:
             break
         if is_prime:
-            primes.append(k)
-            for m in range(k * k, n + 1, k):
-                flags[m] = False
-            while number % k == 0:
-                factors.append(k)
-                number = number // k
+            for multiple in range(p * p, n + 1, p):
+                prime_flags[multiple] = False
+            while n % p == 0:
+                factors.append(p)
+                n = n // p
     return factors
 
 

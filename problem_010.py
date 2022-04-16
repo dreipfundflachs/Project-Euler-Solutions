@@ -1,11 +1,11 @@
 #################################
-#  PROJECT EULER - PROBLEM 100  #
+#  PROJECT EULER - PROBLEM 010  #
 #################################
 import time
 
 
 def get_primes_up_to(n: int) -> list[int]:
-    """ Returns a list of all primes <= n using Erasthotenes' sieve """
+    """ Returns a list of all primes <= n using Eratosthenes' sieve """
     primes = []
     prime_flags = [True] * (n + 1)
     prime_flags[0] = False

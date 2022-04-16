@@ -1,89 +1,73 @@
-# PROJECT EULER - PROBLEM 11
+#################################
+#  PROJECT EULER - PROBLEM 011  #
+#################################
 import time
 
 
-def convert_string_to_int(a):
-    """
-    Takes a list of integers formatted as strings and
-    converts it to a list of integers
-    """
-    b = [int(number_string) for number_string in a]
-    return b
+def convert_strings_to_int(strings: [str]) -> int:
+    """ Takes a list of integers formatted as strings and converts it to a
+    list of integers.  """
+    integers = [int(number_string) for number_string in strings]
+    return integers
 
 
-def max_rows(A):
+def get_max_product_along_rows(A: list[list[int]]) -> int:
     """ Calculates the maximum product of four entries
-    along the rows of matrix A (whose entries are integers)
-    """
+    along the rows of matrix A (whose entries are integers).  """
     m = len(A)
     n = len(A[0])
-    prod = 1
-    max_prod = 1
+    max_product = 1
     for i in range(0, m):
         row = A[i]
         for j in range(3, n):
-            prod = row[j-3]*row[j-2]*row[j-1]*row[j]
-            if prod > max_prod:
-                max_prod = prod
-    return max_prod
+            product = row[j - 3] * row[j - 2] * row[j - 1] * row[j]
+            max_product = max(product, max_product)
+    return max_product
 
 
-def transpose(A):
-    """
-    Transposes a (not necessarily square nor numeric) matrix
-    (list of lists, each of the same size)
-    """
+def transpose(A: list[list]) -> list[list]:
+    """ Transposes a (not necessarily square nor numeric) matrix (list of
+    lists, each of the same size)."""
     m = len(A)
     n = len(A[0])
-    # Initialize the transpose
-    B = [[0 for i in range(m)] for j in range(n)]
-    for j in range(0, n):
-        column = []
-        for i in range(0, m):
-            column.append(A[i][j])
-        B[j] = column
+#   A = [[A[i][j] for j in range(n)] for i in range(m)], so its transpose is:
+    B = [[A[i][j] for i in range(m)] for j in range(n)]
     return B
 
 
 start = time.time()
-# Import grid from file and store it as a matrix
+# Import grid from file and store it as a matrix.
 A = []
 with open('p011_numbers.txt') as file_object:
     for line in file_object:
-        A.append(
-            line.split()
-        )
-A = [convert_string_to_int(nums) for nums in A]
+        A.append(line.split())
+A = [convert_strings_to_int(nums) for nums in A]
 B = transpose(A)
+N = len(A)
 
-# Calculate the maximum product along rows and columns (p_1 and p_2 resp.)
-p_1 = max_rows(A)
-p_2 = max_rows(B)
-p_3 = 1
-p_4 = 1
+# Calculate the maximum product along rows and columns.
+max_row_product = get_max_product_along_rows(A)
+max_column_product = get_max_product_along_rows(B)
 
-# Calculate the maximum product p_3 along diagonals
-for i in range(0, 16):
-    for j in range(0, 16):
+# Calculate the maximum product along the diagonal.
+max_diagonal_product = 1
+for i in range(0, N - 4):
+    for j in range(0, N - 4):
         prod = A[i][j] * A[i + 1][j + 1]
         prod *= A[i + 2][j + 2] * A[i + 3][j + 3]
-        if prod > p_3:
-            p_3 = prod
+        max_diagonal_product = max(prod, max_diagonal_product)
 
-# Calculate the maximum product p_4 along anti-diagonals
-for i in range(0, 16):
-    for j in range(4, 20):
+# Calculate the maximum product along the anti-diagonal.
+max_anti_diagonal_product = 1
+for i in range(0, N - 4):
+    for j in range(4, N):
         prod = A[i][j] * A[i + 1][j - 1]
         prod *= A[i + 2][j - 2] * A[i + 3][j - 3]
-        if prod > p_3:
-            p_4 = prod
+        max_anti_diagonal_product = max(prod, max_anti_diagonal_product)
 
-print(p_1)
-print(p_2)
-print(p_3)
-print(p_4)
-print(max(p_1, p_2, p_3, p_4))
-
+# Print the answer.
+print(max(max_row_product, max_column_product,
+          max_diagonal_product, max_anti_diagonal_product))
 
 end = time.time()
 print(f"Program runtime: {end - start} seconds")
