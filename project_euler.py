@@ -54,7 +54,7 @@ def involves_only(n: int, p: int, q: int) -> bool:
 
 
 def powmod(base: int, exp: int, m: int) -> int:
-    """ Computes base**exp (mod m) efficiently (log(exp) time). """
+    """ Computes base**exp (mod m) efficiently (in O(log(exp)) time). """
     if exp == 1:
         return base % m
     elif exp % 2 == 0:
@@ -72,7 +72,7 @@ def get_primes_up_to(n: int) -> list[int]:
     for (k, is_prime) in enumerate(prime_flags):
         if is_prime:
             primes.append(k)
-            for m in range(k*k, n+1, k):
+            for m in range(k * k, n + 1, k):
                 prime_flags[m] = False
     return primes
 
@@ -239,11 +239,11 @@ def radical_set_sieve(N: int) -> list[int]:
     return radicals
 
 
-def prime_factors_given_primes(n: int, primes: list[int]) -> list[int]:
+def get_prime_factors_given_primes(n: int, primes: list[int]) -> list[int]:
     """ Returns the list of all prime factors of n, each prime appearing the
     same number of times as its multiplicity, given a list that includes all
-    primes less than n Ex.: prime_factors(60, [2, 3, 5, 7, 11]) -> [2, 2, 3, 5]
-    """
+    primes less than n. Example:
+    get_prime_factors_given_primes(60, [2, 3, 5, 7, 11]) -> [2, 2, 3, 5]. """
     prime_factors = []
     for p in primes:
         if n == 1:
@@ -271,10 +271,10 @@ def prime_tuples_given_primes(n: int, primes: list[int]) -> int:
     return prime_tuples
 
 
-def proper_divisors_given_primes(n: int, primes: list[int]) -> list[int]:
+def get_proper_divisors_given_primes(n: int, primes: list[int]) -> list[int]:
     """ Returns the list of all proper divisors of n (i.e., < n) given a list
     that includes all primes less than n """
-    list_of_prime_factors = prime_factors_given_primes(n, primes)
+    list_of_prime_factors = get_prime_factors_given_primes(n, primes)
     m = len(list_of_prime_factors)
     tuples = set()
     for k in range(1, m):
@@ -288,7 +288,7 @@ def proper_divisors_given_primes(n: int, primes: list[int]) -> list[int]:
 def sum_of_proper_divisors(n: int, primes: list[int]) -> int:
     """ Returns the sum of all proper divisors of n given a list that includes
     all primes less than n """
-    return(sum(proper_divisors_given_primes(n, primes)))
+    return sum(get_proper_divisors_given_primes(n, primes))
 
 
 def number_of_digits(n: int) -> int:

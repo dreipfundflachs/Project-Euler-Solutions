@@ -1,18 +1,22 @@
-# PROJECT EULER - PROBLEM 025
+#################################
+#  PROJECT EULER - PROBLEM 025  #
+#################################
 import time
 
 
 start = time.time()
-fib = [1, 1]
-for n in range(3, 10**6):
-    current = fib[-1] + fib[-2]
-    fib.append(current)
-    string = str(current)
-    if len(string) > 999:
-        print(current)
+
+N = 10**3
+
+fibs = [1, 1]
+n = 3
+while True:
+    current_fib = fibs[-1] + fibs[-2]
+    fibs.append(current_fib)
+    if len(str(current_fib)) >= N:
         print(n)
         break
-
+    n += 1
 
 end = time.time()
 print(f"Program runtime: {end - start} seconds")

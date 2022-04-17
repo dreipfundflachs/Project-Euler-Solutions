@@ -1,30 +1,30 @@
-# PROJECT EULER - PROBLEM 21
+#################################
+#  PROJECT EULER - PROBLEM 021  #
+#################################
 import time
-import itertools
-import math
+from itertools import combinations
+from math import prod
 
 
-def prime_sieve(n):
-    """ Returns a list of all primes <= n using Erasthotenes' sieve """
+def get_primes_up_to(n: int) -> list[int]:
+    """ Returns a list of all primes <= n using Eratosthenes' sieve """
     primes = []
-    flags = [True] * (n+1)
-    flags[0] = False
-    flags[1] = False
-    for (k, isprime) in enumerate(flags):
-        if isprime:
+    prime_flags = [True] * (n + 1)
+    prime_flags[0] = False
+    prime_flags[1] = False
+    for (k, is_prime) in enumerate(prime_flags):
+        if is_prime:
             primes.append(k)
-            for m in range(k*k, n+1, k):
-                flags[m] = False
+            for m in range(k * k, n + 1, k):
+                prime_flags[m] = False
     return primes
 
 
-def prime_factors(n, primes):
-    """
-    Returns the list of all prime factors of n,
-    each prime appearing the same number of times as its multiplicity,
-    given a list that includes all primes less than n
-    Ex.: prime_factors(60, [2, 3, 5, 7, 11]) -> [2, 2, 3, 5]
-    """
+def get_prime_factors_given_primes(n: int, primes: list[int]) -> list[int]:
+    """ Returns the list of all prime factors of n, each prime appearing the
+    same number of times as its multiplicity, given a list that includes all
+    primes less than n. Example:
+    get_prime_factors_given_primes(60, [2, 3, 5, 7, 11]) -> [2, 2, 3, 5]. """
     prime_factors = []
     for p in primes:
         if n == 1:
@@ -35,41 +35,39 @@ def prime_factors(n, primes):
     return prime_factors
 
 
-def proper_divisors(n, primes):
-    """
-    Returns the list of all divisors of n
-    given a list that includes all primes less than n
-    """
-    list_of_prime_factors = prime_factors(n, primes)
+def get_proper_divisors_given_primes(n: int, primes: list[int]) -> list[int]:
+    """ Returns the list of all proper divisors of n (i.e., < n) given a list
+    that includes all primes less than n """
+    list_of_prime_factors = get_prime_factors_given_primes(n, primes)
     m = len(list_of_prime_factors)
     tuples = set()
     for k in range(1, m):
-        new_tuples = set(itertools.combinations(list_of_prime_factors, k))
+        new_tuples = set(combinations(list_of_prime_factors, k))
         tuples = tuples.union(new_tuples)
-    result = [math.prod(t) for t in tuples]
-    result.append(1)
-    return result
+    proper_divisors = [prod(t) for t in tuples]
+    proper_divisors.append(1)
+    return proper_divisors
 
 
-def sum_of_proper_divisors(n, primes):
-    """
-    Returns the sum of all proper divisors of n
-    given a list that includes all primes less than n
-    """
-    return(sum(proper_divisors(n, primes)))
+def get_sum_of_proper_divisors(n: int, primes: list[int]) -> int:
+    """ Returns the sum of all proper divisors of n
+    given a list that includes all primes less than n. """
+    return sum(get_proper_divisors_given_primes(n, primes))
 
 
 start = time.time()
-list_of_primes = prime_sieve(10_000)
-amicable = 0
-print(sum_of_proper_divisors(220, list_of_primes))
-print(sum_of_proper_divisors(284, list_of_primes))
-for n in range(1, 10_000):
-    m = sum_of_proper_divisors(n, list_of_primes)
-    if m > n:
-        s = sum_of_proper_divisors(m, list_of_primes)
-        if s == n:
-            amicable += n + m
-print(amicable)
+
+N = 10**4
+PRIMES = get_primes_up_to(N)
+
+sum_of_amicables = 0
+for n in range(1, N):
+    m = get_sum_of_proper_divisors(n, PRIMES)
+    # m is the only candidate for forming an amicable pair with n.
+    if m > n and n == get_sum_of_proper_divisors(m, PRIMES):
+        sum_of_amicables += n + m
+
+print(sum_of_amicables)
+
 end = time.time()
 print(f"Program runtime: {end - start} seconds")

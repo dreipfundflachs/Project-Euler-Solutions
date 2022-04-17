@@ -1,51 +1,50 @@
 #################################
 #  PROJECT EULER - PROBLEM 014  #
 #################################
-
 import time
+
+
+def collatz_function(n: int) -> int:
+    """ Computes the value of the Collatz function on a positive integer n. """
+    if n % 2 == 0:
+        return n // 2
+    else:
+        return (3 * n + 1)
+
 
 start = time.time()
 
-collatz = {1: 1, 2: 2}
+N = 10**6
+
+collatz_chain_lengths = {1: 1, 2: 2}
 max_count = 1
 max_number = 1
-for n in range(1, 10**6):
-    if n in collatz:
+
+for n in range(1, N):
+    if n in collatz_chain_lengths:
         continue
+    # If the length of the Collatz chain of n has not yet been computed, we
+    # will keep iterating the Collatz function on n and storing the
+    # intermediate numbers in a list until we finally reach a terminal number
+    # whose Collatz chain-length has already been computed. The chain length of
+    # the Collatz sequence of all intermediate numbers can be computed by
+    # adding their position in the reversed list to the chain-length of the
+    # terminal number.
     else:
-        if n % 2 == 0:
-            m = n//2
-            count = collatz[m] + 1
-            collatz[n] = count
-        else:
-            p = (3*n + 1) // 2
-            if p % 2 == 0:
-                q = p // 2
-                count = collatz[q] + 3
-                collatz[n] = count
-                collatz[3*n+1] = count - 1
-                collatz[p] = count - 2
-            else:
-                numbers = [n]
-                k = n
-                count = 0
-                while k not in collatz:
-                    if k % 2 == 0:
-                        k = k // 2
-                    else:
-                        k = 3*k + 1
-                    count += 1
-                    numbers.append(k)
-                count += collatz[k]
-                temp_count = count
-                for number in numbers:
-                    collatz[number] = temp_count
-                    temp_count -= 1
-    if count > max_count:
-        max_count = count
+        numbers = [n]
+        k = n
+        while k not in collatz_chain_lengths:
+            k = collatz_function(k)
+            numbers.append(k)
+        base_length = collatz_chain_lengths[k]
+        for i, number in enumerate(reversed(numbers)):
+            collatz_chain_lengths[number] = base_length + i
+
+    if collatz_chain_lengths[n] > max_count:
+        max_count = collatz_chain_lengths[n]
         max_number = n
 
-print(max_number, max_count)
+print(max_number)
 
 end = time.time()
 print(f"Program runtime: {end - start} seconds")

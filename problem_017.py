@@ -1,8 +1,10 @@
-# PROJECT EULER - PROBLEM 17
+#################################
+#  PROJECT EULER - PROBLEM 017  #
+#################################
 import time
 
 
-def count_teens(n):
+def count_teens(n: int) -> int:
     """ Counts the number of letters of an integer between 0 and 19 """
     if n < 20:
         if n == 0:
@@ -25,7 +27,7 @@ def count_teens(n):
         raise ValueError("Number is greater than 20 or less than 0")
 
 
-def count_ties(d):
+def count_ties(d: int) -> int:
     """ Counts the number of letters of d0 for d = 2, 3, ..., 9 """
     if d < 2 or d > 9:
         raise ValueError("Digit is greater than 9 or less than 2")
@@ -38,7 +40,7 @@ def count_ties(d):
             return 7
 
 
-def count_small(n):
+def count_small(n: int) -> int:
     """ Counts the number of letters of a number between 1 and 99 """
     if n < 1 or n > 99:
         raise ValueError("Digit is greater than 999 or less than 1")
@@ -51,7 +53,7 @@ def count_small(n):
     return number_of_letters
 
 
-def count_letters(n):
+def count_letters(n: int) -> int:
     """ Counts the number of letters in a number between 1 and 999 """
     if n < 1 or n > 999:
         raise ValueError("Digit is greater than 999 or less than 1")
@@ -69,11 +71,13 @@ def count_letters(n):
 
 start = time.time()
 
-numbers = list(range(1, 1000))
-list_of_counts = [count_letters(n) for n in numbers]
+N = 1000
+NUMBERS = list(range(1, N))
 
-s = sum(list_of_counts) + 3 + 8
-print(s)
+list_of_counts = [count_letters(n) for n in NUMBERS]
+number_of_letters = sum(list_of_counts) + 3 + 8
+# The 3 and the 8 correspond to the number of letters in "one thousand".
+print(number_of_letters)
 
 end = time.time()
 print(f"Program runtime: {end - start} seconds")

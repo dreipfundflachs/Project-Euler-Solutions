@@ -1,4 +1,6 @@
-# PROJECT EULER - PROBLEM 19
+#################################
+#  PROJECT EULER - PROBLEM 019  #
+#################################
 import time
 
 
@@ -7,14 +9,11 @@ start = time.time()
 months = {'january': 31, 'february': 28, 'march': 31,
           'april': 30, 'may': 31, 'june': 30,
           'july': 31, 'august': 31, 'september': 30,
-          'october': 31, 'november': 30, 'december': 31
-          }
+          'october': 31, 'november': 30, 'december': 31}
 
 # Jan 1 1901 was a Tuesday
 week = ['tuesday', 'wednesday', 'thursday',
-        'friday', 'saturday', 'sunday', 'monday'
-        ]
-
+        'friday', 'saturday', 'sunday', 'monday']
 
 day_count = 0
 sunday_count = 0
