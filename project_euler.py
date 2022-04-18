@@ -77,15 +77,15 @@ def get_primes_up_to(n: int) -> list[int]:
     return primes
 
 
-def prime_sieve_flags(n: int) -> list[bool]:
-    """ Returns a 'prime_flags' of primes <=n, such that prime_flags[p] = True
-    if and only if p is a prime number."""
-    prime_flags = [True] * (n+1)
+def get_prime_flags_up_to(n: int) -> list[bool]:
+    """ Returns a list prime_flags of n + 1 elements such that
+    prime_flags[k] = True if and only if k is a prime number."""
+    prime_flags = [True] * (n + 1)
     prime_flags[0] = False
     prime_flags[1] = False
-    for (k, is_prime) in enumerate(prime_flags):
+    for (p, is_prime) in enumerate(prime_flags):
         if is_prime:
-            for m in range(k*k, n+1, k):
+            for m in range(p * p, n + 1, p):
                 prime_flags[m] = False
     return prime_flags
 
@@ -254,20 +254,20 @@ def get_prime_factors_given_primes(n: int, primes: list[int]) -> list[int]:
     return prime_factors
 
 
-def prime_tuples_given_primes(n: int, primes: list[int]) -> int:
+def get_prime_tuples_given_primes(n: int, primes: list[int]) -> set[int]:
     """ Returns the set of all prime factors of n in tuple form, given a list
-    that includes all primes less than n Ex.: prime_factors(60, [2, 3, 5, 7,
-    11]) -> {(2,2), (3,1), (5, 1)} """
+    that includes all primes less than n. Example:
+    prime_factors(60, [2, 3, 5, 7, 11]) -> {(2,2), (3,1), (5, 1)}. """
     prime_tuples = set()
     for p in primes:
         if n == 1:
             break
-        mult = 0
+        multiplicity = 0
         while n % p == 0:
             n = n // p
-            mult += 1
-        if mult > 0:
-            prime_tuples.add((p, mult))
+            multiplicity += 1
+        if multiplicity > 0:
+            prime_tuples.add((p, multiplicity))
     return prime_tuples
 
 
@@ -391,13 +391,34 @@ def palindromes(n: int) -> list[int]:
     return palindromes
 
 
-def uniquify(lst: list) -> list:
-    """ Given a list 'lst', returns a new list with all duplicates removed. """
-    new_lst = []
-    for x in lst:
-        if x not in new_lst:
-            new_lst.append(x)
-    return new_lst
+def get_decimal_representation(n: int, d: int, precision: int) -> list[int]:
+    """ Given integers n < d, computes the decimal part of n / d up to the
+    'precision'-th digit of its decimal part or until there is a recurring
+    cycle. The function does not determine the cycle. 'r' indicates a
+    recurring cycle from that position on. Example: since 1 / 7 = 0.(142857),
+    we have: int_division(1, 7, 10) = [1, 4, 2, 8, 5, 7, 'r']. To obtain the
+    decimal representation, the function simply emulates long division. """
+    decimals = []
+    remainders = [n]
+    decimal = -1
+    count = 0
+    while n != 0 and count < precision:
+        n *= 10
+        while n < d:
+            n *= 10
+            decimals.append(0)
+            count += 1
+            remainders.append(n)
+        decimal = n // d
+        decimals.append(decimal)
+        n = n % d
+        count += 1
+        if n not in remainders:
+            remainders.append(n)
+        else:
+            decimals.append('r')
+            break
+    return decimals
 
 
 ################################################

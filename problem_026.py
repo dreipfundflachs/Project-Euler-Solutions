@@ -1,47 +1,52 @@
-# PROJECT EULER - PROBLEM 026
+#################################
+#  PROJECT EULER - PROBLEM 026  #
+#################################
 import time
 
 
-def int_division(r, d, prec):
-    """ Given integers r < d, computes the decimal part of r/d up to the
-    'prec'-th digit of its decimal part or until there is a recurring cycle.
-    The function does not determine the cycle. 'x' indicates a recurring cycle
-    from that position on.
-    """
+def get_decimal_representation(n: int, d: int, precision: int) -> list[int]:
+    """ Given integers n < d, computes the decimal part of n / d up to the
+    'precision'-th digit of its decimal part or until there is a recurring
+    cycle. The function does not determine the cycle. 'r' indicates a
+    recurring cycle from that position on. Example: since 1 / 7 = 0.(142857),
+    we have: int_division(1, 7, 10) = [1, 4, 2, 8, 5, 7, 'r']. To obtain the
+    decimal representation, the function simply emulates long division. """
     decimals = []
-    remainders = [r]
-    digit = -1
+    remainders = [n]
+    decimal = -1
     count = 0
-    while r != 0 and count < prec:
-        r *= 10
-        while r < d:
-            r *= 10
+    while n != 0 and count < precision:
+        n *= 10
+        while n < d:
+            n *= 10
             decimals.append(0)
             count += 1
-            remainders.append(r)
-        digit = r // d
-        decimals.append(digit)
-        r = (r % d)
+            remainders.append(n)
+        decimal = n // d
+        decimals.append(decimal)
+        n = n % d
         count += 1
-        if r not in remainders:
-            remainders.append(r)
+        if n not in remainders:
+            remainders.append(n)
         else:
-            decimals.append('x')
+            decimals.append('r')
             break
     return decimals
 
 
+start = time.time()
+
+N = 1000
+
 max_length = 0
 max_d = 0
-for d in range(2, 1000):
-    length = len(int_division(1, d, 1000)) - 1
+for d in range(2, N):
+    length = len(get_decimal_representation(1, d, N)) - 1
     if length > max_length:
         max_length = length
         max_d = d
 
-print(int_division(1, 8, 100))
 print(max_d)
-print(max_length)
-start = time.time()
+
 end = time.time()
 print(f"Program runtime: {end - start} seconds")
