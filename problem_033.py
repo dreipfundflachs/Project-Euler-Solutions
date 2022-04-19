@@ -1,38 +1,50 @@
-# PROJECT EULER - PROBLEM 033
+#################################
+#  PROJECT EULER - PROBLEM 033  #
+#################################
 import time
 from fractions import Fraction
 
+
+def is_cancellable(num_string: str, den_string: str) -> bool:
+    """ Determines if the fraction int(num_string) / int(den_string)
+    is 'cancellable' in the sense of the problem statement. """
+    num = int(num_string)
+    den = int(den_string)
+
+    if num >= den:
+        return False
+    if num_string[0] == den_string[0] and\
+            int(num_string[1]) / int(den_string[1]) == num / den:
+        return True
+    elif num_string[0] == den_string[1] and\
+            int(num_string[1]) / int(den_string[0]) == num / den:
+        return True
+    elif num_string[1] == den_string[0] and\
+            int(num_string[0]) / int(den_string[1]) == num / den:
+        return True
+    elif num_string[1] == den_string[1] and\
+            int(num_string[0]) / int(den_string[0]) == num / den:
+        return True
+
+
 start = time.time()
-s = []
-for a in range(10, 100):
-    s.append(str(a))
 
-new_s = [a for a in s if '0' not in a]
-s = new_s
-special = []
-for p in s:
-    for q in s:
-        pint = int(p)
-        qint = int(q)
-        if pint < qint:
-            if p[0] == q[0] and int(p[1]) / int(q[1]) == pint / qint:
-                special.append((pint, qint))
-            if p[0] == q[1] and int(p[1]) / int(q[0]) == pint / qint:
-                special.append((pint, qint))
-            if p[1] == q[0] and int(p[0]) / int(q[1]) == pint / qint:
-                special.append((pint, qint))
-            if p[1] == q[1] and int(p[0]) / int(q[0]) == pint / qint:
-                special.append((pint, qint))
+NUMBER_STRINGS = [str(number) for number in range(10, 100)
+                  if '0' not in str(number)]
 
-print(special)
-p = 1
-q = 1
-for (a, b) in special:
-    p *= a
-    q *= b
-print(p)
-print(q)
-r = Fraction(p, q)
-print(r)
+special_pairs = []
+for numerator_str in NUMBER_STRINGS:
+    for denominator_str in NUMBER_STRINGS:
+        if is_cancellable(numerator_str, denominator_str):
+            special_pairs.append((int(numerator_str), int(denominator_str)))
+
+num_product = 1
+den_product = 1
+for (num, den) in special_pairs:
+    num_product *= num
+    den_product *= den
+
+print((Fraction(num_product, den_product)).denominator)
+
 end = time.time()
 print(f"Program runtime: {end - start} seconds")

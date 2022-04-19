@@ -6,7 +6,7 @@ import time
 
 start = time.time()
 # A number of 7 digits which is a sum of the fifth powers of its digits must
-# be less than or equal to M where:
+# be less than or equal to N, where:
 N = 7 * 9**5
 
 special_numbers = []
