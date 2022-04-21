@@ -1,33 +1,48 @@
-# PROJECT EULER - PROBLEM 037
+#################################
+#  PROJECT EULER - PROBLEM 037  #
+#################################
 import time
-from project_euler import prime_sieve
+
+
+def get_prime_flags_up_to(n: int) -> list[bool]:
+    """ Returns a list prime_flags of n + 1 elements such that
+    prime_flags[k] = True if and only if k is a prime number."""
+    prime_flags = [True] * (n + 1)
+    prime_flags[0] = False
+    prime_flags[1] = False
+    for (p, is_prime) in enumerate(prime_flags):
+        if is_prime:
+            for multiple in range(p * p, n + 1, p):
+                prime_flags[multiple] = False
+    return prime_flags
+
 
 start = time.time()
-primes = prime_sieve(10**6)
-set_of_primes = set(primes)
-special = []
 
-for p in primes:
-    s = str(p)
-    m = len(s)
-    active = True
-    for i in range(1, m):
-        q = int(s[i:])
-        if q not in set_of_primes:
-            active = False
+N = 10**6
+PRIME_FLAGS = get_prime_flags_up_to(N)
+# Since 2, 3, 5, 7 are not considered truncatable, we start from 11.
+PRIMES = [p for p in range(11, N) if PRIME_FLAGS[p]]
+
+truncatable_numbers = []
+for p in PRIMES:
+    p_string = str(p)
+    number_of_digits_of_p = len(p_string)
+    is_truncatable = True
+    for i in range(1, number_of_digits_of_p):
+        # Crop p from the left and from the right by i digits:
+        init = int(p_string[:i])
+        tail = int(p_string[i:])
+        # Check if these cropped numbers are still prime; if not, break.
+        if not (PRIME_FLAGS[init] and PRIME_FLAGS[tail]):
+            is_truncatable = False
             break
-    if active:
-        for i in range(1, m):
-            q = int(s[:i])
-            if q not in set_of_primes:
-                active = False
-                break
-    if active:
-        special.append(p)
+    if is_truncatable:
+        truncatable_numbers.append(p)
+        if len(truncatable_numbers) == 11:
+            break
 
-print(special)
-print(sum(special) - 17)
-
+print(sum(truncatable_numbers))
 
 end = time.time()
 print(f"Program runtime: {end - start} seconds")

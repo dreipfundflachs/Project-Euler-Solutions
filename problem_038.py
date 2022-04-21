@@ -1,46 +1,44 @@
-###############################
+#################################
 #  PROJECT EULER - PROBLEM 038  #
-###############################
-
+#################################
 import time
 
 
-def is_pandigital(s):
-    "Decides whether a number string is 1-to-9 pandigital."
-    digits = set(range(1, 10))
-    digits_in_number = set([int(k) for k in s])
-    boolean = (digits_in_number == digits)
-    return boolean
+def is_pandigital(number_string: str) -> bool:
+    """ Decides whether a number string is 1-to-9 pandigital. """
+    digits_in_number = {int(k) for k in number_string}
 
+    return (len(number_string) == 9 and digits_in_number == set(range(1, 10)))
+
+
+# We will call the integer that gets multiplied by 1,..., 9 the 'base'.  The
+# idea is to loop through all bases having fewer than 5 digits, multiplying
+# them by 1, ..., n, ..., 9, and to test whether the concatenation of all of
+# these products is pandigital. If it is, update the maxima if necessary.
 
 start = time.time()
 
-# Initialize the maximum product (m), the maximum base used in the product
-# (base) and the number of factors used to multiply the product(mn)
+N = 10**4
 
-m = 1
-mbase = 1
-mn = 1
+max_base = 1
+max_number_of_factors = 1
+max_product = 1
 
-# Loop through all numbers having less than 5 digits, multiplying them by
-# chains of length n, and test whether the result is pandigital. If it is,
-# update the maxima if necessary.
-
-for base in range(10**4):
-    concat = ''
+for base in range(N):
+    concatenation = ''
     for n in range(1, 10):
-        concat += str(base * n)
-        if len(concat) > 9:
+        concatenation += str(base * n)
+        if len(concatenation) > 9:
             break
-        if len(concat) == 9 and is_pandigital(concat):
-            p = int(concat)
-            if p > m:
-                m = p
-                mbase = base
-                mn = n
+        elif is_pandigital(concatenation):
+            product = int(concatenation)
+            if product > max_product:
+                max_product = product
+                max_base = base
+                max_number_of_factors = n
                 break
 
-print(mbase, mn, m)
+print(max_product)
 
 end = time.time()
 print(f"Program runtime: {end - start} seconds")

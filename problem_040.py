@@ -1,31 +1,31 @@
-# PROJECT EULER - PROBLEM
+#################################
+#  PROJECT EULER - PROBLEM 040  #
+#################################
 import time
 
 
-def concatenate_list(strings):
-    """ Takes a list of strings
-        and returns a string which is the concatenation of all of them.
-    """
-    result = ''
-    for element in strings:
-        result += element
-    return result
-
+# The concatenation of all numbers from 1 to 10**5 into a single string has
+# the following number of digits:
+#       9 * 1 + 90 * 2 + 900 * 3 + 9000 * 4 + 90_000 * 5
+#   =   9 * (1 + 20 + 300 + 4000 + 50_000)
+#   =   488_889
+# If we further concatenate all numbers from 10**5 = 100_000 to 199_999,
+# each of which has 6 digits, we will extend the length of the string by
+# 600_000, thus comfortably exceeding the necessary count of 10**6 digits.
 
 start = time.time()
 
-numbers = list(range(1, 7*10**5))
-str_numbers = [str(number) for number in numbers]
-# print(str_numbers)
-digits = concatenate_list(str_numbers)
-# print(digits)
-# print(digits[10])
-product = 1
-for n in range(0, 7):
-    index = 10**n - 1
-    product *= int(digits[index])
-print(product)
+N = 2 * 10**5
+D = 6
+NUMBER_STRINGS = [str(number) for number in list(range(1, N))]
+DIGITS = ''.join(NUMBER_STRINGS)
 
+product = 1
+for n in range(0, D + 1):
+    index = 10**n - 1
+    product *= int(DIGITS[index])
+
+print(product)
 
 end = time.time()
 print(f"Program runtime: {end - start} seconds")

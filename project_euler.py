@@ -53,14 +53,14 @@ def involves_only(n: int, p: int, q: int) -> bool:
         return True
 
 
-def powmod(base: int, exp: int, m: int) -> int:
+def powmod(base: int, exponent: int, m: int) -> int:
     """ Computes base**exp (mod m) efficiently (in O(log(exp)) time). """
-    if exp == 1:
+    if exponent == 1:
         return base % m
-    elif exp % 2 == 0:
-        return (powmod(base, exp // 2, m)**2) % m
+    elif exponent % 2 == 0:
+        return (powmod(base, exponent // 2, m)**2) % m
     else:
-        return ((base * powmod(base, (exp - 1)//2, m)**2) % m)
+        return ((base * powmod(base, (exponent - 1)//2, m)**2) % m)
 
 
 def get_primes_up_to(n: int) -> list[int]:
@@ -72,8 +72,24 @@ def get_primes_up_to(n: int) -> list[int]:
     for (k, is_prime) in enumerate(prime_flags):
         if is_prime:
             primes.append(k)
-            for m in range(k * k, n + 1, k):
-                prime_flags[m] = False
+            for multiple in range(k * k, n + 1, k):
+                prime_flags[multiple] = False
+    return primes
+
+
+def get_primes_up_to_greater_than(n: int, m: int) -> list[int]:
+    """ Returns a list of all primes p such that m <= p <= n using
+    Eratosthenes' sieve. """
+    primes = []
+    prime_flags = [True] * (n + 1)
+    prime_flags[0] = False
+    prime_flags[1] = False
+    for (k, is_prime) in enumerate(prime_flags):
+        if is_prime:
+            if k >= m:
+                primes.append(k)
+            for multiple in range(k * k, n + 1, k):
+                prime_flags[multiple] = False
     return primes
 
 
@@ -85,8 +101,8 @@ def get_prime_flags_up_to(n: int) -> list[bool]:
     prime_flags[1] = False
     for (p, is_prime) in enumerate(prime_flags):
         if is_prime:
-            for m in range(p * p, n + 1, p):
-                prime_flags[m] = False
+            for multiple in range(p * p, n + 1, p):
+                prime_flags[multiple] = False
     return prime_flags
 
 
@@ -334,6 +350,25 @@ def transpose(A: list) -> list:
 #################
 #  MISCELLANEA  #
 #################
+
+
+def binary_search(target: int, numbers: list[int]) -> True:
+    """ Given a _sorted_ list of integers 'numbers', uses a binary search to
+    decide whether 'target' lies in it. """
+    first = 0
+    last = len(numbers) - 1
+    middle = 0
+
+    while first <= last:
+        middle = (first + last) // 2
+        if numbers[middle] == target:
+            return True
+        elif target < numbers[middle]:
+            last = middle - 1
+        else:
+            first = middle + 1
+
+    return False
 
 
 def sum_of_digits(n: int) -> int:
