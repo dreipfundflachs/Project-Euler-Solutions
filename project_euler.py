@@ -161,8 +161,9 @@ def integer_product(list_of_integers: list[int]) -> int:
 
 
 def get_prime_factors(n: int) -> list[int]:
-    """ Returns the list of all prime factors of n.  Determines all necessary
-    primes on the fly.  """
+    """ Returns the list of all prime factors of n, each prime appearing as
+    many times as its multiplicity indicates.  Determines all necessary primes
+    on the fly.  """
     factors = []
     prime_flags = [True] * (n + 1)
     prime_flags[0] = False
