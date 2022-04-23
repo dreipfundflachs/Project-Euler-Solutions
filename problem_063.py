@@ -1,23 +1,27 @@
-# PROJECT EULER - PROBLEM 063
+#################################
+#  PROJECT EULER - PROBLEM 063  #
+#################################
 import time
-
-
-def number_of_digits(n):
-    """ Returns the number of digits of an integer n expressed in base 10. """
-    d = len(str(n))
-    return d
 
 
 start = time.time()
 
-s = 0
-for n in range(1, 10):
-    m = 1
-    while number_of_digits(n**m) == m:
-        s += 1
-        m += 1
+N = 10
 
-print(s)
+count = 0  # Counts the number of integers satisfying the stated condition.
+
+# If a number k is > 10, then certainly k**n will have more than n digits.  On
+# the other hand, for a number k in {1, ..., 9}, it is clear that k**1 = k has
+# 1 digit and that eventually k**n will have fewer than n digits. If this
+# happens first for some n_0, then for no value n > n_0 will k**n have n
+# digits. Thus we have the following simple algorithm to count these numbers.
+for k in range(1, N):
+    n = 1
+    while len(str(k**n)) == n:
+        count += 1
+        n += 1
+
+print(count)
 
 end = time.time()
 print(f"Program runtime: {end - start} seconds")

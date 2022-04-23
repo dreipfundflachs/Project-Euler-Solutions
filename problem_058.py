@@ -1,4 +1,6 @@
-# PROJECT EULER - PROBLEM 058
+#################################
+#  PROJECT EULER - PROBLEM 058  #
+#################################
 import time
 
 
