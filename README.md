@@ -1,5 +1,5 @@
-Contains solutions to some [Project Euler](https://www.projecteuler.net)
-problems (among the first 100), written in Python 3.
+Contains solutions to the first 100 problems on [Project
+Euler](https://www.projecteuler.net), written in Python 3.
 
 My badge is available [here](https://projecteuler.net/profile/dreipfundflachs.png) 
 and my [friend key](https://projecteuler.net/minimal=friends) is 1912870_zicXUiSA5Mv6wAvcZOOv8FMAfCtCClsu

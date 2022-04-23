@@ -31,9 +31,10 @@ for p in PRIMES:
     for n in permutations_of_p[:]:
         if not PRIME_FLAGS[n] or n < M:
             permutations_of_p.remove(n)
-    # Remove duplicates from the list of permutations of p:
+    # Remove duplicates from the list of permutations of the digits of p:
     permutations_of_p = list(set(permutations_of_p))
-    # If there are at least three prime numbers which are permutations of p:
+    # If there are at least three prime numbers obtained by permuting the
+    # digits of p:
     if len(permutations_of_p) >= 3:
         # Sort them and extract all possible triples we can form using them:
         permutations_of_p.sort()
@@ -47,7 +48,7 @@ for p in PRIMES:
                 if diff_1 == diff_2:
                     print(f"{k} and {m} and {n}")
                     found_solution = True
-    if found_solution is True:
+    if found_solution:
         break
 
 end = time.time()

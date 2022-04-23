@@ -95,7 +95,7 @@ def get_primes_up_to_greater_than(n: int, m: int) -> list[int]:
 
 def get_prime_flags_up_to(n: int) -> list[bool]:
     """ Returns a list prime_flags of n + 1 elements such that
-    prime_flags[k] = True if and only if k is a prime number."""
+    prime_flags[k] is True if and only if k is a prime number."""
     prime_flags = [True] * (n + 1)
     prime_flags[0] = False
     prime_flags[1] = False
@@ -308,7 +308,7 @@ def sum_of_proper_divisors(n: int, primes: list[int]) -> int:
     return sum(get_proper_divisors_given_primes(n, primes))
 
 
-def number_of_digits(n: int) -> int:
+def get_number_of_digits(n: int) -> int:
     """ Determines the number digits of n. """
     d = 0
     while n != 0:
@@ -372,7 +372,13 @@ def binary_search(target: int, numbers: list[int]) -> True:
     return False
 
 
-def sum_of_digits(n: int) -> int:
+def get_powerset(ns: set[int]) -> list[iter]:
+    """ Returns the power set of 'ns' as a list, e.g., get_powerset([1,2,3])
+    yields [(), (1,), (2,), (3,), (1,2), (1,3), (2,3), (1,2,3)]. """
+    return [tup for n in range(0, len(ns) + 1) for tup in combinations(ns, n)]
+
+
+def get_sum_of_digits(n: int) -> int:
     """ Returns the sum of all the digits of n """
     sum = 0
     while n > 0:
@@ -384,9 +390,7 @@ def sum_of_digits(n: int) -> int:
 
 def swap(lst: list, i: int, j: int) -> list:
     """ Swaps elements i and j of list lst """
-    temp = lst[i]
-    lst[i] = lst[j]
-    lst[j] = temp
+    lst[i], lst[j] = lst[j], lst[i]
 
 
 def dec_to_bin(n: int) -> int:
@@ -462,8 +466,10 @@ def get_decimal_representation(n: int, d: int, precision: int) -> list[int]:
 ################################################
 
 
-def convert_list_to_int(lst: list[int]) -> int:
-    return int(''.join(str(i) for i in lst))
+def convert_to_int(digits: list[int]) -> int:
+    """ Converts a list of digits to a single integer, e.g.,
+    [1, 2, 3] --> 123. """
+    return int(''.join([str(digit) for digit in digits]))
 
 
 def name_score(name: str) -> int:
@@ -480,10 +486,10 @@ def name_score(name: str) -> int:
     return score
 
 
-def flatten(t: list[list]) -> list:
+def flatten(list_of_lists: list[list[int]]) -> list[int]:
     """ Converts a list of lists into a single list by joining all sublists,
-    e.g., flatten([[1, 2], [2, 3]]) --> [1, 2, 2, 3] """
-    return [item for sublist in t for item in sublist]
+    e.g., flatten([[1, 2], [2, 3]]) --> [1, 2, 2, 3]. """
+    return [item for sublist in list_of_lists for item in sublist]
 
 
 def generate_palindromes(letters: list[str], length: int) -> list[str]:

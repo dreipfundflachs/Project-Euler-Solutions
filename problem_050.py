@@ -6,7 +6,7 @@ import time
 
 def get_prime_flags_up_to(n: int) -> list[bool]:
     """ Returns a list prime_flags of n + 1 elements such that
-    prime_flags[k] = True if and only if k is a prime number."""
+    prime_flags[k] is True if and only if k is a prime number."""
     prime_flags = [True] * (n + 1)
     prime_flags[0] = False
     prime_flags[1] = False
