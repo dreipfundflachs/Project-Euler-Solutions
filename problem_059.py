@@ -48,7 +48,6 @@ def decrypt(text, key):
     return ''.join(letters)
 
 
-
 start = time.time()
 
 # Extract the contents of the file.
@@ -67,7 +66,7 @@ candidates = [[], [], []]
 # symbol that one would expect to appear in a real text.
 for k in range(3):
     for i in range(97, 123):
-        candidate = True
+        is_candidate = True
         for j in lists[k]:
             int_j = int(j)
             byte_i = f'{i:08b}'
@@ -76,10 +75,10 @@ for k in range(3):
             # If the result is unexpected, the key is not a candidate.
             if result < 32 or result > 122 or \
                     result == 61 or result == 64 or result in [94, 96]:
-                candidate = False
+                is_candidate = False
                 break
         # If the i is a possible for being the key, append it to candidates[k]
-        if candidate == True:
+        if is_candidate:
             candidates[k].append(i)
 print(candidates)
 
@@ -95,7 +94,6 @@ for i in range(2):
 # Write the contents of the text to a file and compute the sum s of the ASCII
 # characters.
 s = 0
-print(len(letters[0]) == len(letters[2]))
 with open('p059_decrypted.txt', 'w') as file_object:
     for n in range(len(letters[0])):
         for k in range(3):

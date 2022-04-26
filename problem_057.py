@@ -23,8 +23,8 @@ q = [2]
 count = 0  # Counts the number of fractions satisfying the stated condition.
 
 for k in range(1, N):
-    # It is easy to prove by induction that the recursive formulae for the
-    # numerator and denominator are as follows:
+    # It is easy to prove by induction the following recursive formulae for
+    # the numerators and denominators:
     current_p = p[k - 1] + 2 * q[k - 1]
     current_q = p[k - 1] + q[k - 1]
     p.append(current_p)

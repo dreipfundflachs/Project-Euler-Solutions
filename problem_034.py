@@ -30,13 +30,12 @@ for n in range(1, 10):
         N = n
         break
 
-special_numbers = []
-
+answer = 0
 for n in range(3, N * FACTORIAL_LIST[9]):
     if is_sum_of_digit_factorials(n):
-        special_numbers.append(n)
+        answer += n
 
-print(sum(special_numbers))
+print(answer)
 
 end = time.time()
 print(f"Program runtime: {end - start} seconds")

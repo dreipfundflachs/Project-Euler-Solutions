@@ -22,13 +22,13 @@ def is_prime(n: int) -> bool:
 
 start = time.time()
 
-N = 10**4 + 1
+N = 10**4
 
 k = 1
 most_recent_prime = 0
 prime_count = 0
 
-while prime_count < N:
+while prime_count <= N:
     if is_prime(k):
         prime_count += 1
         most_recent_prime = k

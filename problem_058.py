@@ -19,9 +19,11 @@ def is_prime(n: int) -> bool:
 
 start = time.time()
 
-# Choose a diagonal. Let n_1 = be the first number != 1 along it and n_k be the
+# Choose a diagonal. Let n_1 be the first number != 1 along it and n_k be the
 # number in the k-th position (other than 1).  Then
 # n_k = n_(k-1) + (n_1 - 1) + 8*(k - 1) for k > 1.
+
+M = 10**5
 
 diagonals = [[]] * 4
 diagonals[0] = [3]
@@ -31,7 +33,6 @@ diagonals[3] = [9]
 relevant = [3, 5, 7]
 d = [2, 4, 6, 8]
 
-M = 100_000
 
 count = 3
 for k in range(1, M):

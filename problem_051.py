@@ -89,7 +89,9 @@ PRIMES = [p for p in range(M, N) if PRIME_FLAGS[p]]
 # prime, we can proceed to consider the next prime; if we find a solution, we
 # can exit the loop.
 found_solution = False
-for p in PRIMES:
+i = 0  # Index used to traverse the list PRIMES.
+while not found_solution:
+    p = PRIMES[i]
     for positions in list(combinations(range(0, MAX_DIGITS - 1), 3)):
         variations_of_p = get_variations(p, positions)
         # In principle, all 10 variations of p can be prime:
@@ -105,9 +107,7 @@ for p in PRIMES:
         if number_of_prime_candidates == 8:
             print(f"The smallest such prime is {p}.")
             found_solution = True
-            break
-    if found_solution:
-        break
+    i += 1
 
 end = time.time()
 print(f"Program runtime: {end - start} seconds")

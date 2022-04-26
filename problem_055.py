@@ -7,15 +7,14 @@ import time
 def reverse_add(n):
     """ Returns the sum of n with number obtained
     by reversing the digits of n.  """
-    s = str(n)
-    m = int(s[::-1])
-    return(m + n)
+    m = int(str(n)[::-1])
+    return m + n
 
 
 def is_palindromic(n):
     """ Checks if the given number is palindromic. """
     s = str(n)
-    return (s == s[::-1])
+    return s == s[::-1]
 
 
 start = time.time()
@@ -48,7 +47,7 @@ for n in range(0, N):
         # Sum up our findings.
         if is_lychrel:
             lychrels[k] = True
-        elif not is_lychrel:
+        elif is_lychrel is False:
             lychrels[k] = False
         elif is_palindromic(m):
             lychrels[k] = False

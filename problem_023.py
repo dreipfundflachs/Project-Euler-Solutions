@@ -60,21 +60,19 @@ for k in range(2, N):
     if sum(get_proper_divisors_given_primes(k, PRIMES)) > k:
         abundants.append(k)
 
-# Construct the list of numbers < N which can be written as the sum of two
-# abundant numbers.
-sums_of_abundants = []
+# Find all numbers < N which can be written as the sum of two abundant numbers
+# and store them in a dictionary of flags.
+sum_of_abundants_flags = {k: False for k in range(N)}
 number_of_abundants = len(abundants)
 for i in range(0, number_of_abundants):
     for j in range(i, number_of_abundants):
         sum_of_abundants = abundants[i] + abundants[j]
         if sum_of_abundants < N:
-            sums_of_abundants.append(sum_of_abundants)
+            sum_of_abundants_flags[sum_of_abundants] = True
         else:
             break
 
-# Take the difference of the sets {1,..., N} and {k | k is a sum of abundants}
-# and compute the sum of its elements.
-non_sums = set(range(1, N)).difference(set(sums_of_abundants))
+non_sums = [k for k in range(N) if not sum_of_abundants_flags[k]]
 print(sum(non_sums))
 
 end = time.time()
