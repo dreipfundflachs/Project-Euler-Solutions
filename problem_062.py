@@ -1,34 +1,35 @@
-# PROJECT EULER - PROBLEM 062
+#################################
+#  PROJECT EULER - PROBLEM 062  #
+#################################
 import time
 
+
+# The main idea of this solution is that two numbers m and n are a permutation
+# of one another if and only if for each digit d = 0, ..., 9, the number of
+# occurrences of d in m and in n coincide.
 start = time.time()
 
-dict_of_cube_digits = {}
-N = 10**4   # upper bound
+list_of_cube_digits: list[list[int]] = []
+n = 0
+found_solution = False
 
-for n in range(N):
-    cube = n**3
-    s = str(cube)
-    # For each cube in the range, create a dictionary to store its digits. The
-    # value at the key 'k' (for k between 0 and 9) is the number of times that
-    # k occurs in the cube.
-    cube_digits = {}
+while not found_solution:
+    cube_string = str(n**3)
+    cube_digits = []  # cube_digits[d] = number of occurrences of d in n**3.
     for k in range(10):
-        cube_digits[k] = s.count(str(k))
-    # Store this dictionary as the value associated with the cube in
-    # dict_of_cube_digits.
-    dict_of_cube_digits[cube] = cube_digits
+        cube_digits.append(cube_string.count(str(k)))
+    # Store this list as the value associated with n (not n**3) in
+    # list_of_cube_digits.
+    list_of_cube_digits.append(cube_digits)
     # Test whether cube_digits has already occurred 5x. If so, stop searching.
-    if (list(dict_of_cube_digits.values())).count(cube_digits) == 5:
-        # To obtain the smallest cube whose digits are a permutation of those
-        # stored in cube_digits, we need to search through dict_of_cube_digits
-        # for all occurrences of cube_digits.
-        special_cubes = [c for c in range(N)
-                         if dict_of_cube_digits.get(c**3) == cube_digits]
-        # Print all numbers, the digits of whose cubes form a permutation of
-        # cube_digits; then print the minimum among those cubes.
-        print(special_cubes, min(special_cubes)**3)
-        break
+    if list_of_cube_digits.count(cube_digits) == 5:
+        # To obtain the cubes whose digits are a permutation of those of n**3,
+        # search list_of_cube_digits for all occurrences of cube_digits.
+        special_cubes = [c**3 for c in range(n + 1)
+                         if list_of_cube_digits[c] == cube_digits]
+        print(min(special_cubes))
+        found_solution = True
+    n += 1
 
 end = time.time()
 print(f"Program runtime: {end - start} seconds")

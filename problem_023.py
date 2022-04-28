@@ -61,8 +61,8 @@ for k in range(2, N):
         abundants.append(k)
 
 # Find all numbers < N which can be written as the sum of two abundant numbers
-# and store them in a dictionary of flags.
-sum_of_abundants_flags = {k: False for k in range(N)}
+# and record the corresponding (T or F) in a list.
+sum_of_abundants_flags = [False for k in range(N)]
 number_of_abundants = len(abundants)
 for i in range(0, number_of_abundants):
     for j in range(i, number_of_abundants):

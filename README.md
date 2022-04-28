@@ -7,11 +7,11 @@ and my [friend key](https://projecteuler.net/minimal=friends) is 1912870_zicXUiS
 Among the solutions provided here, the following take more than 1 second to
 execute (on my computer):
 
-| Problem number | Runtime (approx.) |
-| -------------- | ----------------- |
+| Problem number   | Runtime (approx.)   |
+| :--------------: | :-----------------: |
 | 12 | 3.3s |
 | 14 | 1.8s |
-| 23 | 4.4s |
+| 23 | 3.8s |
 | 30 | 1.2s |
 | 34 | 3.6s |
 | 41 | 1.9s | 

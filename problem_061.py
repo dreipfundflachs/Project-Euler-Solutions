@@ -1,6 +1,5 @@
-# PROJECT EULER - PROBLEM 066
+# PROJECT EULER - PROBLEM 061
 import time
-from itertools import combinations
 
 start = time.time()
 m = 10_000
@@ -28,7 +27,7 @@ for n in range(1, m):
     figurates[8].append(octogonal)
 
 for k in range(3, 9):
-    figurates[k] = [ n for n in (figurates[k]) if (1000 <= n < 10_000) ]
+    figurates[k] = [n for n in (figurates[k]) if (1000 <= n < 10_000)]
 for k in range(3, 9):
     print(figurates[k][0:10])
 
@@ -54,31 +53,31 @@ for n1 in figurates[8]:
                                 for i3 in gen:
                                     if n4 in figurates[i3]:
                                         gen = [k for k in ran if k != i1 and k
-                                                != i2 and k != i3]
+                                               != i2 and k != i3]
                                         for p6 in numbers:
                                             n5 = int(str(p5) + str(p6))
                                             n6 = int(str(p6) + str(p1))
                                             for i4 in gen:
                                                 if n5 in figurates[i4]:
                                                     gen = [k for k in ran if
-                                                            k != i1 and
-                                                            k != i2 and
-                                                            k != i3 and
-                                                            k != i4]
+                                                           k != i1 and
+                                                           k != i2 and
+                                                           k != i3 and
+                                                           k != i4]
                                                     for i5 in gen:
                                                         if n6 in figurates[i5]:
-                                                            answer = sum([n1,
-                                                                n2, n3, n4, n5,
-                                                                n6])
+                                                            answer =\
+                                                                sum([n1, n2,
+                                                                    n3, n4, n5,
+                                                                    n6])
 
                                                             print((n1, 8),
-                                                                    (n2, i1),
-                                                                    (n3, i2),
-                                                                    (n4, i3),
-                                                                    (n5, i4),
-                                                                    (n6, i5))
+                                                                  (n2, i1),
+                                                                  (n3, i2),
+                                                                  (n4, i3),
+                                                                  (n5, i4),
+                                                                  (n6, i5))
                                                             print(answer)
-
 
 
 end = time.time()
