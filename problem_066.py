@@ -10,12 +10,14 @@ from math import isqrt
 
 start = time.time()
 
+M = 10**2
 N = 10**3
-SQUARES = [n**2 for n in range(10**2 + 1)]
+SQUARES = [n**2 for n in range(M + 1)]
 NON_SQUARES = [n for n in range(2, N + 1) if n not in SQUARES]
 
 max_n = 0
 max_solution = 0
+
 for n in NON_SQUARES:
     p = []  # p[k] will be the numerator of the k-th convergent
     q = []  # q[k] will be the denominatro of the k-th convergent
@@ -37,12 +39,13 @@ for n in NON_SQUARES:
     k = 2
     period = 1
     while p[k - 1]**2 - n * q[k - 1]**2 != 1:
-        # The algorithm to find a = a_k proceeds by repeated updating the
+        # The algorithm to find a = a_k proceeds by repeatedly updating the
         # values a, d and m, given their previous values according to the
-        # three formulas below (see the Wikipedia article).
+        # three formulas immediately below (cf. the Wikipedia article).
         m = d * a - m
         d = (n - m**2) / d
         a = int((a_0 + m) / d)
+
         p.append(a * p[k - 1] + p[k - 2])
         q.append(a * q[k - 1] + q[k - 2])
         period += 1
@@ -51,6 +54,7 @@ for n in NON_SQUARES:
         max_solution = p[k - 1]
         max_n = n
 
-print(max_n, max_solution)
+print(max_n)
+
 end = time.time()
 print(f"Program runtime: {end - start} seconds")

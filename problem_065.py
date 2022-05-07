@@ -1,16 +1,27 @@
-# PROJECT EULER - PROBLEM 065
+#################################
+#  PROJECT EULER - PROBLEM 065  #
+#################################
 import time
-from project_euler import get_digital_sum
+from fractions import Fraction
 
 
-def continued(coefficients):
-    """ Computes the value of the continued fraction whose
-    coefficients are given, as a rational number.
-    """
-    from fractions import Fraction
-    m = len(c)
+def get_digital_sum(n: int) -> int:
+    """ Determines the sum of all digits of n. """
+    s = 0
+    while n != 0:
+        r = n % 10
+        n = (n - r) // 10
+        s += r
+    return s
+
+
+def continued(coefficients: list[int]) -> int:
+    """ Computes the value of the continued fraction whose coefficients are
+    given, as a rational number.
+    Requires: 'Fraction' from module 'fractions'. """
+    m = len(coefficients)
     if m == 1:
-        x = Fraction(1, c[0])
+        x = Fraction(1, coefficients[0])
     else:
         last = coefficients.pop()
         next_to_last = coefficients.pop()
@@ -21,21 +32,20 @@ def continued(coefficients):
 
 
 start = time.time()
-# Initialize the list of coefficients.
-n = 99
-c = []
-for k in range(n):
+
+N = 99
+coefficients = []
+
+for k in range(N):
     if k % 3 == 1:
         i = (k - 1) // 3 + 1
-        c.append(2*i)
+        coefficients.append(2 * i)
     else:
-        c.append(1)
+        coefficients.append(1)
 
 # Determine the numerator by adding 2 to the ``fractional part''.
-nm = (continued(c) + 2).numerator
-print(nm)
-print(get_digital_sum(nm))
-
+num = (continued(coefficients) + 2).numerator
+print(get_digital_sum(num))
 
 end = time.time()
 print(f"Program runtime: {end - start} seconds")

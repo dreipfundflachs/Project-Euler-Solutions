@@ -18,6 +18,8 @@ execute (on my computer):
 | 43 | 2.9s |
 | 58 | 4.0s | 
 | 60 | > 1m |
+| 70 | 1.7s |
+| 72 | > 1m |
 
 
 Favorite problems so far (in ascending order): 

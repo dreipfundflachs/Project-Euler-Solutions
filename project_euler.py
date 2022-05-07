@@ -29,16 +29,11 @@ def is_square(n: int) -> bool:
         return False
 
 
-def gcd(a: int, b: int) -> int:
-    """ Computes the g.c.d. (also known as h.c.f.) of the integers a and b."""
-    if b == 0 or a == b:
-        return a
-    elif a == 0:
-        return b
-    elif a > b:
-        return gcd(b, a % b)
-    elif b > a:
-        return gcd(a, b % a)
+def gcd(a: int, b:  int) -> int:
+    """ Computes the greatest common divisor (gcd) of integers a and b. """
+    while b:
+        a, b = b, a % b
+    return a
 
 
 def involves_only(n: int, p: int, q: int) -> bool:

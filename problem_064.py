@@ -10,9 +10,10 @@ from math import isqrt
 
 start = time.time()
 
-N = 10**4
+M = 10**2
+N = M**2
 # We will consider the square root of n only when the latter is not a square.
-SQUARES = [n**2 for n in range(10**2 + 1)]
+SQUARES = [n**2 for n in range(M + 1)]
 NON_SQUARES = [n for n in range(2, N + 1) if n not in SQUARES]
 
 count = 0
@@ -27,7 +28,7 @@ for n in NON_SQUARES:
     period = 0
     while a != 2 * a_0:
         # The algorithm proceeds by repeated calculation of a (the current
-        # partial denominator) d and m, given their previous values according
+        # partial denominator), d and m, given their previous values according
         # to these formulas and the initial values above (see the Wikipedia
         # article).
         m = d * a - m
