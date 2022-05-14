@@ -1,11 +1,13 @@
 Contains solutions to the first 100 problems on [Project
 Euler](https://www.projecteuler.net), written in Python 3.
 
-My badge is available [here](https://projecteuler.net/profile/dreipfundflachs.png) 
-and my [friend key](https://projecteuler.net/minimal=friends) is 1912870_zicXUiSA5Mv6wAvcZOOv8FMAfCtCClsu
+My badge can be found
+[here](https://projecteuler.net/profile/dreipfundflachs.png) and my [friend
+key](https://projecteuler.net/minimal=friends) is
+1912870_zicXUiSA5Mv6wAvcZOOv8FMAfCtCClsu
 
-Among the solutions provided here, the following take more than 1 second to
-execute (on my computer):
+Among the solutions provided in this repository, the following take more than 1
+second to execute (on my computer):
 
 | Problem number   | Runtime (approx.)   |
 | :--------------: | :-----------------: |
@@ -25,7 +27,6 @@ execute (on my computer):
 | 78 | 4.9s |
 | 82 | 1.1s |
 | 86 | 3.4s |
-| 91 | 1.7s |
 
 
 Favorite problems so far (in ascending order): 

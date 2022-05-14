@@ -18,14 +18,17 @@ total = 0
 for x_1 in range(N + 1):
     for y_1 in range(N + 1):
         for x_2 in range(x_1 + 1, N + 1):
-            for y_2 in range(N + 1):
-                # Test if the points are non-collinear.
+            for y_2 in range(y_1 + 1):
+                # We can consider only those values of y_2 <= y_1 because this
+                # condition must hold if the triangle has a right angle at P or
+                # Q; see the two equality tests below, observing that
+                # x_2 - x_1 > 0 by hypothesis.
                 if x_1 * y_2 != x_2 * y_1:
                     # Test if the angle at P = (x_1, y_1) is right.
-                    if x_1 * (x_1 - x_2) == y_1 * (y_2 - y_1):
+                    if x_1 * (x_2 - x_1) == y_1 * (y_1 - y_2):
                         total += 1
                     # Test if the angle at Q = (x_2, y_2) is right.
-                    elif x_2 * (x_1 - x_2) == y_2 * (y_2 - y_1):
+                    elif x_2 * (x_2 - x_1) == y_2 * (y_1 - y_2):
                         total += 1
 
 # Now add to this the number of solutions of type (ii). There are N choices for
