@@ -35,5 +35,6 @@ for string in numerals:
         k += 1
 
 print(characters_saved)
+
 end = time.time()
 print(f"Program runtime: {end - start} seconds")

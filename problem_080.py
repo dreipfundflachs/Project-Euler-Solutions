@@ -1,6 +1,8 @@
-# PROJECT EULER - PROBLEM 080
+#################################
+#  PROJECT EULER - PROBLEM 080  #
+#################################
 import time
-from decimal import *
+from decimal import getcontext, Decimal
 
 # The statement of the problem is somewhat ambiguous. One should also include
 # the digit to the left of the decimal point in the count (i.e., the integer
@@ -15,8 +17,8 @@ NON_SQUARES = set(range(1, 100)).difference(set(SQUARES))
 
 total = 0
 for n in NON_SQUARES:
-    s = str(Decimal(n).sqrt())
-    total += int(s[0]) + sum([int(d) for d in s[2:101]])
+    n_string = str(Decimal(n).sqrt())
+    total += int(n_string[0]) + sum([int(d) for d in n_string[2:101]])
 
 print(total)
 

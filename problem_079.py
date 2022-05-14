@@ -1,4 +1,6 @@
-# PROJECT EULER - PROBLEM 079
+#################################
+#  PROJECT EULER - PROBLEM 079  #
+#################################
 import time
 
 
@@ -10,7 +12,6 @@ filename = 'p079_keylog.txt'
 with open(filename) as f:
     for line in f:
         numbers.append(line.strip())
-print(numbers)
 
 # Obtain the set of all digits involved and create a set of pairs (m, n) where
 # m is to the left of n.
@@ -28,10 +29,9 @@ for number in numbers:
     digits.add(second)
     digits.add(third)
 
-# Count the number of ocurrences of each digit a smaller of the two numbers in
-# a given pair.
-
-count = {}
+# Count the number of ocurrences of each digit as the smallest one of two
+# numbers in a given pair.
+count: dict[int, int] = {}
 for d in digits:
     count[d] = 0
 
@@ -42,7 +42,7 @@ for d in digits:
 
 # Sort the digits by their counts, in decreasing order.
 for d in sorted(count, key=count.get, reverse=True):
-    print(d, count[d])
+    print(d, end='')
 
 end = time.time()
-print(f"Program runtime: {end - start} seconds")
+print(f"\nProgram runtime: {end - start} seconds")

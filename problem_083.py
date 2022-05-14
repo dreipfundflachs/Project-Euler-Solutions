@@ -1,11 +1,13 @@
-# PROJECT EULER - PROBLEM 083
+#################################
+#  PROJECT EULER - PROBLEM 083  #
+#################################
 import time
 
 
-def extract(line):
+def extract(line: str) -> list[int]:
     """ Given a string ending in a newline character and containing various
     integers separated by commas, return a list of those integers.
-    Ex.: extract('13,49,732,5\n') -> [13, 49, 732, 5] """
+    Ex.: extract("13,49,732,5\n") -> [13, 49, 732, 5] """
     new_line = (line.strip()).split(',')
     return [int(entry) for entry in new_line]
 
@@ -17,9 +19,8 @@ with open('p083_matrix.txt') as file_object:
     for line in file_object:
         A.append(extract(line))
 
-# N = dimension of the matrix
-N = len(A)
-C = 1_000_000
+N = len(A)  # dimension of the matrix A
+C = 10**6
 
 best = [([C] * N) for i in range(N)]
 best[0][0] = A[0][0]
@@ -37,10 +38,12 @@ while True:
                 current_min = min(current_min, best[i][j - 1])
             if j < 79:
                 current_min = min(current_min, best[i][j + 1])
-
             best[i][j] = min(best[i][j], A[i][j] + current_min)
 
     if best[N - 1][N - 1] < C and best[N - 1][N - 1] == previous_best:
         break
 
 print(best[N - 1][N - 1])
+
+end = time.time()
+print(f"Program runtime: {end - start} seconds")

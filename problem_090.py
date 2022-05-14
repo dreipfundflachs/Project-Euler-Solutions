@@ -1,4 +1,6 @@
-# PROJECT EULER - PROBLEM 090
+#################################
+#  PROJECT EULER - PROBLEM 090  #
+#################################
 import time
 from itertools import combinations
 
@@ -36,7 +38,7 @@ start = time.time()
 
 DIGITS = set(range(0, 10))
 # Generate a list of all the squares, written as tuples (0, 1), (0, 4), etc.
-SQUARES = [ (n**2 // 10, n**2 % 10) for n in range(1, 10)]
+SQUARES = [(n**2 // 10, n**2 % 10) for n in range(1, 10)]
 total = 0
 
 filled = fill(set(), set())

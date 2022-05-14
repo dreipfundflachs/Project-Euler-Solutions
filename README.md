@@ -20,6 +20,12 @@ execute (on my computer):
 | 60 | > 1m |
 | 70 | 1.7s |
 | 72 | > 1m |
+| 73 | 6.2s |
+| 74 | 1.9s |
+| 78 | 4.9s |
+| 82 | 1.1s |
+| 86 | 3.4s |
+| 91 | 1.7s |
 
 
 Favorite problems so far (in ascending order): 

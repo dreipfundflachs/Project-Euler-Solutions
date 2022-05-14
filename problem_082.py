@@ -1,11 +1,13 @@
-# PROJECT EULER - PROBLEM 082
+#################################
+#  PROJECT EULER - PROBLEM 082  #
+#################################
 import time
 
 
-def extract(line):
+def extract(line: str) -> list[int]:
     """ Given a string ending in a newline character and containing various
     integers separated by commas, return a list of those integers.
-    Ex.: extract('13,49,732,5\n') -> [13, 49, 732, 5] """
+    Ex.: extract("13,49,732,5\n") -> [13, 49, 732, 5] """
     new_line = (line.strip()).split(',')
     return [int(entry) for entry in new_line]
 
@@ -17,21 +19,19 @@ with open('p082_matrix.txt') as file_object:
     for line in file_object:
         A.append(extract(line))
 
-# N = dimension of the matrix
-N = len(A)
-"""
-As in the preceding (simpler) problem, we use dynamic programming. The idea
-is to proceed from the last column to the first one as follows. We update
-each entry of a given column j so that it reflects the minimum cost to reach
-the last column using the permissible moves and starting from this entry.
-Imagine you are standing at an entry, say, (k, j),  in the j-th column. Then
-you can pace up and down this column, but eventually you must move right,
-say, at the i-th line, to the entry (i, j + 1). The most efficient way to
-choose this move, and from there to the last column, is to minimize the sum
-of the costs from (k, j) to (i, j + 1) along the j-th column _plus_ the cost
-recorded at (i, j + 1), which contains the cost to reach the last column from
-the latter entry.
-"""
+N = len(A)  # dimension of the matrix A
+
+# As in the preceding (simpler) problem, we use dynamic programming. The idea
+# is to proceed from the last column to the first one as follows. We update
+# each entry of a given column j so that it reflects the minimum cost to reach
+# the last column using the permissible moves and starting from this entry.
+# Imagine you are standing at an entry, say, (k, j), in the j-th column. Then
+# you can pace up and down this column, but eventually you must move right,
+# say, at the i-th line, to the entry (i, j + 1). The most efficient way to
+# choose this move, and from there to the last column is to minimize the sum
+# of the costs from (k, j) to (i, j + 1) along the j-th column _plus_ the cost
+# recorded at (i, j + 1), which contains the cost to reach the last column from
+# the latter entry.
 
 # For the last column (j = N - 1), we do not need to calculate anything.
 for j in reversed(range(N - 1)):
@@ -57,3 +57,6 @@ for j in reversed(range(N - 1)):
         A[i][j] = B[i]
 
 print(min([A[i][0] for i in range(N)]))
+
+end = time.time()
+print(f"Program runtime: {end - start} seconds")

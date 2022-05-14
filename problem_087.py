@@ -1,18 +1,34 @@
-# PROJECT EULER - PROBLEM 087
+#################################
+#  PROJECT EULER - PROBLEM 087  #
+#################################
 import time
-from project_euler import prime_sieve
 from math import isqrt
+
+
+def get_primes_up_to(n: int) -> list[int]:
+    """ Returns a list of all primes <= n using Eratosthenes' sieve """
+    primes = []
+    prime_flags = [True] * (n + 1)
+    prime_flags[0] = False
+    prime_flags[1] = False
+    for (k, is_prime) in enumerate(prime_flags):
+        if is_prime:
+            primes.append(k)
+            for multiple in range(k * k, n + 1, k):
+                prime_flags[multiple] = False
+    return primes
+
 
 start = time.time()
 
 N = 50 * 10**6
 # Compute the maximum possible values of a number which, when raised to the
-# powers 2, 3, 4, is still less than N.
+# powers 2, 3, 4, is still less than N:
 MAX_2 = isqrt(N)
 MAX_3 = int(N**(1/3))
 MAX_4 = int(N**(1/4))
 
-primes = prime_sieve(MAX_2)
+primes = get_primes_up_to(MAX_2)
 
 # Compute the maximum indices N_i such that primes[N_i] < MAX_i for i = 3, 4.
 k = 0
@@ -25,8 +41,7 @@ while primes[k] < MAX_3:
     k += 1
 N_3 = k
 
-# Initialize a set to hold all expressible numbers.
-expressible = set()
+expressibles = set()  # Set that will hold all expressible numbers.
 
 for k in range(N_4 + 1):
     c = primes[k]
@@ -41,10 +56,11 @@ for k in range(N_4 + 1):
             for a in primes:
                 s = a**2 + r
                 if s < N:
-                    expressible.add(s)
+                    expressibles.add(s)
                 else:
                     break
-print(len(expressible))
+
+print(len(expressibles))
 
 end = time.time()
 print(f"Program runtime: {end - start} seconds")
