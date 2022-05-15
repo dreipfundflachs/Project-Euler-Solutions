@@ -49,7 +49,9 @@ for k in range(3):
 
 # print(candidates)
 
-letters = [0, 0, 0]  # Will hold all letters in each of the three lists.
+# Will hold all letters in each of the three lists.
+letters: list[str] = ["", "", ""]
+
 # Since there is only one candidate for the key in each case, we can now
 # proceed to decrypt each of the three parts of the text.
 for i in range(2):
