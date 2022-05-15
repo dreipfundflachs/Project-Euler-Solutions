@@ -1,15 +1,17 @@
-# PROJECT EULER - PROBLEM 092
+#################################
+#  PROJECT EULER - PROBLEM 092  #
+#################################
 import time
 
 
-def sum_of_squares(n):
+def sum_squares_digits(n: int) -> int:
     "Calculates the sum of the squares of all digits of an integer n."
-    sq_sum = 0
+    square_sum = 0
     while n != 0:
         r = n % 10
-        sq_sum += r**2
+        square_sum += r**2
         n = n // 10
-    return sq_sum
+    return square_sum
 
 
 start = time.time()
@@ -38,7 +40,7 @@ for n in range(1, r + 1):
                 ends[k] = 1
             active = False
         else:
-            m = sum_of_squares(m)
+            m = sum_squares_digits(m)
             curr.append(m)
 
 # Since all possible sums of squares have already appeared, for n > r, any
@@ -47,7 +49,7 @@ for n in range(1, r + 1):
 count_89 = ends.count(89)
 
 for n in range(r + 1, 10**7):
-    m = sum_of_squares(n)
+    m = sum_squares_digits(n)
     if ends[m] == 89:
         count_89 += 1
 #     else:

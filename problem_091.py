@@ -13,10 +13,10 @@ total = 0
 #   (ii) x_1 == x_2 and the triangle has a right angle at either P or Q;
 #   (iii) The triangle has a right angle at O.
 
-# The number of solutions of the first type is computed in the loop below. To
-# optimize the computation, we can order the vertices lexicographically.
+# The number of solutions of type (i) is computed in the loop below.
 for x_1 in range(N + 1):
     for y_1 in range(N + 1):
+        # Note that x_2 > x_1 by hypothesis.
         for x_2 in range(x_1 + 1, N + 1):
             for y_2 in range(y_1 + 1):
                 # We can consider only those values of y_2 <= y_1 because this

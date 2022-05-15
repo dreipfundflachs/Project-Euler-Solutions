@@ -27,6 +27,8 @@ second to execute (on my computer):
 | 78 | 4.9s |
 | 82 | 1.1s |
 | 86 | 3.4s |
+| 93 | 4.4s |
+| 95 | 8.5s |
 
 
 Favorite problems so far (in ascending order): 

@@ -1,4 +1,6 @@
-# PROJECT EULER - PROBLEM 093
+#################################
+#  PROJECT EULER - PROBLEM 093  #
+#################################
 import time
 from itertools import combinations, product
 
@@ -77,6 +79,7 @@ start = time.time()
 # We also need to include 0 as a valid digit.
 DIGITS = list(range(0, 10))
 OPERATORS = ['+', '-', '*', '/']
+
 m = 28
 max_digits = []
 
@@ -89,7 +92,7 @@ for digit_combination in combinations(DIGITS, 4):
     # If this number exceeds the previous largest number, store it as the new
     # maximum, along with the list of digits that gave rise to it.
     if n > m:
-        m = current_size
+        m = n
         max_digits = list_of_digits
 
 print((f"Combining the digits in {max_digits} under all possible\n"

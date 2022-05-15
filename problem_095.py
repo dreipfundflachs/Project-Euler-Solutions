@@ -1,6 +1,8 @@
-# PROJECT EULER - PROBLEM 095
+#################################
+#  PROJECT EULER - PROBLEM 095  #
+#################################
 import time
-from functools import reduce
+
 
 start = time.time()
 N = 10**6
@@ -12,8 +14,8 @@ for n in range(N + 1):
 
 # Use a sieve method to obtain the proper divisors of each number.
 for d in range(2, N):
-    for n in range(2*d, N + 1, d):
-    # Start from 2 * d instead of d, because we want only _proper_ divisors.
+    for n in range(2 * d, N + 1, d):
+        # Starting from 2 * d because we want only _proper_ divisors.
         (proper_divisors[n]).append(d)
 
 # Obtain the _sum_ of proper divisors of each number.  If a number is such that
@@ -37,7 +39,6 @@ for n in range(N + 1):
     if k == n and len(current_chain) > max_length:
         max_length = len(current_chain)
         max_chain = current_chain
-        print(n, current_chain)
 
 # Print the answer.
 print(min(max_chain))
