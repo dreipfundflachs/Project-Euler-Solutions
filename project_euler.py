@@ -528,3 +528,36 @@ def is_palindromic_base_2(n: int) -> bool:
     else:
         binary_string = str(bin(n))[2:]
         return binary_string == binary_string[::-1]
+
+
+def are_equal_strings(string_1: str, string_2: str) -> bool:
+    """ Decides if two strings are equal. """
+    n_1, n_2 = len(string_1), len(string_2)
+    if n_1 != n_2:
+        return False
+    elif n_1 == n_2 == 0:
+        return True
+    else:
+        if string_1[0] == string_2[0]:
+            return are_equal_strings(string_1[1:], string_2[1:])
+        else:
+            return False
+
+
+def are_anagrams(string_1: str, string_2: str) -> bool:
+    """ Decides if two given strings are anagrams of each other. To this end,
+    the function searches the second string for the presence of the first
+    character of the first string. If it is not found, then False is returned.
+    Otherwise, (one instance of) this character is removed from both strings
+    and a recursive call on the resulting smaller strings is performed. """
+    n_1, n_2 = len(string_1), len(string_2)
+    if n_1 != n_2:
+        return False
+    elif n_1 == n_2 == 0:
+        return True
+    else:
+        i = string_2.find(string_1[0])
+        if i == -1:
+            return False
+        else:
+            return are_anagrams(string_1[1:], string_2[:i] + string_2[i + 1:])

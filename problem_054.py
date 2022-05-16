@@ -34,7 +34,7 @@ def get_weighted_card_values(hand: list[str]) -> tuple:
                  for card in cards])))
 
 
-def get_card_frequencies(hand: list[str]) -> list[int]:
+def get_card_frequencies(hand: list[str]) -> tuple:
     """ Given a hand, returns the card frequencies as a tuple sorted in
     decreasing order. For example, for the hand 9D 6S QH 6H QC,
     the function returns (2, 2, 1). This function will be used to check if a
@@ -96,7 +96,7 @@ def get_hand_score(hand: list[str]) -> int:
     return score
 
 
-def tie_break(hand_1, hand_2) -> int:
+def tie_break(hand_1: list[str], hand_2: list[str]) -> int:
     """ If two hands have the same score, this function breaks the tie. """
     if get_weighted_card_values(hand_1) > get_weighted_card_values(hand_2):
         return 1
