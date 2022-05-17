@@ -1,11 +1,6 @@
 Contains solutions to the first 100 problems on [Project
 Euler](https://www.projecteuler.net), written in Python 3.
 
-My badge can be found
-[here](https://projecteuler.net/profile/dreipfundflachs.png) and my [friend
-key](https://projecteuler.net/minimal=friends) is
-1912870_zicXUiSA5Mv6wAvcZOOv8FMAfCtCClsu
-
 Among the solutions provided in this repository, the following take more than 1
 second to execute (on my computer):
 
