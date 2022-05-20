@@ -12,7 +12,7 @@ from functools import reduce
 #################################################################
 
 
-def even(n: int) -> bool:
+def is_even(n: int) -> bool:
     """ Decides whether a number is even """
     if n % 2 == 0:
         return True
