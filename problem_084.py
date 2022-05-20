@@ -119,7 +119,7 @@ for n in range(TRIALS):
 
 # Sort the list of squares by the number of visits:
 most_visited = sorted(list(range(40)), key=lambda i: visits[i], reverse=True)
-# Producte a string from the three most visited squares and print it:
+# Produce a string from the three most visited squares and print it:
 modal_string = "".join([str(square) for square in most_visited[:3]])
 print(modal_string)
 

@@ -31,6 +31,7 @@ Favorite problems so far (in ascending order):
 [81](https://projecteuler.net/problem=81),
 [82](https://projecteuler.net/problem=82),
 [83](https://projecteuler.net/problem=83),
+[84](https://projecteuler.net/problem=84),
 [96](https://projecteuler.net/problem=96),
 [113](https://projecteuler.net/problem=113),
 [126](https://projecteuler.net/problem=126),
