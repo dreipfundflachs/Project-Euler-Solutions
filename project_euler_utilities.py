@@ -544,6 +544,16 @@ def are_equal_strings(string_1: str, string_2: str) -> bool:
             return False
 
 
+def string_type(string: str) -> tuple[int]:
+    """ Given a string, returns a tuple consisting of the frequencies of each
+    of its letters, sorted in decreasing order. For example:
+        string_type("CARE") -> (1, 1, 1, 1)
+        string_type("representation") -> (3, 2, 2, 2, 1, 1, 1, 1, 1)
+            corresponding to the letters (e, r, n, t, p, s, a, i, o) """
+    return tuple(reversed(sorted(string.count(letter) for letter in
+                 set(string))))
+
+
 def are_anagrams(string_1: str, string_2: str) -> bool:
     """ Decides if two given strings are anagrams of each other. To this end,
     the function searches the second string for the presence of the first
@@ -561,3 +571,21 @@ def are_anagrams(string_1: str, string_2: str) -> bool:
             return False
         else:
             return are_anagrams(string_1[1:], string_2[:i] + string_2[i + 1:])
+
+
+def match_two_strings(str_1: str, str_2: str) -> bool:
+    """ Given two strings, decides if one can be mapped into the other by
+    applying a bijection of the set of letters of the first to the set of
+    letters of the second one. """
+    m = len(str_1)
+    if len(str_2) != m:
+        return False
+    else:
+        for char in set(str_1):
+            char_indices = [k for k in range(m) if str_1[k] == char]
+            matching_char = str_2[char_indices[0]]  # Matching char in str_2.
+            mchar_indices = [k for k in range(m) if str_2[k] == matching_char]
+
+            if char_indices != mchar_indices:
+                return False
+    return True
