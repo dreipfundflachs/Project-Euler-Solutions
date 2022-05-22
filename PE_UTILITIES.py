@@ -5,12 +5,25 @@
 from math import prod, isqrt
 from itertools import combinations
 from functools import reduce
+from random import randint
+
+
+#############
+#  CLASSES  #
+#############
+
+class Die:
+    """ Models a balanced die. """
+    def __init__(self, sides=4):
+        self.sides = sides
+
+    def roll(self) -> int:
+        return randint(1, self.sides)  # Requires module 'random'
 
 
 #################################################################
 #  FUNCTIONS INVOLVING PRIMES, FACTORIZATION, DIVISORS, ETC...  #
 #################################################################
-
 
 def is_even(n: int) -> bool:
     """ Decides whether a number is even """
@@ -22,7 +35,7 @@ def is_even(n: int) -> bool:
 
 def is_square(n: int) -> bool:
     """ Decides whether an integer is the square of another integer. """
-    m = isqrt(n)
+    m = isqrt(n)  # Requires module 'math'.
     if m**2 == n:
         return True
     else:
@@ -212,7 +225,7 @@ def radical(n: int, primes: list[int]) -> int:
         while (n % p) == 0:
             n //= p
             prime_factors.add(p)
-    return reduce(lambda x, y: x * y, prime_factors)
+    return reduce(lambda x, y: x * y, prime_factors)  # requires functools
 
 
 def radical_sieve(N: int) -> list[int]:
@@ -285,14 +298,15 @@ def get_prime_tuples_given_primes(n: int, primes: list[int]) -> set[int]:
 
 def get_proper_divisors_given_primes(n: int, primes: list[int]) -> list[int]:
     """ Returns the list of all proper divisors of n (i.e., < n) given a list
-    that includes all primes less than n """
+    that includes all primes less than n. Requires 'combinations' from
+    module 'itertools'.  """
     list_of_prime_factors = get_prime_factors_given_primes(n, primes)
     m = len(list_of_prime_factors)
     tuples = set()
     for k in range(1, m):
         new_tuples = set(combinations(list_of_prime_factors, k))
         tuples = tuples.union(new_tuples)
-    result = [prod(t) for t in tuples]
+    result = [prod(t) for t in tuples]  # Requires module 'math'.
     result.append(1)
     return result
 
@@ -327,7 +341,6 @@ def get_digital_sum(n: int) -> int:
 #  FUNCTIONS INVOLVING MATRICES AND ARRAYS  #
 #############################################
 
-
 def transpose(A: list) -> list:
     """ Transposes a (not necessarily square nor numeric) matrix (list of
     lists, each of the same size) """
@@ -346,6 +359,42 @@ def transpose(A: list) -> list:
 #################
 #  MISCELLANEA  #
 #################
+
+def get_partitions(target: int, bound: int, summands: int) -> [tuple[int]]:
+    """ Computes the unique ways (as a list of tuples) in which one can
+    partition the integer 'target' using numbers in the range from 1 to 'bound'
+    (inclusive) in exactly the given number of summands. For example:
+        get_partitions(8, 5, 3) = [(2, 3, 3), (2, 2, 4), (1, 3, 4), (1, 2, 5)]
+    """
+    partitions = []
+    if summands < 0 or target < summands:
+        return []
+    if target == 0:
+        return [()]
+    else:
+        for k in range(1, bound + 1):
+            partitions += [p + (k,) for p in
+                           get_partitions(target - k, k, summands - 1)]
+    return partitions
+
+
+def multinomial(*coefficients: list[int]) -> int:
+    """ Given a list k_1, ..., k_r, computes the multinomial coefficient
+        n! / (k_1)! * (k_2)! * ... * (k_r)! where n = k_1 + ... + k_r. """
+    result = 1
+    m = 1  # Will run through the values of n!.
+    for k in coefficients:
+        for j in range(1, k + 1):
+            result *= m
+            result //= j
+            m += 1
+    return result
+
+
+def frequencies(lst: list[int]) -> list[int]:
+    """ Given a list, returns a new list consisting of all the frequency counts
+    of its unique elements. """
+    return sorted([lst.count(x) for x in set(lst)])
 
 
 def binary_search(target: int, numbers: list[int]) -> True:
@@ -369,7 +418,8 @@ def binary_search(target: int, numbers: list[int]) -> True:
 
 def get_powerset(ns: set[int]) -> list[iter]:
     """ Returns the power set of 'ns' as a list, e.g., get_powerset([1,2,3])
-    yields [(), (1,), (2,), (3,), (1,2), (1,3), (2,3), (1,2,3)]. """
+    yields [(), (1,), (2,), (3,), (1,2), (1,3), (2,3), (1,2,3)].
+    Requires 'combinations' from module 'itertools'. """
     return [tup for n in range(0, len(ns) + 1) for tup in combinations(ns, n)]
 
 
@@ -460,7 +510,6 @@ def get_decimal_representation(n: int, d: int, precision: int) -> list[int]:
 #  FUNCTIONS INVOLVING STRINGS AND CHARACTERS  #
 ################################################
 
-
 def convert_to_int(digits: list[int]) -> int:
     """ Converts a list of digits to a single integer, e.g.,
     [1, 2, 3] --> 123. """
@@ -547,7 +596,6 @@ def are_equal_strings(string_1: str, string_2: str) -> bool:
 def string_type(string: str) -> tuple[int]:
     """ Given a string, returns a tuple consisting of the frequencies of each
     of its letters, sorted in decreasing order. For example:
-        string_type("CARE") -> (1, 1, 1, 1)
         string_type("representation") -> (3, 2, 2, 2, 1, 1, 1, 1, 1)
             corresponding to the letters (e, r, n, t, p, s, a, i, o) """
     return tuple(reversed(sorted(string.count(letter) for letter in
@@ -573,19 +621,18 @@ def are_anagrams(string_1: str, string_2: str) -> bool:
             return are_anagrams(string_1[1:], string_2[:i] + string_2[i + 1:])
 
 
-def match_two_strings(str_1: str, str_2: str) -> bool:
-    """ Given two strings, decides if one can be mapped into the other by
+def strings_match(str_1: str, str_2: str) -> bool:
+    """ Given two strings, decides if one can be transformed into the other by
     applying a bijection of the set of letters of the first to the set of
     letters of the second one. """
-    m = len(str_1)
-    if len(str_2) != m:
+    n = len(str_1)
+    if len(str_2) != n:
         return False
     else:
         for char in set(str_1):
-            char_indices = [k for k in range(m) if str_1[k] == char]
+            char_indices = [k for k in range(n) if str_1[k] == char]
             matching_char = str_2[char_indices[0]]  # Matching char in str_2.
-            mchar_indices = [k for k in range(m) if str_2[k] == matching_char]
-
+            mchar_indices = [k for k in range(n) if str_2[k] == matching_char]
             if char_indices != mchar_indices:
                 return False
     return True

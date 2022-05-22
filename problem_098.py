@@ -66,7 +66,6 @@ def match(str_1, str_2, str_3, str_4) -> bool:
 
 start = time.time()
 
-S = 10**7  # Upper bound for the squares.
 
 # Extract the words from the file provided in the problem statement.
 with open("p098_words.txt") as file_object:
@@ -76,15 +75,19 @@ with open("p098_words.txt") as file_object:
 # Search for all pairs of anagrams and store them in a list.
 anagram_pairs: list[tuple] = []
 n = len(words)
+max_length = 0  # Maximum length of a word which has an anagram pair.
 for i in range(n - 1):
     for j in range(i + 1, n):
         if are_anagrams(words[i], words[j]):
             anagram_pairs.append((words[i], words[j]))
-# print(pairs)
+            max_length = max(max_length, len(words[i]))
+# print(anagram_pairs)
 
 # Store all 'types' (given by a tuple which counts the frequencies of each
 # letter) of strings which have an anagram pair.
 valid_types = set(sorted(list(string_type(a) for (a, b) in anagram_pairs)))
+
+S = 10**max_length  # Upper bound for the squares to be searched.
 
 # Produce all squares < S.
 squares = []
