@@ -27,15 +27,19 @@ second to execute (on my computer):
 | 98 | 2.6s |
 
 
-Favorite problems so far (in ascending order): 
-[59](https://projecteuler.net/problem=59),
+Favorite problems so far (in ascending order):  
+[59](https://projecteuler.net/problem=59) (XOR decryption),  
 [81](https://projecteuler.net/problem=81),
 [82](https://projecteuler.net/problem=82),
-[83](https://projecteuler.net/problem=83),
-[84](https://projecteuler.net/problem=84),
-[96](https://projecteuler.net/problem=96),
-[113](https://projecteuler.net/problem=113),
-[126](https://projecteuler.net/problem=126),
-[147](https://projecteuler.net/problem=147),
-[164](https://projecteuler.net/problem=164),
-[191](https://projecteuler.net/problem=191)
+[83](https://projecteuler.net/problem=83) (Path sum: two, three and four
+ways),  
+[84](https://projecteuler.net/problem=84) (Monopoly odds),  
+[96](https://projecteuler.net/problem=96) (Su Doku),  
+[113](https://projecteuler.net/problem=113) (Non-bouncy numbers),  
+[126](https://projecteuler.net/problem=126) (Cuboid layers),  
+[147](https://projecteuler.net/problem=147) (Rectangles in cross-hatched grids),  
+[151](https://projecteuler.net/problem=151) (Paper sheets of standard size),  
+[164](https://projecteuler.net/problem=164) (Numbers for which no three
+consecutive digits have a sum greater than a given value),  
+[191](https://projecteuler.net/problem=191) (Prize strings),  
+[267](https://projecteuler.net/problem=267) (Billionaire)

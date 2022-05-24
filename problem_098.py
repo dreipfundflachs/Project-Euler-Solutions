@@ -107,9 +107,9 @@ for i in reversed(range(number_of_squares)):
         for j in reversed(range(i)):
             if are_anagrams(squares[i], squares[j]):
                 # For each pair of anagrams, compare the first and second
-                # squares to each pair of anagram pairs (in some other) stored
-                # in our list of pairs. If there is a match according to the
-                # rules in the problem statement, we have found the solution.
+                # squares to each pair of anagrams stored in our list of pairs.
+                # If there is a match according to the rules in the problem
+                # statement, we have found the solution.
                 for (word_1, word_2) in anagram_pairs:
                     if match(squares[i], squares[j], word_1, word_2) or\
                             match(squares[i], squares[j], word_2, word_1):

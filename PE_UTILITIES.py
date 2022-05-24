@@ -369,12 +369,29 @@ def get_partitions(target: int, bound: int, summands: int) -> [tuple[int]]:
     partitions = []
     if summands < 0 or target < summands:
         return []
-    if target == 0:
+    elif target == 0:
         return [()]
     else:
         for k in range(1, bound + 1):
             partitions += [p + (k,) for p in
                            get_partitions(target - k, k, summands - 1)]
+    return partitions
+
+
+def get_number_of_partitions(target: int, bound: int, summands: int)\
+        -> [tuple[int]]:
+    """ Computes the number of unique ways (as a list of tuples) in which one
+    can partition the integer 'target' using numbers in the range from 1 to
+    'bound' (inclusive) in exactly the given number of summands. For example:
+        get_number_of_partitions(8, 5, 3) = 4 """
+    if summands < 0 or target < summands:
+        return 0
+    elif target == 0:
+        return 1
+    else:
+        partitions = 0
+        for k in range(1, bound + 1):
+            partitions += get_number_of_partitions(target - k, k, summands - 1)
     return partitions
 
 
