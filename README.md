@@ -1,8 +1,23 @@
-Contains solutions to the first 100 problems on [Project
-Euler](https://www.projecteuler.net), written in Python 3.
+# Solutions to the first 100 Project Euler problems
 
-Among the solutions provided in this repository, the following take more than 1
-second to execute (on my computer):
+## Features
+
+This repository contains solutions to each of the first 100 problems on [Project
+Euler](https://www.projecteuler.net), written in Python 3. It also includes:
+
+* All _auxiliary files_ provided in the problem statements (among the first
+  100); these are named 'p0\d\d_\*.txt'
+* A _module_ PE_UTILITIES.py compiling the most useful functions that I had
+  to write to solve these problems. It is however not necessary to import this
+  module for any of the scripts to work.
+* A _template_ PROBLEM_TEMPLATE.py for the solution scripts.
+
+
+## Benchmarks
+
+All of these solutions are original (in the sense of not having been taken from
+someone else). The following among them take more than 1 second to execute (on
+my computer):
 
 | Problem number   | Runtime (approx.)   |
 | :--------------: | :-----------------: |
@@ -27,7 +42,8 @@ second to execute (on my computer):
 | 98 | 2.6s |
 
 
-Favorite problems so far (in ascending order):  
+## List of favorite problems (so far)
+
 [59](https://projecteuler.net/problem=59) (XOR decryption),  
 [81](https://projecteuler.net/problem=81),
 [82](https://projecteuler.net/problem=82),
@@ -43,3 +59,10 @@ ways),
 consecutive digits have a sum greater than a given value),  
 [191](https://projecteuler.net/problem=191) (Prize strings),  
 [267](https://projecteuler.net/problem=267) (Billionaire)
+
+
+## Badge and friend key
+
+My PE badge can be found
+[here](https://projecteuler.net/profile/dreipfundflachs.png) and my friend key
+is: 1912870_zicXUiSA5Mv6wAvcZOOv8FMAfCtCClsu.
