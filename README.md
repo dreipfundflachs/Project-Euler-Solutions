@@ -1,23 +1,23 @@
-# Solutions to the first 100 Project Euler problems
+# Project Euler Solutions
 
 ## Features
 
 This repository contains solutions to each of the first 100 problems on [Project
 Euler](https://www.projecteuler.net), written in Python 3. It also includes:
 
-* All _auxiliary files_ provided in the problem statements (among the first
-  100); these are named 'p0\d\d_\*.txt'
+* All _auxiliary files_ linked to in the problem statements (among the first
+  100); these are named 'p0\d\d_\*.txt' and have not been modified.
 * A _module_ PE_UTILITIES.py compiling the most useful functions that I had
-  to write to solve these problems. It is however not necessary to import this
-  module for any of the scripts to work.
+  to write to solve these problems. It is however not necessary to import it
+  for any of the scripts to work.
 * A _template_ PROBLEM_TEMPLATE.py for the solution scripts.
 
 
 ## Benchmarks
 
-All of these solutions are original (in the sense of not having been taken from
-someone else). The following among them take more than 1 second to execute (on
-my computer):
+All solutions are original (in the sense of not having been taken from someone
+else). The following among them take more than 1 second to execute on my
+computer:
 
 | Problem number   | Runtime (approx.)   |
 | :--------------: | :-----------------: |
@@ -63,6 +63,5 @@ consecutive digits have a sum greater than a given value),
 
 ## Badge and friend key
 
-My PE badge can be found
-[here](https://projecteuler.net/profile/dreipfundflachs.png) and my friend key
-is: 1912870_zicXUiSA5Mv6wAvcZOOv8FMAfCtCClsu.
+My PE badge can be found [here](https://projecteuler.net/profile/pzuehlke.png)
+and my friend key is: 1912870_zicXUiSA5Mv6wAvcZOOv8FMAfCtCClsu.
