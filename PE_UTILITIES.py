@@ -49,6 +49,41 @@ def gcd(a: int, b:  int) -> int:
     return a
 
 
+def extended_gcd(a: int, b: int) -> list[int]:
+    """
+    Returns a list `result` of size 3 where, referring to the equation
+    ax + by = gcd(a, b):
+        result[0] is gcd(a, b);
+        result[1] is x;
+        result[2] is y.
+    The Euclidean algorithm proceeds by finding q_n, r_n such that:
+        a = q_0 b + r_1
+        b = q_1 r_1 + r_2
+        r_1 = q_2 r_2 + r_3
+        ...
+        r_{n - 1} = q_n r_n + r_{n + 1}
+    Suppose that we have already found that:
+        r_{n - 1} = (old_s a + old_t b) and that r_n = (s a + t b).
+    Then it follows that:
+        r_{n + 1} = (old_s - q_n s)a + (old_t - q_n t)b.
+    """
+    if a > b:
+        s, old_s = 0, 1
+        t, old_t = 1, 0
+        r, old_r = b, a
+
+        while r:
+            q = old_r // r
+            old_r, r = r, old_r - q * r
+            old_s, s = s, old_s - q * s
+            old_t, t = t, old_t - q * t
+        return [old_r, old_s, old_t]
+
+    else:
+        d, y, x = extended_gcd(b, a)
+        return [d, x, y]
+
+
 def involves_only(n: int, p: int, q: int) -> bool:
     """ Checks if the prime factors of n all lie in the set {p, q}. """
     while (n % p) == 0:
