@@ -47,8 +47,8 @@ computer:
 __59__: [XOR decryption](https://projecteuler.net/problem=59)  
 __81__, __82__ and __83__: Path sum:
 [two](https://projecteuler.net/problem=81),
-[three](https://projecteuler.net/problem=83) and
-[four](https://projecteuler.net/problem=84) ways  
+[three](https://projecteuler.net/problem=82) and
+[four](https://projecteuler.net/problem=83) ways  
 __84__: [Monopoly odds](https://projecteuler.net/problem=84)  
 __96__: [Su Doku](https://projecteuler.net/problem=96)  
 __113__: [Non-bouncy numbers](https://projecteuler.net/problem=113)  
@@ -62,10 +62,9 @@ __267__: [Billionaire](https://projecteuler.net/problem=267)
 
 
 ## Badge and friend key
-__PE badge__:  
   
 <a href="https://projecteuler.net/progress=pzuehlke">
     <img src="https://projecteuler.net/profile/pzuehlke.png">
 </a>
   
-__Friend code__: `1912870_zicXUiSA5Mv6wAvcZOOv8FMAfCtCClsu`
+__Friend key__: `1912870_zicXUiSA5Mv6wAvcZOOv8FMAfCtCClsu`
