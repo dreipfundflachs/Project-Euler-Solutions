@@ -6,7 +6,7 @@ This repository contains solutions to each of the first 100 problems on [Project
 Euler](https://www.projecteuler.net), written in Python 3. It also includes:
 
 * All __auxiliary files__ linked to in the problem statements (among the first
-  100); these are named 'p0\d\d_\*.txt' and have not been modified.
+  100); these are named 'p0\d\d_\*.txt'.
 * A __module__ PE_UTILITIES.py compiling the most useful functions that I had
   to write to solve these problems. It is however not necessary to import it
   for any of the scripts to work.
@@ -62,6 +62,8 @@ __267__: [Billionaire](https://projecteuler.net/problem=267)
 
 
 ## Badge and friend key
-
-My PE badge can be found [here](https://projecteuler.net/profile/pzuehlke.png)
-and my friend key is: 1912870_zicXUiSA5Mv6wAvcZOOv8FMAfCtCClsu.
+My PE badge:
+<a href="https://projecteuler.net/progress=pzuehlke">
+    <img src="https://projecteuler.net/profile/pzuehlke.png">
+</a>
+and my friend code: `1912870_zicXUiSA5Mv6wAvcZOOv8FMAfCtCClsu`
