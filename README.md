@@ -44,21 +44,21 @@ computer:
 
 ## List of favorite problems (so far)
 
-[59](https://projecteuler.net/problem=59) (XOR decryption),  
-[81](https://projecteuler.net/problem=81),
-[82](https://projecteuler.net/problem=82),
-[83](https://projecteuler.net/problem=83) (Path sum: two, three and four
-ways),  
-[84](https://projecteuler.net/problem=84) (Monopoly odds),  
-[96](https://projecteuler.net/problem=96) (Su Doku),  
-[113](https://projecteuler.net/problem=113) (Non-bouncy numbers),  
-[126](https://projecteuler.net/problem=126) (Cuboid layers),  
-[147](https://projecteuler.net/problem=147) (Rectangles in cross-hatched grids),  
-[151](https://projecteuler.net/problem=151) (Paper sheets of standard size),  
-[164](https://projecteuler.net/problem=164) (Numbers for which no three
-consecutive digits have a sum greater than a given value),  
-[191](https://projecteuler.net/problem=191) (Prize strings),  
-[267](https://projecteuler.net/problem=267) (Billionaire)
+__59__: [XOR decryption](https://projecteuler.net/problem=59)  
+__81__, __82__ and __83__: Path sum:
+[two](https://projecteuler.net/problem=81),
+[three](https://projecteuler.net/problem=83) and
+[four](https://projecteuler.net/problem=84) ways  
+__84__: [Monopoly odds](https://projecteuler.net/problem=84)  
+__96__: [Su Doku](https://projecteuler.net/problem=96)  
+__113__: [Non-bouncy numbers](https://projecteuler.net/problem=113)  
+__126__: [Cuboid layers](https://projecteuler.net/problem=126)  
+__147__: [Rectangles in cross-hatched grids](https://projecteuler.net/problem=147)  
+__151__: [Paper sheets of standard size](https://projecteuler.net/problem=151)  
+__164__: [Numbers for which no three
+consecutive digits have a sum greater than a given value](https://projecteuler.net/problem=164)  
+__191__: [Prize strings](https://projecteuler.net/problem=191)  
+__267__: [Billionaire](https://projecteuler.net/problem=267)
 
 
 ## Badge and friend key

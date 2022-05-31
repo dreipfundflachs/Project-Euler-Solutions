@@ -51,21 +51,21 @@ def gcd(a: int, b:  int) -> int:
 
 def extended_gcd(a: int, b: int) -> list[int]:
     """
-    Returns a list `result` of size 3 where, referring to the equation
+    Returns a list 'result' of size 3 where, referring to the equation
     ax + by = gcd(a, b):
-        result[0] is gcd(a, b);
-        result[1] is x;
-        result[2] is y.
+        result[0] = gcd(a, b)
+        result[1] = x
+        result[2] = y.
     The Euclidean algorithm proceeds by finding q_n, r_n such that:
         a = q_0 b + r_1
         b = q_1 r_1 + r_2
         r_1 = q_2 r_2 + r_3
         ...
         r_{n - 1} = q_n r_n + r_{n + 1}
-    Suppose that we have already found that:
+    Suppose that we have already computed that:
         r_{n - 1} = (old_s a + old_t b) and that r_n = (s a + t b).
     Then it follows that:
-        r_{n + 1} = (old_s - q_n s)a + (old_t - q_n t)b.
+        r_{n + 1} = (old_s - q_n s) a + (old_t - q_n t) b.
     """
     if a > b:
         s, old_s = 0, 1
