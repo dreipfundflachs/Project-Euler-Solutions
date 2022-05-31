@@ -62,8 +62,9 @@ __267__: [Billionaire](https://projecteuler.net/problem=267)
 
 
 ## Badge and friend key
-My PE badge:
+My PE badge:  
 <a href="https://projecteuler.net/progress=pzuehlke">
     <img src="https://projecteuler.net/profile/pzuehlke.png">
 </a>
+  
 and my friend code: `1912870_zicXUiSA5Mv6wAvcZOOv8FMAfCtCClsu`
