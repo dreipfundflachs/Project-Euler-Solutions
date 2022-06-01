@@ -28,7 +28,7 @@ N = len(A)  # dimension of the matrix A
 # Imagine you are standing at an entry, say, (k, j), in the j-th column. Then
 # you can pace up and down this column, but eventually you must move right,
 # say, at the i-th line, to the entry (i, j + 1). The most efficient way to
-# choose this move, and from there to the last column is to minimize the sum
+# choose this move, and from there to the last column, is to minimize the sum
 # of the costs from (k, j) to (i, j + 1) along the j-th column _plus_ the cost
 # recorded at (i, j + 1), which contains the cost to reach the last column from
 # the latter entry.
