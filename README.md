@@ -66,6 +66,6 @@ __267__: [Billionaire](https://projecteuler.net/problem=267)
 __Friend key__: `1912870_zicXUiSA5Mv6wAvcZOOv8FMAfCtCClsu`
 
 <a href="https://projecteuler.net/progress=pzuehlke">
-    <img src="https://projecteuler.net/profile/.png">
+    <img src="https://projecteuler.net/profile/pzuehlke.png">
 </a>
   
