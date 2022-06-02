@@ -314,6 +314,28 @@ def get_prime_factors_given_primes(n: int, primes: list[int]) -> list[int]:
     return prime_factors
 
 
+def has_two_prime_factors(n: int, primes: list[int]) -> bool:
+    """ Decides whether a number has exactly two distinct prime factors. """
+    number_of_prime_factors = 0
+    for p in primes:
+        if n == 1:
+            break
+        # If n /= 1 and the number of prime factors is >= 2, then it must be at
+        # least 3.
+        if number_of_prime_factors == 2:
+            number_of_prime_factors = 3
+            break
+        if n % p == 0:
+            n = n // p
+            number_of_prime_factors += 1
+            while n % p == 0:
+                n = n // p
+    if number_of_prime_factors == 2:
+        return True
+    else:
+        return False
+
+
 def get_prime_tuples_given_primes(n: int, primes: list[int]) -> set[int]:
     """ Returns the set of all prime factors of n in tuple form, given a list
     that includes all primes less than n. Example:
