@@ -59,7 +59,7 @@ __151__: [Paper sheets of standard size](https://projecteuler.net/problem=151)
 __164__: [Numbers for which no three
 consecutive digits have a sum greater than a given value](https://projecteuler.net/problem=164)  
 __191__: [Prize strings](https://projecteuler.net/problem=191)  
-__267__: [Billionaire](https://projecteuler.net/problem=267)
+__267__: [Billionaire](https://projecteuler.net/problem=267)  
 __301__: [Nim](https://projecteuler.net/problem=301)  
 
 
