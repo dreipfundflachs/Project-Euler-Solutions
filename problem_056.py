@@ -4,7 +4,7 @@
 import time
 
 
-def get_digital_sum(n):
+def get_digital_sum(n: int) -> int:
     """ Determines the sum of all digits of n. """
     digital_sum = 0
     while n != 0:

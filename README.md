@@ -2,8 +2,9 @@
 
 ## Features
 
-This repository contains solutions to each of the first 100 problems on [Project
-Euler](https://www.projecteuler.net), written in Python 3. It also includes:
+This repository contains solutions, written in Python 3, to each of the first
+100 problems on [Project Euler](https://www.projecteuler.net).  It also
+includes:
 
 * A __module__ `PE_UTILITIES.py` comprising the most useful functions that I
   had to write to solve these problems. It is however _not_ necessary to import
@@ -59,6 +60,7 @@ __164__: [Numbers for which no three
 consecutive digits have a sum greater than a given value](https://projecteuler.net/problem=164)  
 __191__: [Prize strings](https://projecteuler.net/problem=191)  
 __267__: [Billionaire](https://projecteuler.net/problem=267)
+__301__: [Nim](https://projecteuler.net/problem=301)
 
 
 ## Badge and friend key
@@ -68,4 +70,3 @@ __Friend key__: `1912870_zicXUiSA5Mv6wAvcZOOv8FMAfCtCClsu`
 <a href="https://projecteuler.net/progress=pzuehlke">
     <img src="https://projecteuler.net/profile/pzuehlke.png?">
 </a>
-  
