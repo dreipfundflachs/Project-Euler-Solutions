@@ -60,13 +60,11 @@ __164__: [Numbers for which no three
 consecutive digits have a sum greater than a given value](https://projecteuler.net/problem=164)  
 __191__: [Prize strings](https://projecteuler.net/problem=191)  
 __267__: [Billionaire](https://projecteuler.net/problem=267)
-__301__: [Nim](https://projecteuler.net/problem=301)
+__301__: [Nim](https://projecteuler.net/problem=301)  
 
 
 ## Badge and friend key
   
 __Friend key__: `1912870_zicXUiSA5Mv6wAvcZOOv8FMAfCtCClsu`
 
-<a href="https://projecteuler.net/progress=pzuehlke">
-    <img src="https://projecteuler.net/profile/pzuehlke.png?">
-</a>
+[![Badge](https://projecteuler.net/profile/pzuehlke.png?)](https://projecteuler.net/progress)
