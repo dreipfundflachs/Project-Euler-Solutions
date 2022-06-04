@@ -67,6 +67,6 @@ __301__: [Nim](https://projecteuler.net/problem=301)
 
 ## Badge and friend key
   
-__Friend key__: `1912870_zicXUiSA5Mv6wAvcZOOv8FMAfCtCClsu`
+[Friend key](https://projecteuler.net/friends): `1912870_zicXUiSA5Mv6wAvcZOOv8FMAfCtCClsu`
 
-[![Badge](https://projecteuler.net/profile/pzuehlke.png?)](https://projecteuler.net/progress)
+[![Badge](https://projecteuler.net/profile/pzuehlke.png?)](https://projecteuler.net/progress=pzuehlke)
