@@ -5,15 +5,15 @@ import time
 from functools import reduce
 
 # The key fact is that phi is a multiplicative function in the sense that
-# phi(ab) = phi(a) * phi(b) provided that a, b are relatively prime. This
+# phi(ab) = phi(a) * phi(b) provided that a and b are relatively prime. This
 # follows from the Chinese Remainder Theorem, which says that Z/(ab) is
 # isomorphic to Z/(a) x Z/(b), and in particular their respective sets of
-# _invertible_ elements (under multiplication) are in bijection.
+# _invertible_ elements (under multiplication) are in bijective correspondence.
 
-# Now the set of invertible elements in Z/(ab) corresponds to those numbers <
-# ab which are relatively prime to ab. Similarly, those in Z/(a) x Z/(b)
-# correspond to pairs (p, q) where p is rel. prime to a and q is rel. prime
-# to q. Therefore phi(ab) = phi(a) * phi(b).
+# Now the set of invertible elements in Z/(ab) consists of those numbers < ab
+# which are relatively prime to ab. Similarly, those in Z/(a) x Z/(b)
+# are given by pairs (p, q) where p is rel. prime to a and q rel. prime to q.
+# Therefore phi(ab) = phi(a) * phi(b).
 
 # It follows that if n = p_1^(k_1) * ... * p_m^(k_m), then
 # phi(n) = phi(p_1^(k_1)) * ... * phi(p_m^(k_m)). If p is prime and m > 0, it

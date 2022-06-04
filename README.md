@@ -2,9 +2,9 @@
 
 ## Features
 
-This repository contains solutions, written in Python 3, to each of the first
-100 problems on [Project Euler](https://www.projecteuler.net).  It also
-includes:
+This repository contains solutions to each of the first
+100 problems on [Project Euler](https://www.projecteuler.net), written in
+Python 3. It also includes:
 
 * A __module__ `PE_UTILITIES.py` comprising the most useful functions that I
   had to write to solve these problems. It is however _not_ necessary to import
@@ -54,6 +54,8 @@ __84__: [Monopoly odds](https://projecteuler.net/problem=84)
 __96__: [Su Doku](https://projecteuler.net/problem=96)  
 __113__: [Non-bouncy numbers](https://projecteuler.net/problem=113)  
 __126__: [Cuboid layers](https://projecteuler.net/problem=126)  
+__144__: [Investigating multiple reflections of a laser
+beam](https://projecteuler.net/problem=144)  
 __147__: [Rectangles in cross-hatched grids](https://projecteuler.net/problem=147)  
 __151__: [Paper sheets of standard size](https://projecteuler.net/problem=151)  
 __164__: [Numbers for which no three
