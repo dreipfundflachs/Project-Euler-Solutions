@@ -63,7 +63,7 @@ consecutive digits have a sum greater than a given value](https://projecteuler.n
 __191__: [Prize strings](https://projecteuler.net/problem=191)  
 __267__: [Billionaire](https://projecteuler.net/problem=267)  
 __301__: [Nim](https://projecteuler.net/problem=301)  
-
+__345__: [Matrix Sum](https://projecteuler.net/problem=345)  
 
 ## Badge and friend key
   
