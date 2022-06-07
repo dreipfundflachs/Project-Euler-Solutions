@@ -403,13 +403,12 @@ def transpose(A: list) -> list:
     lists, each of the same size) """
     m = len(A)
     n = len(A[0])
-    # Initialize the transpose
-    B = [[0 for i in range(m)] for j in range(n)]
+    B = []
     for j in range(0, n):
         column = []
         for i in range(0, m):
             column.append(A[i][j])
-        B[j] = column
+        B.append(column)
     return B
 
 

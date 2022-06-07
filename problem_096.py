@@ -5,71 +5,90 @@ import time
 from copy import deepcopy
 
 
-def solve_grids(grids: list[list[list[int]]]) -> list[list[list[int]]]:
-    """ Given a list of grids of Su Doku, returns a list comprising their
-    solutions (in the same order). """
-    return [solve(grid) for grid in grids]
+def get_available(grid: list[list[int]], cell: tuple[int]) -> set[int]:
+    """ Given a grid and a cell in it, encoded as a pair of integers, returns a
+    set comprising all available numbers to be placed at that position. """
+    (i, j) = cell
+    if grid[i][j] != 0:
+        # Cell is already occupied.
+        return set()
+    else:
+        columns = transpose(grid)
+        # Extract all values inside the cells in the same box.
+        box_entries = {grid[m][n] for m in box(i) for n in box(j)}
+        # Get all available numbers in the same row, column and box.
+        available_row = {d for d in NUMBERS if d not in grid[i]}
+        available_column = {d for d in NUMBERS if d not in columns[j]}
+        available_box = {d for d in NUMBERS if d not in box_entries}
+        # Take the intersection of the three preceding sets to find the answer.
+        available = ((available_row
+                     .intersection(available_column))
+                     .intersection(available_box))
+    return available
 
 
-def get_sum(grids: list[list[list[int]]]) -> int:
-    solved_grids = solve_grids(grids)
-    total = 0
-    for grid in solved_grids:
-        for j in range(3):
-            total += grid[0][j]
-    return total
+def find_minimizing(grid: list[list[int]]) -> tuple[int]:
+    """ Given a grid:
+        * If it is not completely filled (solved), find a cell at which the
+        number of available entries is as small as possible.
+        * If the grid is already filled, return (10, 10).
+        * If it cannot be solved, return None. """
+    minimizing_cell = (10, 10)
+    minimum = 10
+    for i in INDICES:
+        for j in INDICES:
+            if grid[i][j] != 0:
+                # If a cell is not blank, no need to consider it.
+                continue
+            else:
+                available = get_available(grid, (i, j))
+                number_of_available = len(available)
+                if number_of_available == 0:
+                    # Failure! Not possible to fill grid.
+                    return None
+                elif number_of_available < minimum:
+                    # Found a new minimum:
+                    minimizing_cell = (i, j)
+                    minimum = number_of_available
+    return minimizing_cell
 
 
 def solve(grid: list[list[int]]) -> list[list[int]]:
-    for i in range(9):
-        grid = fill_rows_or_cols(grid)
-    return grid
-
-
-def fill_rows_or_cols(grid: list[list[int]]) -> list[list[int]]:
-    grid = fill_rows(grid)
-    return fill_columns(grid)
-
-
-def fill_rows(grid: list[list[int]]) -> list[list[int]]:
     """ Given a Su Doku grid, returns the solution (as another grid). """
-    easiest_rows = find_minimizing_rows(grid)
-    if easiest_rows != []:
-        same_rows_as_before = False
+    cell = find_minimizing(grid)
+    if cell == (10, 10):
+        # Grid is already solved.
+        return grid
+    elif cell is None:
+        # Grid cannot be solved.
+        return None
     else:
-        same_rows_as_before = True
-    while not same_rows_as_before:
-        # Perform one pass through all of the easiest the rows:
-        same_rows_as_before = True
-        for i in easiest_rows:
-            new_grid = fill_row(grid, i)
-            if new_grid and new_grid != grid:
-                grid = new_grid
-                same_rows_as_before = False
-    return grid
+        (i, j) = cell
+        possibilities = get_available(grid, (i, j))
+        for k in possibilities:
+            new_grid = deepcopy(grid)
+            new_grid[i][j] = k
+            new_grid = solve(new_grid)
+            if new_grid is None:
+                # Impossible to solve the new grid.
+                continue
+            elif new_grid != grid:
+                # Solved!
+                return new_grid
+        # If this point has been reached, all attempted substitutions for the
+        # given cell failed: It is impossible to solve original grid!
+        return None
 
 
-def fill_columns(grid: list[list[int]]) -> list[list[int]]:
-    columns = transpose(grid)
-    return transpose(fill_rows(columns))
-
-
-def count_blanks(line: list[int]) -> int:
-    """ Count the number of blanks (or, in our case, '0's) in a given row or
-    column of a grid. """
-    return line.count(0)
-
-
-def get_missing_numbers(line: list[int]) -> list[int]:
-    """ Given a row or column of a grid, returns a new list comprising all
-    numbers which do not appear in it. """
-    return [d for d in range(1, 10) if d not in line]
-
-
-def get_blanks(line: list[int]) -> list[int]:
-    """ Given a row or column of a grid, returns a list of the indices of the
-    entries equal to 0. """
-    return [j for j in range(9) if line[j] == 0]
+def box(i: int) -> set[int]:
+    """ Given an index i between 0 and 8, returns the set of all three indices
+     which belong to the same box as i in a Su Doku grid (including i)."""
+    if i in INDICES_1:
+        return INDICES_1
+    elif i in INDICES_2:
+        return INDICES_2
+    else:
+        return INDICES_3
 
 
 def transpose(A: list[list[int]]) -> list[list[int]]:
@@ -77,7 +96,6 @@ def transpose(A: list[list[int]]) -> list[list[int]]:
     lists, each of the same size) """
     m = len(A)
     n = len(A[0])
-    # Initialize the transpose
     B = []
     for j in range(0, n):
         column = []
@@ -87,75 +105,50 @@ def transpose(A: list[list[int]]) -> list[list[int]]:
     return B
 
 
-def get_min_blanks(grid: list[list[int]]) -> int:
-    """ Given a grid, returns the smallest number of blank entries among all
-    rows and all columns of the grid. """
-    minimum = 10
-    columns = transpose(grid)
-    for i in range(9):
-        row = grid[i]
-        column = columns[i]
-        minimum = min(count_blanks(row), count_blanks(column), minimum)
-    return minimum
+def solve_several(grids: list[list[list[int]]]) -> list[list[list[int]]]:
+    """ Given a list of Su Doku grids in the format of the linked file,
+    returns a list comprising their solutions (in the same order). """
+    return [solve(grid) for grid in grids]
 
 
-def find_minimizing_rows(grid: list[list[int]]) -> list[int]:
-    """ Given a grid, finds the indices of the rows which have the smallest
-    number of blank entries (or, in our case, entries equal to '0'). """
-    minimum = get_min_blanks(grid)
-    if minimum == 0:
-        return []
-    else:
-        minimizing_rows = []
-        for i in range(9):
-            if count_blanks(grid[i]) == minimum:
-                minimizing_rows.append(i)
-        return minimizing_rows
+def get_sum(grids: list[list[list[int]]]) -> int:
+    """ Returns the sum of the upper-left three-digit numbers in all of the
+    solved grids. """
+    solved_grids = solve_several(grids)
+    total = 0
+    for grid in solved_grids:
+        current = ''
+        for j in range(3):
+            current += str(grid[0][j])
+        total += int(current)
+    return total
 
 
-def find_minimizing_columns(grid: list[list[int]]) -> list[int]:
-    """ Given a grid, finds the indices of the rows which have the smallest
-    number of blank entries (or, in our case, entries equal to '0'). """
-    columns = transpose(grid)
-    return find_minimizing_rows(columns)
-
-
-def fill_row(grid: list[list[int]], i: int) -> list[list[int]]:
-    """ Fills the blanks of the i-th row of the grid with a given list of
-    numbers. If this is impossible, then it returns the empty list []. """
-    columns = transpose(grid)
-    row = grid[i]
-    missing_numbers = get_missing_numbers(row)
-    if missing_numbers:
-        j = get_blanks(row)[0]
-        for k in missing_numbers:
-            if k in columns[j]:
-                continue
-            else:
-                new_grid = deepcopy(grid)
-                new_grid[i][j] = k
-                filled_new_grid = fill_row(new_grid, i)
-                if filled_new_grid:
-                    return filled_new_grid
-                else:
-                    continue
-        return None
-    else:
-        if 0 not in grid[i]:
-            return grid
-
-
-def fill_column(grid: list[list[int]], j: int) -> list[list[int]]:
-    """ Fills the blanks of the j-th column of the grid with a given list of
-    numbers. If this is impossible, then it returns the empty list []. """
-    columns = transpose(grid)
-    return transpose(fill_row(columns, j))
+def display_grid(grid: list[list[int]]) -> None:
+    """ Displays a Su Doku grid, returns None. This function is not required
+    for the solution of the problem. """
+    for i in INDICES:
+        print('\n', end='')
+        if i % 3 == 0 and i != 0:
+            print('------+-------+------\n', end='')
+        for j in INDICES:
+            if j % 3 == 0 and j != 0:
+                print('| ', end='')
+            print(grid[i][j], end=' ')
+    print('\n')
+    return None
 
 
 start = time.time()
 
-grids: list[list[list[int]]] = []
+INDICES = set(range(0, 9))
+INDICES_1 = {0, 1, 2}
+INDICES_2 = {3, 4, 5}
+INDICES_3 = {6, 7, 8}
+NUMBERS = set(range(1, 10))
 
+# Extract the grids in the linked file:
+grids: list[list[list[int]]] = []
 with open('p096_sudoku.txt') as file_object:
     for i, line in enumerate(file_object):
         if i % 10 == 0:
@@ -168,39 +161,9 @@ with open('p096_sudoku.txt') as file_object:
 
 N = len(grids)
 
-gr = grids[0]
-tr_gr = transpose(gr)
-print(get_min_blanks(gr))
-print(find_minimizing_rows(gr))
-print(find_minimizing_columns(gr))
-print(tr_gr)
-print(get_blanks(tr_gr[2]))
-row = gr[0]
-print(row)
-print(get_missing_numbers(row))
-print(get_blanks(row))
-print(fill_row(gr, 0))
-print()
-print(solve(gr))
-print(find_minimizing_columns(gr))
-# print((fill_column(tr_gr, 6))[6])
-
-# for i in range(9):
-#     new_grid = fill_row(grid, i)
-#     if new_grid and new_grid != grid:
-#         row = grid[i]
-#         new_row = new_grid[i]
-#         print(row)
-#         print(new_row)
-
-# for i in range(1, 2):
-#     new_grid = fill_row(grid, i)
-#     print(new_grid)
-#     if new_grid:
-#         print(grid[i])
-#         print(new_grid[i])
-#         print()
-#         grid = new_grid
+# grid = grids[7]
+# display_grid(solve(grid))
+print(get_sum(grids))
 
 end = time.time()
 print(f"Program runtime: {end - start} seconds")
