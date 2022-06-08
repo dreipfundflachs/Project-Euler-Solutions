@@ -353,6 +353,29 @@ def get_prime_tuples_given_primes(n: int, primes: list[int]) -> set[int]:
     return prime_tuples
 
 
+def get_proper_divisors(n: int) -> list[int]:
+    """ Given n > 0, returns all divisors of n smaller than n as a list. """
+    if n <= 0:
+        return []
+    divisors = [1]
+    for k in range(2, isqrt(n) + 1):
+        if n % k == 0:
+            divisors.append(k)
+    return divisors
+
+
+def get_divisors(n: int) -> list[int]:
+    """ Given n > 0, returns the list of all divisors of n, incl. 1 and n. """
+    if n <= 0:
+        return []
+    divisors = [1]
+    for k in range(2, isqrt(n) + 1):
+        if n % k == 0:
+            divisors.append(k)
+    divisors.append(n)
+    return divisors
+
+
 def get_proper_divisors_given_primes(n: int, primes: list[int]) -> list[int]:
     """ Returns the list of all proper divisors of n (i.e., < n) given a list
     that includes all primes less than n. Requires 'combinations' from
