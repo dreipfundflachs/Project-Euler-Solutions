@@ -539,7 +539,7 @@ def dec_to_bin(n: int) -> int:
     return(int(bin(n)[2:]))
 
 
-def palindromic(string: str) -> bool:
+def is_palindromic(string: str) -> bool:
     """ Checks if the given string is palindromic. """
     return (string == string[::-1])
 
