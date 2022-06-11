@@ -18,7 +18,7 @@ def get_available(grid: list[list[int]], cell: tuple[int]) -> set[int]:
         columns = transpose(grid)
         # Extract all values inside the cells in the same box:
         box_entries = {grid[m][n] for m in box(i) for n in box(j)}
-        # Get all available numbers in the same row, column and box:
+        # Get all available numbers in the same row, column or box:
         available_row = {d for d in NUMBERS if d not in grid[i]}
         available_column = {d for d in NUMBERS if d not in columns[j]}
         available_box = {d for d in NUMBERS if d not in box_entries}

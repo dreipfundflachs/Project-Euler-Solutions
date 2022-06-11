@@ -417,6 +417,36 @@ def get_digital_sum(n: int) -> int:
     return s
 
 
+#########################################################
+#  FUNCTIONS INVOLVING SQUARES AND PYTHAGOREAN TRIPLES  #
+#########################################################
+
+
+def get_pythagorean_triples(N: int) -> set[int]:
+    """ Generates all Pythagorean triples (a, b, c) with a <= b <= c <= N.
+    Returns a set containing all such triples.
+
+    Euclid's formula for Pythagorean triples states that any _primitive_
+    Pythagorean triple has the form:
+    a = m**2 - n**2, b = 2 * m * n and c = m**2 + n**2, where
+    (i) 0 < n < m; (ii) exactly one of m, n is even; (iii) gcd(m, n) = 1.
+    """
+    triples = set()
+    for m in range(2, isqrt(N - 1) + 1):
+        for n in range(1, m):
+            if (m + n) % 2 == 1 and gcd(m, n) == 1:
+                a = m**2 - n**2
+                b = 2 * m * n
+                c = m**2 + n**2
+                k = 1
+                if a > b:
+                    a, b = b, a
+                while k * c <= N:
+                    triples.add((k * a, k * b, k * c))
+                    k += 1
+    return triples
+
+
 #############################################
 #  FUNCTIONS INVOLVING MATRICES AND ARRAYS  #
 #############################################
@@ -539,6 +569,79 @@ def dec_to_bin(n: int) -> int:
     return(int(bin(n)[2:]))
 
 
+def get_decimal_representation(n: int, d: int, precision: int) -> list[int]:
+    """ Given integers n < d, computes the decimal part of n / d up to the
+    'precision'-th digit of its decimal part or until there is a recurring
+    cycle. The function does not determine the cycle. 'r' indicates a
+    recurring cycle from that position on. Example: since 1 / 7 = 0.(142857),
+    we have: int_division(1, 7, 10) = [1, 4, 2, 8, 5, 7, 'r']. To obtain the
+    decimal representation, the function simply emulates long division. """
+    decimals = []
+    remainders = [n]
+    decimal = -1
+    count = 0
+    while n != 0 and count < precision:
+        n *= 10
+        while n < d:
+            n *= 10
+            decimals.append(0)
+            count += 1
+            remainders.append(n)
+        decimal = n // d
+        decimals.append(decimal)
+        n = n % d
+        count += 1
+        if n not in remainders:
+            remainders.append(n)
+        else:
+            decimals.append('r')
+            break
+    return decimals
+
+
+def fib_iter(n: int, a: int = 0, b: int = 1) -> int:
+    """ Computes the n-th Fibonacci number in O(n) time. """
+    if n < 0:
+        raise ValueError(""" The argument of 'log_fib'
+                         must be a positive integer.""")
+    elif n == 0:
+        return a
+    elif n == 1:
+        return b
+    else:
+        return fib_iter(n - 1, b, a + b)
+
+
+def log_fib(n: int) -> int:
+    """ Computes the n-th Fibonacci number in O(log n) time. """
+    if n < 0:
+        raise ValueError(""" The argument of 'log_fib'
+                         must be a positive integer.""")
+    elif n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    elif n % 2 == 0:
+        m = n // 2
+        return log_fib(m) * (2 * log_fib(m - 1) + log_fib(m))
+    else:
+        m = (n + 1) // 2
+        return log_fib(m)**2 + log_fib(m - 1)**2
+
+
+def is_tail_pandigital(n: int) -> bool:
+    """ Decides whether the last 9 digits of an integer are 1-9 pandigital. """
+    if {int(d) for d in str(n)[-9:]} == set(range(1, 10)):
+        return True
+    else:
+        return False
+
+
+################################################
+#  FUNCTIONS INVOLVING STRINGS AND CHARACTERS  #
+################################################
+
+
 def is_palindromic(string: str) -> bool:
     """ Checks if the given string is palindromic. """
     return (string == string[::-1])
@@ -571,40 +674,6 @@ def palindromes(n: int) -> list[int]:
             palindromes[palindrome] = True
     return palindromes
 
-
-def get_decimal_representation(n: int, d: int, precision: int) -> list[int]:
-    """ Given integers n < d, computes the decimal part of n / d up to the
-    'precision'-th digit of its decimal part or until there is a recurring
-    cycle. The function does not determine the cycle. 'r' indicates a
-    recurring cycle from that position on. Example: since 1 / 7 = 0.(142857),
-    we have: int_division(1, 7, 10) = [1, 4, 2, 8, 5, 7, 'r']. To obtain the
-    decimal representation, the function simply emulates long division. """
-    decimals = []
-    remainders = [n]
-    decimal = -1
-    count = 0
-    while n != 0 and count < precision:
-        n *= 10
-        while n < d:
-            n *= 10
-            decimals.append(0)
-            count += 1
-            remainders.append(n)
-        decimal = n // d
-        decimals.append(decimal)
-        n = n % d
-        count += 1
-        if n not in remainders:
-            remainders.append(n)
-        else:
-            decimals.append('r')
-            break
-    return decimals
-
-
-################################################
-#  FUNCTIONS INVOLVING STRINGS AND CHARACTERS  #
-################################################
 
 def convert_to_int(digits: list[int]) -> int:
     """ Converts a list of digits to a single integer, e.g.,
