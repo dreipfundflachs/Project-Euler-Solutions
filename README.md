@@ -13,6 +13,9 @@ Python 3. It also includes:
 * All __auxiliary files__ linked to in the problem statements (among the first
   100); these are named `p0[0-9][0-9]_*.txt`.
 
+Solutions to some of the problems beyond the first one hundred are stored in a
+_private_ repository. Even though it is inaccessible, Github still lists the
+corresponding folder `problems_100_plus` above.
 
 ## Benchmarks
 
@@ -64,6 +67,7 @@ consecutive digits have a sum greater than a given value](https://projecteuler.n
 __191__: [Prize strings](https://projecteuler.net/problem=191)  
 __267__: [Billionaire](https://projecteuler.net/problem=267)  
 __301__: [Nim](https://projecteuler.net/problem=301)  
+__317__: [Firecracker](https://projecteuler.net/problem=317)  
 __345__: [Matrix Sum](https://projecteuler.net/problem=345)  
 
 ## Badge and friend key

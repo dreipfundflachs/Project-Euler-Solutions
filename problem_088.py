@@ -46,40 +46,41 @@ F = int(log(N, 2)) + 1
 minimals = {k: 2 * k for k in range(2, N + 1)}
 
 for number_of_factors in range(2, F + 1):
-    completed_loop = False
-    # Initialize the list of factors with number_of_factors 2's.
+    # Initialize the list of factors with number_of_factors 2's:
     factors = [2 for _ in range(number_of_factors)]
+    # To increment the factors, we use a moving head, beginning from right
+    # to left. It is only necessary to search through those lists
+    # (b_1, b_2, ..., b_r) for which b_1 <= b_2 <= ... <= b_r.
+    completed_loop = False
     while not completed_loop:
-        # To increment the factors, we use a moving head, beginning from right
-        # to left. It is only necessary to search through those lists
-        # (b_1, b_2, ..., b_r) for which b_1 <= b_2 <= ... <= b_r.  Set the
-        # head to the last position and compute the product n.
+        # At each step, set the head to the last position and compute the
+        # product n:
         head = number_of_factors - 1
         n = prod(factors)
         if n > 2 * N:
             # If at some point the product n is greater than the bound 2 * N,
-            # move the head left and set all factors to its right to the
-            # current value of the factor at the new head plus 1. Repeat as
-            # necessary until the product is <= 2 * N.
+            # move the head left, increment the value at this position and set
+            # all factors to its right equal to it. Repeat as necessary until
+            # the product is <= 2 * N.
             while(prod(factors)) > 2 * N:
                 head -= 1
-                for i in range(head + 1, number_of_factors):
-                    factors[i] = factors[head] + 1
-                # This will only fail if the first factor by itself is
-                # already greater than 2 * N. In this case the head will be
-                # moved back to the '- 1st' position. This means that we have
-                # exhausted all products involving number_of_factors factors.
-                # We catch the exception and increment the number of factors.
+                # This will generate a key-value error (head < 0) if (and only
+                # if) the first factor by itself is already greater than 2 * N.
+                # This means that we have exhausted all products involving
+                # number_of_factors factors. We catch the error before it
+                # occurs and increment the number of factors:
                 if head == -1:
                     completed_loop = True
                     break
-            # Otherwise, we can safely increase the current factor, and move
-            # the head all the way to the right again.
-            factors[head] += 1
+
+                factors[head] += 1
+                for i in range(head + 1, number_of_factors):
+                    factors[i] = factors[head]
             head = number_of_factors - 1
+
         else:
             # If the product is a valid candidate, we compare it to the current
-            # k-minimal product-sum number and store in case it is smaller.
+            # k-minimal product-sum number and store it in case it is smaller:
             k = n - sum(factors) + number_of_factors
             if k <= N and n < minimals[k]:
                 minimals[k] = n
