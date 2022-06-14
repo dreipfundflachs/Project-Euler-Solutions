@@ -16,7 +16,7 @@ from math import log, prod
 #
 #   (ii) Conversely, given b_1, ..., b_r, all >= 2, their product n is greater
 #   to or equal to their sum. Thus we can make n a product-sum number by adding
-#   some one factors if necessary, the quantity of ones being as in (i).
+#   some 1 factors if necessary, the quantity of ones being as in (i).
 #
 #   (iii) A _minimal_ product-sum number involving k factors/summands must
 #   be <= 2 * k, because
@@ -30,11 +30,11 @@ from math import log, prod
 #   between 2 and F = floor(log_2(2 * N)) = 1 + floor(log_2(N)).
 #
 #   (v) Combining the previous points, it follows that we can generate all
-#   minimal-product sum numbers by considering all possible numbers of factors
-#   >= 2 between 2 and F, and for each such number of factors, all lists of
-#   factors >= 2 (b_1, ..., b_r) whose product n does not exceed 2 * N. For k
-#   given as in (i), we can then compare n to the previous candidate for a
-#   k-minimal product-sum number.
+#   minimal-product sum numbers by considering each possible number between 2
+#   and F of factors >= 2 and, for each such number of factors, all
+#   lists of such factors (b_1, ..., b_r) whose product n does not exceed
+#   2 * N. For k given as in (i), we then compare n to the previous candidate
+#   for a k-minimal product-sum number.
 
 start = time.time()
 
@@ -49,29 +49,27 @@ for number_of_factors in range(2, F + 1):
     completed_loop = False
     # Initialize the list of factors with number_of_factors 2's.
     factors = [2 for _ in range(number_of_factors)]
-    # To increment the factors, we use a moving head, beginning from right to
-    # left.
     while not completed_loop:
-        # Set the head to the last position and compute the product.
+        # To increment the factors, we use a moving head, beginning from right
+        # to left. It is only necessary to search through those lists
+        # (b_1, b_2, ..., b_r) for which b_1 <= b_2 <= ... <= b_r.  Set the
+        # head to the last position and compute the product n.
         head = number_of_factors - 1
         n = prod(factors)
         if n > 2 * N:
-            # If the product is greater than the upper bound 2 * N, we set the
-            # factor at the head and all factors to its right equal to the
-            # minimum value 2 and move the head back one position.
-            for i in range(head, number_of_factors):
-                factors[i] = 2
-            head -= 1
-            # If the product is still greater than the upper bound, we again
-            # set the current factor equal to 2 and move the head back, until
-            # we finally reach a list of factors whose products is <= 2 * N.
+            # If at some point the product n is greater than the bound 2 * N,
+            # move the head left and set all factors to its right to the
+            # current value of the factor at the new head plus 1. Repeat as
+            # necessary until the product is <= 2 * N.
             while(prod(factors)) > 2 * N:
-                factors[head] = 2
                 head -= 1
-                # This will only fail if the first factor by itself is already
-                # greater than 2 * N. In this case the head will be moved back
-                # to the '- 1st' position; we catch the exception and increase
-                # the number of factors.
+                for i in range(head + 1, number_of_factors):
+                    factors[i] = factors[head] + 1
+                # This will only fail if the first factor by itself is
+                # already greater than 2 * N. In this case the head will be
+                # moved back to the '- 1st' position. This means that we have
+                # exhausted all products involving number_of_factors factors.
+                # We catch the exception and increment the number of factors.
                 if head == -1:
                     completed_loop = True
                     break
@@ -80,8 +78,8 @@ for number_of_factors in range(2, F + 1):
             factors[head] += 1
             head = number_of_factors - 1
         else:
-            # If the product is a valid candidate, we compare it the current
-            # k-minimal product-sum number.
+            # If the product is a valid candidate, we compare it to the current
+            # k-minimal product-sum number and store in case it is smaller.
             k = n - sum(factors) + number_of_factors
             if k <= N and n < minimals[k]:
                 minimals[k] = n
