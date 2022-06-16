@@ -1,5 +1,6 @@
 # Project Euler Solutions
 
+
 ## Features
 
 This repository contains solutions to each of the first
@@ -16,6 +17,7 @@ Python 3. It also includes:
 Solutions to some of the problems beyond the first one hundred are stored in a
 _private_ repository. Even though it is inaccessible, Github still lists the
 corresponding folder `problems_100_plus` above.
+
 
 ## Benchmarks
 
@@ -47,8 +49,16 @@ computer:
 | 98 | 2.6s |
 
 
+## Badge and friend key
+  
+[Friend key](https://projecteuler.net/friends): `1912870_zicXUiSA5Mv6wAvcZOOv8FMAfCtCClsu`
+
+[![Badge](https://projecteuler.net/profile/pzuehlke.png?)](https://projecteuler.net/progress=pzuehlke)
+
+
 ## List of favorite problems (so far)
 
+__31__: [Coin sums](https://projecteuler.net/problem=31)  
 __59__: [XOR decryption](https://projecteuler.net/problem=59)  
 __81__, __82__ and __83__: Path sum:
 [two](https://projecteuler.net/problem=81),
@@ -69,9 +79,3 @@ __267__: [Billionaire](https://projecteuler.net/problem=267)
 __301__: [Nim](https://projecteuler.net/problem=301)  
 __317__: [Firecracker](https://projecteuler.net/problem=317)  
 __345__: [Matrix Sum](https://projecteuler.net/problem=345)  
-
-## Badge and friend key
-  
-[Friend key](https://projecteuler.net/friends): `1912870_zicXUiSA5Mv6wAvcZOOv8FMAfCtCClsu`
-
-[![Badge](https://projecteuler.net/profile/pzuehlke.png?)](https://projecteuler.net/progress=pzuehlke)

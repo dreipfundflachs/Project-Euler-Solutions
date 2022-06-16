@@ -8,7 +8,7 @@ from math import log, prod
 # The solution is based on the following observations:
 #
 #   (i) Let n be a product-sum number whose factors >= 2 are b_1, ..., b_r.
-#   Then, the number of ones in the decomposition must be:
+#   Then the number of ones in the decomposition must be:
 #           b_1 * ... * b_r - (b_1 + ... + b_r),
 #   for a total of
 #           k = b_1 * ... * b_r - (b_1 + ... + b_r) + r
@@ -30,11 +30,11 @@ from math import log, prod
 #   between 2 and F = floor(log_2(2 * N)) = 1 + floor(log_2(N)).
 #
 #   (v) Combining the previous points, it follows that we can generate all
-#   minimal-product sum numbers by considering each possible number between 2
-#   and F of factors >= 2 and, for each such number of factors, all
-#   lists of such factors (b_1, ..., b_r) whose product n does not exceed
-#   2 * N. For k given as in (i), we then compare n to the previous candidate
-#   for a k-minimal product-sum number.
+#   minimal product-sum numbers by considering each possible number between 2
+#   and F of factors >= 2 and, for each such number k of factors, all
+#   lists of such factors (b_1, ..., b_r) whose products n do not exceed 2 * N.
+#   We then compare n to the previous candidate for a k-minimal product-sum
+#   number.
 
 start = time.time()
 
@@ -45,6 +45,13 @@ F = int(log(N, 2)) + 1
 # Initialize a dictionary to store the minimal product-sum numbers:
 minimals = {k: 2 * k for k in range(2, N + 1)}
 
+# Because the solution involves a nested iteration of depth up to 14 (the
+# maximum number F of factors involved), we circumvent the use of 'for' loops
+# by emulating it through a list of length equal to the depth of the nesting.
+# The members of the list are the various counters involved. We also use a
+# 'moving head' to store the current position we are dealing with in the list
+# and to break out or move into one of the loops as necessary. This makes the
+# code more concise and readable.
 for number_of_factors in range(2, F + 1):
     # Initialize the list of factors with number_of_factors 2's:
     factors = [2 for _ in range(number_of_factors)]
@@ -59,9 +66,9 @@ for number_of_factors in range(2, F + 1):
         n = prod(factors)
         if n > 2 * N:
             # If at some point the product n is greater than the bound 2 * N,
-            # move the head left, increment the value at this position and set
-            # all factors to its right equal to it. Repeat as necessary until
-            # the product is <= 2 * N.
+            # move the head left, increment the value at this position by 1 and
+            # set all factors to its right equal to the new value. Repeat as
+            # necessary until the product is <= 2 * N.
             while(prod(factors)) > 2 * N:
                 head -= 1
                 # This will generate a key-value error (head < 0) if (and only
@@ -72,11 +79,9 @@ for number_of_factors in range(2, F + 1):
                 if head == -1:
                     completed_loop = True
                     break
-
                 factors[head] += 1
                 for i in range(head + 1, number_of_factors):
                     factors[i] = factors[head]
-            head = number_of_factors - 1
 
         else:
             # If the product is a valid candidate, we compare it to the current
