@@ -71,6 +71,7 @@ __126__: [Cuboid layers](https://projecteuler.net/problem=126)
 __144__: [Investigating multiple reflections of a laser
 beam](https://projecteuler.net/problem=144)  
 __147__: [Rectangles in cross-hatched grids](https://projecteuler.net/problem=147)  
+__148__: [Exploring Pascal's triangle](https://projecteuler.net/problem=148)  
 __151__: [Paper sheets of standard size](https://projecteuler.net/problem=151)  
 __164__: [Numbers for which no three
 consecutive digits have a sum greater than a given value](https://projecteuler.net/problem=164)  

@@ -524,6 +524,16 @@ def transpose(A: list) -> list:
 #  MISCELLANEA  #
 #################
 
+def number_to_base(n: int, b: int) -> list[int]:
+    if n == 0:
+        return [0]
+    digits = []
+    while n:
+        digits.append(n % b)
+        n //= b
+    return digits[::-1]
+
+
 def get_partitions(target: int, bound: int, summands: int) -> [tuple[int]]:
     """ Computes the unique ways (as a list of tuples) in which one can
     partition the integer 'target' using numbers in the range from 1 to 'bound'
