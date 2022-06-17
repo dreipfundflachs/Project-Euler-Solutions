@@ -96,6 +96,16 @@ def involves_only(n: int, p: int, q: int) -> bool:
         return True
 
 
+def fast_power(base: int, exponent: int) -> int:
+    """ Computes base**exp (mod m) efficiently (in O(log(exp)) time). """
+    if exponent == 1:
+        return base
+    elif exponent % 2 == 0:
+        return fast_power(base, exponent // 2)**2
+    else:
+        return base * fast_power(base, exponent - 1)
+
+
 def powmod(base: int, exponent: int, m: int) -> int:
     """ Computes base**exp (mod m) efficiently (in O(log(exp)) time). """
     if exponent == 1:
@@ -364,16 +374,25 @@ def get_proper_divisors(n: int) -> list[int]:
     return divisors
 
 
-def get_divisors(n: int) -> list[int]:
-    """ Given n > 0, returns the list of all divisors of n, incl. 1 and n. """
-    if n <= 0:
-        return []
-    divisors = [1]
+def get_divisors(n: int) -> set[int]:
+    """ Given n > 1, returns the set of all divisors of n, incl. 1 and n. """
+    divisors = {1, n}
     for k in range(2, isqrt(n) + 1):
         if n % k == 0:
-            divisors.append(k)
-    divisors.append(n)
+            divisors.add(k)
+            divisors.add(n // k)
     return divisors
+
+
+def list_divisors(n: int) -> list[int]:
+    """ Given n > 1, returns the set of all divisors of n, incl. 1 and n. """
+    small_divisors = [1]
+    large_divisors = [n]
+    for k in range(2, isqrt(n) + 1):
+        if n % k == 0:
+            small_divisors.append(k)
+            large_divisors.append(n // k)
+    return small_divisors + reversed(large_divisors)
 
 
 def get_proper_divisors_given_primes(n: int, primes: list[int]) -> list[int]:
@@ -445,6 +464,42 @@ def get_pythagorean_triples(N: int) -> set[int]:
                     triples.add((k * a, k * b, k * c))
                     k += 1
     return triples
+
+
+###############################
+#  FUNCTIONS INVOLVING LISTS  #
+###############################
+
+def insert_in_ascending(n: int, a: list[int]) -> list[int]:
+    """ Given an integer or float and an ascending list of numbers of the
+    same type, inserts the number in the list. Also take a look at 'insort'
+    from the 'bisect' module. """
+    if a == []:
+        return [n]
+    else:
+        m = len(a) // 2
+        if a[m] == n:
+            return a[:m + 1] + [n] + a[m + 1:]
+        elif a[m] < n:
+            return a[:m + 1] + insert_in_ascending(a[m + 1:], n)
+        else:
+            return insert_in_ascending(a[:m], n) + a[m:]
+
+
+def insert_in_descending(n: int, a: list[int]) -> list[int]:
+    """ Given an integer or float and a descending list of numbers of the
+    same type, inserts the number in the list. Also take a look at 'insort'
+    from the 'bisect' module."""
+    if a == []:
+        return [n]
+    else:
+        m = len(a) // 2
+        if a[m] == n:
+            return a[:m + 1] + [n] + a[m + 1:]
+        elif a[m] > n:
+            return a[:m + 1] + insert_in_descending(a[m + 1:], n)
+        else:
+            return insert_in_descending(a[:m], n) + a[m:]
 
 
 #############################################

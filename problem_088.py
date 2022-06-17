@@ -47,11 +47,10 @@ minimals = {k: 2 * k for k in range(2, N + 1)}
 
 # Because the solution involves a nested iteration of depth up to 14 (the
 # maximum number F of factors involved), we circumvent the use of 'for' loops
-# by emulating it through a list of length equal to the depth of the nesting.
-# The members of the list are the various counters involved. We also use a
-# 'moving head' to store the current position we are dealing with in the list
-# and to break out or move into one of the loops as necessary. This makes the
-# code more concise and readable.
+# by emulating them through a list of length equal to the depth of the nesting.
+# The members of the list are the various counters involved. We use 'moving
+# head' to control the current position/counter we are dealing with and to
+# break out or move into one of the loops as necessary.
 for number_of_factors in range(2, F + 1):
     # Initialize the list of factors with number_of_factors 2's:
     factors = [2 for _ in range(number_of_factors)]
