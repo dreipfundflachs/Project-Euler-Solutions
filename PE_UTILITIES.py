@@ -2,7 +2,7 @@
 #  SOME USEFUL FUNCTIONS FOR SOLVING PROJECT EULER PROBLEMS  #
 ##############################################################
 
-from math import prod, isqrt
+from math import prod, isqrt, log
 from itertools import combinations
 from functools import reduce
 from random import randint
@@ -106,14 +106,23 @@ def fast_power(base: int, exponent: int) -> int:
         return base * fast_power(base, exponent - 1)
 
 
-def powmod(base: int, exponent: int, m: int) -> int:
+def power_mod(base: int, exponent: int, m: int) -> int:
     """ Computes base**exp (mod m) efficiently (in O(log(exp)) time). """
     if exponent == 1:
         return base % m
     elif exponent % 2 == 0:
-        return (powmod(base, exponent // 2, m)**2) % m
+        return (power_mod(base, exponent // 2, m)**2) % m
     else:
-        return ((base * powmod(base, (exponent - 1)//2, m)**2) % m)
+        return ((base * power_mod(base, (exponent - 1)//2, m)**2) % m)
+
+
+def hyper_exp(base: int, exponent: int, m: int) -> int:
+    """ Computes the result of hyperexponentiating the given base to the given
+    exponent (>= 0) modulo m. """
+    current_exponent = 1
+    for k in range(1, exponent + 2):
+        current_exponent = power_mod(base, current_exponent, m)
+    return current_exponent
 
 
 def get_primes_up_to(n: int) -> list[int]:
@@ -434,6 +443,26 @@ def get_digital_sum(n: int) -> int:
         n = (n - r) // 10
         s += r
     return s
+
+
+def highest_power_in_factorial(n: int, p: int) -> int:
+    """ Returns the largest power of a _prime_ number p dividing the factorial
+    n! of n. This is given by:
+        n // p + n // p**2 + n // p**3 + ... + n // p**K
+    where K is the largest (integer) power of p that does not exceed n. """
+    K = int(log(n, p))  # Largest power of p that does not exceed n.
+    largest_power = 0
+    for k in range(1, K + 1):
+        largest_power += n // p**k
+    return largest_power
+
+
+def highest_power_in_binom(n: int, k: int, p: int) -> int:
+    """ Returns the largest power of a _prime_ number p dividing the binomial
+    coefficient (n, k) (a.k.a. 'n choose k'). """
+    return (highest_power_in_factorial(n, p)
+            - highest_power_in_factorial(k, p)
+            - highest_power_in_factorial(n - k, p))
 
 
 #########################################################

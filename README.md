@@ -21,9 +21,9 @@ corresponding folder `problems_100_plus` above.
 
 ## Benchmarks
 
-All solutions are original (in the sense of not having been taken from someone
-else). The following among them take more than 1 second to execute on my
-computer:
+All of the solutions are original (in the sense of not having been taken from
+someone else). The following among them take more than 1 second to execute on
+my computer:
 
 | Problem number   | Runtime (approx.)   |
 | :--------------: | :-----------------: |
