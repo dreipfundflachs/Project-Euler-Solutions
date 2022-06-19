@@ -32,7 +32,7 @@ def get_available(grid: list[list[int]], cell: tuple[int]) -> set[int]:
 def find_minimizing(grid: list[list[int]]) -> tuple[int]:
     """ Given a grid:
         * If it is not completely filled (solved), find a cell at which the
-        number of available entries is as small as possible.
+            number of available entries is as small as possible.
         * If the grid is already filled, return (10, 10).
         * If it cannot be solved, return (-1, -1). """
     minimizing_cell = (10, 10)
@@ -79,8 +79,8 @@ def solve(grid: list[list[int]]) -> list[list[int]]:
             elif new_grid != grid:
                 # Solved!
                 return new_grid
-        # If this point has been reached, all attempted substitutions for the
-        # given cell failed: It is thus impossible to solve original grid!
+        # If this point is reached, then all attempted substitutions for the
+        # given cell have failed: It is thus impossible to solve original grid!
         return []
 
 
@@ -162,8 +162,10 @@ with open('p096_sudoku.txt') as file_object:
             if i % 10 == 9:
                 grids.append(current_grid)
 
-# grid = grids[7]
-# display_grid(solve(grid))
+# Uncomment the following three lines for an example of a solved grid:
+GRID = grids[7]
+display_grid(GRID)
+display_grid(solve(GRID))
 print(get_sum(grids))
 
 end = time.time()

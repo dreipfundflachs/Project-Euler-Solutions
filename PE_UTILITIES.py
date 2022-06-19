@@ -195,7 +195,7 @@ def is_prime_given_primes(n: int, primes: list[int]) -> bool:
 
 def is_prime(n: int) -> bool:
     """ Verifies directly whether a number is prime. """
-    if n % 2 == 0:
+    if n <= 1 or (n % 2 == 0 and n != 2):
         return False
     else:
         d = 3
@@ -450,10 +450,10 @@ def highest_power_in_factorial(n: int, p: int) -> int:
     n! of n. This is given by:
         n // p + n // p**2 + n // p**3 + ... + n // p**K
     where K is the largest (integer) power of p that does not exceed n. """
-    K = int(log(n, p))  # Largest power of p that does not exceed n.
     largest_power = 0
-    for k in range(1, K + 1):
-        largest_power += n // p**k
+    while n > 1:
+        n //= p
+        largest_power += n
     return largest_power
 
 
