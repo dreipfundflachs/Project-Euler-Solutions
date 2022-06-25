@@ -60,6 +60,7 @@ my computer:
 
 __31__: [Coin sums](https://projecteuler.net/problem=31)  
 __59__: [XOR decryption](https://projecteuler.net/problem=59)  
+__78__: [Coin partitions](https://projecteuler.net/problem=78)  
 __81__, __82__ and __83__: Path sum:
 [two](https://projecteuler.net/problem=81),
 [three](https://projecteuler.net/problem=82) and

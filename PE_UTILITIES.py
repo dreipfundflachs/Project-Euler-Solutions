@@ -2,7 +2,7 @@
 #  SOME USEFUL FUNCTIONS FOR SOLVING PROJECT EULER PROBLEMS  #
 ##############################################################
 
-from math import prod, isqrt, log
+from math import prod, isqrt
 from itertools import combinations
 from functools import reduce
 from random import randint
@@ -82,6 +82,17 @@ def extended_gcd(a: int, b: int) -> list[int]:
     else:
         d, y, x = extended_gcd(b, a)
         return [d, x, y]
+
+
+def get_inverse_mod(n: int, m: int) -> int:
+    """ Returns the inverse of n modulo m, for m > 0 and n relatively prime to
+    n. Also consider using pow(n, -1, m). """
+    d, x, y = extended_gcd(n, m)
+    if d != 1:
+        raise ValueError("""The two arguments of 'get_inverse' must be
+                         relatively prime positive integers.""")
+    else:
+        return x % m
 
 
 def involves_only(n: int, p: int, q: int) -> bool:
