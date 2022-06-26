@@ -89,7 +89,7 @@ def get_inverse_mod(n: int, m: int) -> int:
     n. Also consider using pow(n, -1, m). """
     d, x, y = extended_gcd(n, m)
     if d != 1:
-        raise ValueError("""The two arguments of 'get_inverse' must be
+        raise ValueError("""The two arguments of 'get_inverse_mod' must be
                          relatively prime positive integers.""")
     else:
         return x % m
