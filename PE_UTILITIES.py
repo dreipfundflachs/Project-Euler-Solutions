@@ -456,7 +456,7 @@ def get_digital_sum(n: int) -> int:
     return s
 
 
-def highest_power_in_factorial(n: int, p: int) -> int:
+def get_highest_power_in_fact(n: int, p: int) -> int:
     """ Returns the largest power of a _prime_ number p dividing the factorial
     n! of n. This is given by:
         n // p + n // p**2 + n // p**3 + ... + n // p**K
@@ -468,12 +468,12 @@ def highest_power_in_factorial(n: int, p: int) -> int:
     return largest_power
 
 
-def highest_power_in_binom(n: int, k: int, p: int) -> int:
+def get_highest_power_in_binom(n: int, k: int, p: int) -> int:
     """ Returns the largest power of a _prime_ number p dividing the binomial
     coefficient (n, k) (a.k.a. 'n choose k'). """
-    return (highest_power_in_factorial(n, p)
-            - highest_power_in_factorial(k, p)
-            - highest_power_in_factorial(n - k, p))
+    return (get_highest_power_in_fact(n, p)
+            - get_highest_power_in_fact(k, p)
+            - get_highest_power_in_fact(n - k, p))
 
 
 #########################################################
