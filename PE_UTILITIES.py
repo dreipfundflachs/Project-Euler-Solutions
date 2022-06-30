@@ -366,6 +366,15 @@ def has_two_prime_factors(n: int, primes: list[int]) -> bool:
         return False
 
 
+def get_highest_power(m: int, n: int) -> int:
+    """ Returns the largest e >= 0 such that m**e divides n. """
+    e = 0
+    while n % m != 0:
+        e += 1
+        n //= m
+    return e
+
+
 def get_prime_tuples_given_primes(n: int, primes: list[int]) -> set[int]:
     """ Returns the set of all prime factors of n in tuple form, given a list
     that includes all primes less than n. Example:
@@ -466,6 +475,18 @@ def get_highest_power_in_fact(n: int, p: int) -> int:
         n //= p
         largest_power += n
     return largest_power
+
+
+def smallest_factorial_divisible_by_prime_power(p: int, e: int) -> int:
+    """ Given a prime p and e >= 0, returns the smallest m such that m! is
+    divisible by p**e. Note that m must be a multiple of p, say, m = k * p. To
+    find it, we start from the upper bound k = e and sequentially test
+    decreasing values of k until (k * p)! is no longer divisible by p**e.
+    Requires the function 'get_highest_power_in_fact'. """
+    for k in reversed(range(e)):
+        if get_highest_power_in_fact(k * p, p) < e:
+            break
+    return (k + 1) * p
 
 
 def get_highest_power_in_binom(n: int, k: int, p: int) -> int:
