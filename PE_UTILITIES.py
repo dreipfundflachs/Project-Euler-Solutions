@@ -368,11 +368,14 @@ def has_two_prime_factors(n: int, primes: list[int]) -> bool:
 
 def get_highest_power(m: int, n: int) -> int:
     """ Returns the largest e >= 0 such that m**e divides n. """
-    e = 0
-    while n % m != 0:
-        e += 1
-        n //= m
-    return e
+    if n == 0:
+        raise ValueError "Second argument cannot be 0."
+    else:
+        e = 0
+        while n % m == 0:
+            e += 1
+            n //= m
+        return e
 
 
 def get_prime_tuples_given_primes(n: int, primes: list[int]) -> set[int]:
