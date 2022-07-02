@@ -369,7 +369,7 @@ def has_two_prime_factors(n: int, primes: list[int]) -> bool:
 def get_highest_power(m: int, n: int) -> int:
     """ Returns the largest e >= 0 such that m**e divides n. """
     if n == 0:
-        raise ValueError "Second argument cannot be 0."
+        raise ValueError("Second argument cannot be 0.")
     else:
         e = 0
         while n % m == 0:
@@ -631,6 +631,53 @@ def get_number_of_partitions(target: int, bound: int, summands: int)\
         for k in range(1, bound + 1):
             partitions += get_number_of_partitions(target - k, k, summands - 1)
     return partitions
+
+
+def get_ordered_partitions(n: int) -> list[list[int]]:
+    """ Determines all the ordered partitions of n, each partition being
+    represented by a list. For example, the ordered partitions of 4 are:
+        [1, 1, 1, 1],
+        [1, 1, 2],
+        [1, 2, 1],
+        [2, 1, 1],
+        [2, 2],
+        [1, 3],
+        [3, 1],
+        [4].
+    The total number of such partitions is 2**(n - 1) if n >= 1 (see the
+    function 'count_ordered_partitions').
+    """
+    if n == 0:
+        return 0
+    else:
+        partitions = [[] for k in range(n + 1)]
+        partitions[0] = [[]]
+        for k in range(1, n + 1):
+            # Determine the ordered partitions of k and store them, as follows.
+            # Any partition of k can be obtained from a partition of k - i by
+            # appending i, for some i between 1 and k.
+            for i in range(1, k + 1):
+                for p in partitions[k - i]:
+                    partitions[k].append(p + [i])
+        return partitions[n]
+
+
+def count_ordered_partitions(n: int) -> int:
+    """ Counts the number of ordered partitions of an integer n. This is given
+    simply by 2**(n - 1) if n >= 1.
+
+    The proof is by induction: Except for the partition [n], the remaining
+    ordered partitions of n can be obtained from the partitions of n - k, for k
+    between 1 and n - 1 (inclusive), by appending k.  Hence there are
+        1 + 2**0 + 2**1 + ... + 2**(n - 2)
+        = 1 + [2**(n - 1) - 1]
+        = 2**(n - 1)
+    total ordered partitions of n.
+    """
+    if n <= 0:
+        return 0
+    else:
+        return 2**(n - 1)
 
 
 def multinomial(*coefficients: list[int]) -> int:
