@@ -12,6 +12,22 @@ from random import randint
 #  CLASSES  #
 #############
 
+class Memoize:
+    """ Provides memoization for functions through the use of the @Memoize
+    decorator. Also consider using @functools.cache from the functools
+    module."""
+
+    def __init__(self, f):
+        self.f = f
+        self.memo = {}
+
+    def __call__(self, *args):
+        if args not in self.memo:
+            self.memo[args] = self.f(*args)
+            # Warning: You may wish to do a deepcopy here if returning objects
+        return self.memo[args]
+
+
 class Die:
     """ Models a balanced die. """
     def __init__(self, sides=4):
