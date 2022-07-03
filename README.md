@@ -77,6 +77,9 @@ __151__: [Paper sheets of standard size](https://projecteuler.net/problem=151)
 __158__: [Exploring strings for which only one character comes lexicographically after its neighbour to the left](https://projecteuler.net/problem=158)  
 __164__: [Numbers for which no three
 consecutive digits have a sum greater than a given value](https://projecteuler.net/problem=164)  
+__178__: [Step numbers](https://projecteuler.net/problem=178)  
+__181__: [Investigating in how many ways objects of two different colours can
+be grouped](https://projecteuler.net/problem=181)  
 __191__: [Prize strings](https://projecteuler.net/problem=191)  
 __267__: [Billionaire](https://projecteuler.net/problem=267)  
 __301__: [Nim](https://projecteuler.net/problem=301)  
