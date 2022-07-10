@@ -53,8 +53,7 @@ my computer:
   
 [Friend key](https://projecteuler.net/friends): `1912870_zicXUiSA5Mv6wAvcZOOv8FMAfCtCClsu`
 
-[![Badge](https://projecteuler.net/profile/pzuehlke.png?)](https://projecteuler.net/progress=pzuehlke)
- 
+
 
 ## List of favorite problems (so far)
 
