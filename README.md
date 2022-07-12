@@ -5,7 +5,7 @@
 
 This repository contains solutions to each of the first
 100 problems on [Project Euler](https://www.projecteuler.net), written in
-Python 3 <img src="https://www.python.org/static/community_logos/python-logo-master-v3-TM.png" width="45">.
+Python 3 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1200px-Python-logo-notext.svg.png" width="18"> .
 
 It also includes:
 
