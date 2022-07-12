@@ -1,7 +1,13 @@
 # Project Euler Solutions
 
+## Table of Contents
+1. [Features](#features)
+2. [Benchmarks](#benchmarks)
+3. [Badge and friend key](#badge)
+4. [List of favorite problems](#favorite)
 
 ## Features
+<a name="features"></a>
 
 This repository contains solutions to each of the first
 100 problems on [Project Euler](https://www.projecteuler.net), written in
@@ -21,6 +27,7 @@ _private_ repository. Even though it is inaccessible, Github still lists the
 corresponding folder `problems_100_plus` above.
 
 
+<a name="benchmarks"></a>
 ## Benchmarks
 
 All of the solutions are original (in the sense of not having been taken from
@@ -51,12 +58,15 @@ my computer:
 | 98 | 2.6s |
 
 
+<a name="badge"></a>
 ## Badge and friend key
 
 [Friend key](https://projecteuler.net/friends): `1912870_zicXUiSA5Mv6wAvcZOOv8FMAfCtCClsu`
 
 [![Badge](https://projecteuler.net/profile/pzuehlke.png?)](https://projecteuler.net/progress=pzuehlke)
 
+
+<a name="favorite"></a>
 ## List of favorite problems (so far)
 
 __31__: [Coin sums](https://projecteuler.net/problem=31)  
