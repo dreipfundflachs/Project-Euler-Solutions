@@ -5,7 +5,9 @@
 
 This repository contains solutions to each of the first
 100 problems on [Project Euler](https://www.projecteuler.net), written in
-Python 3. It also includes:
+Python 3 <img src="https://www.python.org/static/community_logos/python-logo-master-v3-TM.png" width="45">.
+
+It also includes:
 
 * A __module__ `PE_UTILITIES.py` comprising the most useful functions that I
   had to write to solve these problems. It is however _not_ necessary to import
@@ -32,9 +34,9 @@ my computer:
 | 23 | 3.8s |
 | 30 | 1.2s |
 | 34 | 3.6s |
-| 41 | 1.9s | 
+| 41 | 1.9s |
 | 43 | 2.9s |
-| 58 | 4.0s | 
+| 58 | 4.0s |
 | 60 | > 1m |
 | 70 | 1.7s |
 | 72 | > 1m |
@@ -50,7 +52,7 @@ my computer:
 
 
 ## Badge and friend key
-  
+
 [Friend key](https://projecteuler.net/friends): `1912870_zicXUiSA5Mv6wAvcZOOv8FMAfCtCClsu`
 
 [![Badge](https://projecteuler.net/profile/pzuehlke.png?)](https://projecteuler.net/progress=pzuehlke)
