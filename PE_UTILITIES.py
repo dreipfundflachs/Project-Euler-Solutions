@@ -5,7 +5,7 @@
 from math import prod, isqrt
 from itertools import combinations
 from functools import reduce
-from random import randint
+from random import randint, randrange
 
 
 #############
@@ -231,6 +231,35 @@ def is_prime(n: int) -> bool:
                 return False
             d += 2
         return True
+
+
+def miller_rabin(n: int, k: int) -> bool:
+    """ Verifies whether a number n is prime using by using k random
+    numbers between 2 and n - 1. Requires 'randrange' from the module 'random'.
+    A good value for k in general is k = 40.
+    """
+    # The only even prime is 2:
+    if n == 2:
+        return True
+    if n % 2 == 0:
+        return False
+
+    r, s = 0, n - 1
+    while s % 2 == 0:
+        r += 1
+        s //= 2
+    for _ in range(k):
+        a = randrange(2, n - 1)
+        x = pow(a, s, n)
+        if x == 1 or x == n - 1:
+            continue
+        for _ in range(r - 1):
+            x = pow(x, 2, n)
+            if x == n - 1:
+                break
+        else:
+            return False
+    return True
 
 
 def product(set_of_integers: set[int]) -> int:
