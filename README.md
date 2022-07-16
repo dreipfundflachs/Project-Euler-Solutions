@@ -93,6 +93,7 @@ __181__: [Investigating in how many ways objects of two different colours can
 be grouped](https://projecteuler.net/problem=181)  
 __191__: [Prize strings](https://projecteuler.net/problem=191)  
 __202__: [Laserbeam](https://projecteuler.net/problem=202)  
+__208__: [Robot walks](https://projecteuler.net/problem=208)  
 __267__: [Billionaire](https://projecteuler.net/problem=267)  
 __301__: [Nim](https://projecteuler.net/problem=301)  
 __317__: [Firecracker](https://projecteuler.net/problem=317)  
