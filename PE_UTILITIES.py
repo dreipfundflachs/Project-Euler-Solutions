@@ -790,6 +790,31 @@ def dec_to_bin(n: int) -> int:
     return(int(bin(n)[2:]))
 
 
+def is_terminating_decimal(n: int, d: int) -> list[int]:
+    """ Given integers n and d, decides whether the decimal part of n / d is
+    terminating (finite) or non-terminating/repeating (infinite).
+    Examples:
+        Since 1 / 7 = 0.(142857), is_terminating_decimal(1, 7) is False.
+        Since 11 / 4 = 2.75, is_terminating_decimal(11, 4) is True.
+    To decide whether the decimal part is finite, the function performs long
+    division, recording each possible remainder < d along the way. If a
+    remainder has already appeared, then the decimal is non-terminating.
+    Otherwise, eventually the remainder will be zero and we can break. """
+    n = n % d
+    remainders = [n]
+    while n != 0:
+        n *= 10
+        while n < d:
+            remainders.append(n)
+            n *= 10
+        n = n % d
+        if n in remainders:
+            return False
+        else:
+            remainders.append(n)
+    return True
+
+
 def get_decimal_representation(n: int, d: int, precision: int) -> list[int]:
     """ Given integers n < d, computes the decimal part of n / d up to the
     'precision'-th digit of its decimal part or until there is a recurring
