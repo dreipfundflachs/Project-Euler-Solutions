@@ -790,7 +790,7 @@ def dec_to_bin(n: int) -> int:
     return(int(bin(n)[2:]))
 
 
-def is_terminating_decimal(n: int, d: int) -> list[int]:
+def is_terminating_decimal(n: int, d: int) -> bool:
     """ Given integers n and d, decides whether the decimal part of n / d is
     terminating (finite) or non-terminating/repeating (infinite).
     Examples:
