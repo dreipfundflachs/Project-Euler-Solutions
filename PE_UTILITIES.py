@@ -643,7 +643,7 @@ def number_to_base(n: int, b: int) -> list[int]:
     return digits[::-1]
 
 
-def get_partitions(target: int, bound: int, summands: int) -> [tuple[int]]:
+def precise_partitions(target: int, bound: int, summands: int) -> [tuple[int]]:
     """ Computes the unique ways (as a list of tuples) in which one can
     partition the integer 'target' using numbers in the range from 1 to 'bound'
     (inclusive) in exactly the given number of summands. For example:
@@ -657,7 +657,20 @@ def get_partitions(target: int, bound: int, summands: int) -> [tuple[int]]:
     else:
         for k in range(1, bound + 1):
             partitions += [p + (k,) for p in
-                           get_partitions(target - k, k, summands - 1)]
+                           precise_partitions(target - k, k, summands - 1)]
+    return partitions
+
+
+def get_partitions(target: int) -> [tuple[int]]:
+    """ Computes the unique ways (as a list of increasing tuples) in which one
+    can partition the integer 'target' using numbers from 1 to target
+    (inclusive). For example:
+        get_partitions(4) = [(4,), (2, 2), (1, 3), (1, 1, 2), (1, 1, 1, 1)]
+    """
+    assert target >= 1
+    partitions = []
+    for number_of_summands in range(1, target + 1):
+        partitions += precise_partitions(target, target, number_of_summands)
     return partitions
 
 
