@@ -239,7 +239,8 @@ def miller_rabin(n: int, k: int) -> bool:
     A good value for k in general is k = 40.
     """
     # The only even prime is 2:
-    if n == 2:
+    assert n >= 2
+    if n == 2 or n == 3:
         return True
     if n % 2 == 0:
         return False
