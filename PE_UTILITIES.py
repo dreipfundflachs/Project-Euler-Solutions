@@ -935,9 +935,19 @@ def palindromes(n: int) -> list[int]:
     return palindromes
 
 
+def convert_to_dec(digits: list[int]) -> int:
+    """ Converts a list of the digits '0' and '1' to the corresponding decimal,
+    e.g.,
+        [0, 0, 0, 1, 0, 1, 1, 1] -> 23.  """
+    if not digits:
+        return 0
+    else:
+        return digits[-1] + 2 * convert_to_dec(digits[:-1])
+
+
 def convert_to_int(digits: list[int]) -> int:
     """ Converts a list of digits to a single integer, e.g.,
-    [1, 2, 3] --> 123. """
+        [1, 2, 3] --> 123. """
     return int(''.join([str(digit) for digit in digits]))
 
 

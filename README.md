@@ -61,7 +61,7 @@ my computer:
 <a name="badge"></a>
 ## Badge and friend key
 
-[Friend key](https://projecteuler.net/friends): `1912870_zicXUiSA5Mv6wAvcZOOv8FMAfCtCClsu`
+[Friend key](https://projecteuler.net/about=friends): `1912870_zicXUiSA5Mv6wAvcZOOv8FMAfCtCClsu`
 
 [![Badge](https://projecteuler.net/profile/pzuehlke.png?)](https://projecteuler.net/progress=pzuehlke)
 
@@ -69,15 +69,15 @@ my computer:
 <a name="favorite"></a>
 ## List of favorite problems (so far)
 
-__31__: [Coin sums](https://projecteuler.net/problem=31)  
-__59__: [XOR decryption](https://projecteuler.net/problem=59)  
-__78__: [Coin partitions](https://projecteuler.net/problem=78)  
-__81__, __82__ and __83__: Path sum:
+__031__: [Coin sums](https://projecteuler.net/problem=31)  
+__059__: [XOR decryption](https://projecteuler.net/problem=59)  
+__078__: [Coin partitions](https://projecteuler.net/problem=78)  
+__081__, __082__ and __083__: Path sum:
 [two](https://projecteuler.net/problem=81),
 [three](https://projecteuler.net/problem=82) and
 [four](https://projecteuler.net/problem=83) ways  
-__84__: [Monopoly odds](https://projecteuler.net/problem=84)  
-__96__: [Su Doku](https://projecteuler.net/problem=96)  
+__084__: [Monopoly odds](https://projecteuler.net/problem=84)  
+__096__: [Su Doku](https://projecteuler.net/problem=96)  
 __113__: [Non-bouncy numbers](https://projecteuler.net/problem=113)  
 __126__: [Cuboid layers](https://projecteuler.net/problem=126)  
 __144__: [Investigating multiple reflections of a laser
@@ -95,6 +95,7 @@ be grouped](https://projecteuler.net/problem=181)
 __191__: [Prize strings](https://projecteuler.net/problem=191)  
 __202__: [Laserbeam](https://projecteuler.net/problem=202)  
 __208__: [Robot walks](https://projecteuler.net/problem=208)  
+__265__: [Binary Circles](https://projecteuler.net/problem=265)  
 __267__: [Billionaire](https://projecteuler.net/problem=267)  
 __277__: [A Modified Collatz sequence](https://projecteuler.net/problem=277)  
 __301__: [Nim](https://projecteuler.net/problem=301)  
