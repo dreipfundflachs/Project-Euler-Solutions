@@ -951,6 +951,17 @@ def convert_to_int(digits: list[int]) -> int:
     return int(''.join([str(digit) for digit in digits]))
 
 
+def convert_to_list(n: int) -> list[int]:
+    """ Converts an integer to the list of its digits, e.g.,
+        1234 -> [1, 2, 3, 4]. """
+    if n // 10 > 0:
+        init = convert_to_list(n // 10)
+    else:
+        init = []
+    last = n % 10
+    return init + [last]
+
+
 def name_score(name: str) -> int:
     """ Calculates the 'score' of a name written in capital letters. """
     letter_values = {}
