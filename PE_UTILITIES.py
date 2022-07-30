@@ -279,24 +279,75 @@ def integer_product(list_of_integers: list[int]) -> int:
     return p
 
 
+def moebius(n: int) -> int:
+    """ Given a positive integer n, returns mu(n), the value of the Moebius
+    function at n, computed directly by finding all prime factors of n. """
+    assert n >= 1
+    N = isqrt(n)
+    prime_flags = [True] * (N + 1)
+    prime_flags[0] = False
+    prime_flags[1] = False
+    product = 1
+    for (p, is_prime) in enumerate(prime_flags):
+        if n == 1:
+            break
+        if is_prime:
+            for multiple in range(p * p, N + 1, p):
+                prime_flags[multiple] = False
+            if n % p == 0:
+                n = n // p
+                product *= -1
+                if n % p == 0:
+                    product = 0
+                    break
+    return product
+
+
+def moebius_sieve(n: int) -> list[int]:
+    """ Given a positive integer n, returns a list mu such that mu[n] = mu(n),
+    the value of the Moebius function at k, for each 1 <= k <= n.  Uses a
+    sieving method to compute these values. """
+    assert n >= 1
+    mu = [1 for _ in range(n + 1)]
+    mu[0] = 0
+    prime_flags = [True for _ in range(n + 1)]
+    prime_flags[0] = False
+    prime_flags[1] = False
+    for (p, is_prime) in enumerate(prime_flags):
+        if is_prime:
+            mu[p] = -1
+            for i in range(2, n // p + 1):
+                prime_flags[p * i] = False
+                if i % p == 0:
+                    mu[p * i] = 0
+                else:
+                    mu[p * i] *= -1
+    return mu
+
+
 def get_prime_factors(n: int) -> list[int]:
     """ Returns the list of all prime factors of n, each prime appearing as
     many times as its multiplicity indicates.  Determines all necessary primes
-    on the fly.  """
-    factors = []
-    prime_flags = [True] * (n + 1)
+    on the fly. Requires 'isqrt' from module 'math'. """
+    assert n >= 1
+    prime_factors = []
+    N = isqrt(n)
+    prime_flags = [True] * (N + 1)
     prime_flags[0] = False
     prime_flags[1] = False
     for (p, is_prime) in enumerate(prime_flags):
         if n == 1:
             break
         if is_prime:
-            for multiple in range(p * p, n + 1, p):
+            for multiple in range(p * p, N + 1, p):
                 prime_flags[multiple] = False
             while n % p == 0:
-                factors.append(p)
+                prime_factors.append(p)
                 n = n // p
-    return factors
+    if n != 1:
+        prime_factors.append(n)
+
+    return prime_factors
 
 
 def divisor_count(n: int) -> int:

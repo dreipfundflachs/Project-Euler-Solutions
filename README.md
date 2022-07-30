@@ -36,7 +36,6 @@ my computer:
 
 | Problem number   | Runtime (approx.)   |
 | :--------------: | :-----------------: |
-| 12 | 3.3s |
 | 14 | 1.8s |
 | 23 | 3.8s |
 | 30 | 1.2s |
