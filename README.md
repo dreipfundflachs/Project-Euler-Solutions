@@ -1,10 +1,11 @@
 # Project Euler Solutions
 
 ## Table of Contents
-1. [Features](#features)
-2. [Benchmarks](#benchmarks)
-3. [Badge and friend key](#badge)
-4. [List of favorite problems](#favorite)
+1. [Solutions and auxiliary files](#top)
+2. [Description of features](#features)
+3. [Benchmarks](#benchmarks)
+4. [Badge and friend key](#badge)
+5. [List of favorite problems](#favorite)
 
 ## Features
 <a name="features"></a>
