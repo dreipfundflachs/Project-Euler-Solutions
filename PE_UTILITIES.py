@@ -281,7 +281,8 @@ def integer_product(list_of_integers: list[int]) -> int:
 
 def moebius(n: int) -> int:
     """ Given a positive integer n, returns mu(n), the value of the Moebius
-    function at n, computed directly by finding all prime factors of n. """
+    function at n, computed directly by finding all prime factors of n.
+    Requires O(sqrt(n)) memory and O(sqrt(n) * log(n)) time. """
     assert n >= 1
     N = isqrt(n)
     prime_flags = [True] * (N + 1)
@@ -300,6 +301,8 @@ def moebius(n: int) -> int:
                 if n % p == 0:
                     product = 0
                     break
+    if n != 1:
+        product *= -1
     return product
 
 
