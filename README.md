@@ -4,8 +4,8 @@
 1. [Solutions and auxiliary files](#top)
 2. [Description of features](#features)
 3. [Benchmarks](#benchmarks)
-4. [Badge and friend key](#badge)
-5. [List of favorite problems](#favorite)
+4. [List of favorite problems](#favorite)
+5. [Badge and friend key](#badge)
 
 ## Features
 <a name="features"></a>
@@ -58,14 +58,6 @@ my computer:
 | 98 | 2.6s |
 
 
-<a name="badge"></a>
-## Badge and friend key
-
-[Friend key](https://projecteuler.net/about=friends): `1912870_zicXUiSA5Mv6wAvcZOOv8FMAfCtCClsu`
-
-[![Badge](https://projecteuler.net/profile/pzuehlke.png?)](https://projecteuler.net/progress=pzuehlke)
-
-
 <a name="favorite"></a>
 ## List of favorite problems (so far)
 
@@ -103,3 +95,11 @@ __301__: [Nim](https://projecteuler.net/problem=301)
 __317__: [Firecracker](https://projecteuler.net/problem=317)  
 __329__: [Prime Frog](https://projecteuler.net/problem=329)  
 __345__: [Matrix Sum](https://projecteuler.net/problem=345)  
+
+
+<a name="badge"></a>
+## Badge and friend key
+
+[Friend key](https://projecteuler.net/about=friends): `1912870_zicXUiSA5Mv6wAvcZOOv8FMAfCtCClsu`
+
+[![Badge](https://projecteuler.net/profile/pzuehlke.png?)](https://projecteuler.net/progress=pzuehlke)
