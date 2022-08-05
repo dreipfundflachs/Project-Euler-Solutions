@@ -6,6 +6,7 @@ from math import prod, isqrt
 from itertools import combinations
 from functools import reduce
 from random import randint, randrange
+from typing import Callable
 
 
 #############
@@ -1136,3 +1137,22 @@ def strings_match(str_1: str, str_2: str) -> bool:
             if char_indices != mchar_indices:
                 return False
     return True
+
+
+def bisection(f: Callable[[float], float],
+              low: float, high: float, eps: float, iterations: int,) -> float:
+    """ Uses the bisection method to find a root of the real function f of a
+    real variable, within a tolerance of eps. Assumes:
+        (a) low < high
+        (b) f(low) < 0
+        (c) f(high) > 0
+    Requires 'Callable' from the 'typing' module for the type annotation.
+    """
+    assert low < high and f(low) < 0 and f(high) > 0
+    mid = (low + high) / 2
+    if iterations == 0 or (high - low) / 2 < eps or f(mid) == 0:
+        return mid
+    elif f(mid) < 0:
+        return bisection(f, mid, high, eps, iterations - 1)
+    else:
+        return bisection(f, low, mid, eps, iterations - 1)
