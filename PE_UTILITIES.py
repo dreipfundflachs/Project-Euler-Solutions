@@ -1140,19 +1140,45 @@ def strings_match(str_1: str, str_2: str) -> bool:
 
 
 def bisection(f: Callable[[float], float],
-              low: float, high: float, eps: float, iterations: int,) -> float:
+              a: float, b: float, eps: float, iterations: int,) -> float:
     """ Uses the bisection method to find a root of the real function f of a
     real variable, within a tolerance of eps. Assumes:
-        (a) low < high
-        (b) f(low) < 0
-        (c) f(high) > 0
+        (a) a < b
+        (b) f(a) <= 0 <= f(b) or f(b) <= 0 <= f(a)
     Requires 'Callable' from the 'typing' module for the type annotation.
     """
-    assert low < high and f(low) < 0 and f(high) > 0
-    mid = (low + high) / 2
-    if iterations == 0 or (high - low) / 2 < eps or f(mid) == 0:
+    assert a < b
+    assert (f(a) < 0 and 0 < f(b)) or (f(b) < 0 and 0 < f(a))
+    mid = (a + b) / 2
+    if iterations == 0 or (b - a) / 2 < eps or f(mid) == 0:
         return mid
     elif f(mid) < 0:
-        return bisection(f, mid, high, eps, iterations - 1)
+        return bisection(f, mid, b, eps, iterations - 1)
     else:
-        return bisection(f, low, mid, eps, iterations - 1)
+        return bisection(f, a, mid, eps, iterations - 1)
+
+
+def general_loop(indices: list[int],
+                 reset_condition: Callable[[list[int]], bool]) -> any:
+    m = len(indices)
+    head = m - 1
+    while head != -1:
+        head = m - 1
+        required_resetting = False
+        while reset_condition(indices):
+            required_resetting = True
+            head -= 1
+            if head == -1:
+                break
+            else:
+                indices[head] += 1
+                for j in range(head + 1, m):
+                    indices[j] = 0
+        else:
+            if not required_resetting:
+                # TODO:
+                # Apply the relevant process to the indices here, like adding
+                # the value of some function on them to a running total.
+                indices[head] += 1
+    # TODO:
+    # return answer
