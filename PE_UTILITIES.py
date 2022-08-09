@@ -7,6 +7,7 @@ from itertools import combinations
 from functools import reduce
 from random import randint, randrange
 from typing import Callable
+from scipy.special import comb
 
 
 #############
@@ -45,15 +46,6 @@ class Die:
 def is_even(n: int) -> bool:
     """ Decides whether a number is even """
     if n % 2 == 0:
-        return True
-    else:
-        return False
-
-
-def is_square(n: int) -> bool:
-    """ Decides whether an integer is the square of another integer. """
-    m = isqrt(n)  # Requires module 'math'.
-    if m**2 == n:
         return True
     else:
         return False
@@ -110,6 +102,36 @@ def get_inverse_mod(n: int, m: int) -> int:
                          relatively prime positive integers.""")
     else:
         return x % m
+
+
+def chinese_remainder(remainders: list[int], modulos: list[int]) -> int:
+    """ Given a list of remainders and a list of modulos, of the same length,
+    where the modulos are relatively prime (i.e., the g.c.d. of all of them is
+    1), returns the unique integer x modulo m, where m is the product of all
+    the remainders, such that for each i
+        x = remainders[i] mod modulos[i] """
+    assert len(remainders) == len(modulos)
+    result = 0
+    # Let m be the product of the modulos:
+    m = reduce(lambda a, b: a * b, modulos)
+    # We want x to be congruent to a mod p, where
+    # a = remainders[i] and p = modulos[i], for each i:
+    for (a, p) in [(remainders[i], modulos[i]) for i in range(len(modulos))]:
+        n = m // p
+        result += a * pow(n, -1, p) * n
+    return result % m
+
+
+def binomial_mod_p(m: int, n: int, p: int) -> int:
+    """ Computes the binomial coefficient m choose n modulo p, using Lucas'
+    theorem. Requires the function 'get_b_ary_representation'. """
+    digits_m = get_b_ary_representation(m, p)
+    digits_n = get_b_ary_representation(n, p)
+    J = min(len(digits_m), len(digits_n))
+    binomial = 1
+    for j in range(J):
+        binomial = (binomial * comb(digits_m[j], digits_n[j], exact=True)) % p
+    return binomial
 
 
 def involves_only(n: int, p: int, q: int) -> bool:
@@ -549,6 +571,18 @@ def sum_of_proper_divisors(n: int, primes: list[int]) -> int:
     return sum(get_proper_divisors_given_primes(n, primes))
 
 
+def get_b_ary_representation(n: int, b: int) -> list[int]:
+    """ Computes the b-ary representation of n >= 1 in base b >= 2. Returns the
+    digits as a list, from least significant to most significant, e.g.,
+        (10, 2) -> [0, 1, 0, 1] since 10 = 2^1 + 2^3. """
+    assert n >= 1 and b >= 2
+    digits = []
+    while n != 0:
+        digits.append(n % b)
+        n //= b
+    return digits
+
+
 def get_number_of_digits(n: int) -> int:
     """ Determines the number digits of n. """
     d = 0
@@ -604,6 +638,15 @@ def get_highest_power_in_binom(n: int, k: int, p: int) -> int:
 #########################################################
 #  FUNCTIONS INVOLVING SQUARES AND PYTHAGOREAN TRIPLES  #
 #########################################################
+
+
+def is_square(n: int) -> bool:
+    """ Decides whether an integer is the square of another integer. """
+    m = isqrt(n)  # Requires module 'math'.
+    if m**2 == n:
+        return True
+    else:
+        return False
 
 
 def get_pythagorean_triples(N: int) -> set[int]:
