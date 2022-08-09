@@ -635,6 +635,32 @@ def get_pythagorean_triples(N: int) -> set[int]:
 #  FUNCTIONS INVOLVING LISTS  #
 ###############################
 
+
+def binary_search(target: int, numbers: list[int]) -> True:
+    """ Given a _sorted_ list of integers 'numbers', uses a binary search to
+    decide whether 'target' lies in it. """
+    first = 0
+    last = len(numbers) - 1
+    middle = 0
+
+    while first <= last:
+        middle = (first + last) // 2
+        if numbers[middle] == target:
+            return True
+        elif target < numbers[middle]:
+            last = middle - 1
+        else:
+            first = middle + 1
+
+    return False
+
+
+def frequencies(lst: list[int]) -> list[int]:
+    """ Given a list, returns a new list consisting of all the frequency counts
+    of its unique elements. """
+    return sorted([lst.count(x) for x in set(lst)])
+
+
 def insert_in_ascending(n: int, a: list[int]) -> list[int]:
     """ Given an integer or float and an ascending list of numbers of the
     same type, inserts the number in the list. Also take a look at 'insort'
@@ -805,31 +831,6 @@ def multinomial(*coefficients: list[int]) -> int:
             result //= j
             m += 1
     return result
-
-
-def frequencies(lst: list[int]) -> list[int]:
-    """ Given a list, returns a new list consisting of all the frequency counts
-    of its unique elements. """
-    return sorted([lst.count(x) for x in set(lst)])
-
-
-def binary_search(target: int, numbers: list[int]) -> True:
-    """ Given a _sorted_ list of integers 'numbers', uses a binary search to
-    decide whether 'target' lies in it. """
-    first = 0
-    last = len(numbers) - 1
-    middle = 0
-
-    while first <= last:
-        middle = (first + last) // 2
-        if numbers[middle] == target:
-            return True
-        elif target < numbers[middle]:
-            last = middle - 1
-        else:
-            first = middle + 1
-
-    return False
 
 
 def get_powerset(ns: set[int]) -> list[iter]:
@@ -1139,6 +1140,11 @@ def strings_match(str_1: str, str_2: str) -> bool:
     return True
 
 
+#######################
+#  GENERIC UTILITIES  #
+#######################
+
+
 def bisection(f: Callable[[float], float],
               a: float, b: float, eps: float, iterations: int,) -> float:
     """ Uses the bisection method to find a root of the real function f of a
@@ -1160,11 +1166,32 @@ def bisection(f: Callable[[float], float],
 
 def general_loop(indices: list[int],
                  reset_condition: Callable[[list[int]], bool]) -> any:
+    """ A prototype for a procedure that loops through an arbitrary number of
+    indices, performing some useful computation in the process (to be
+    implemented by the user). The return type is not fixed. The arguments are:
+        (a) An initial value 'indices' for all the indices, provided as a list
+            of integers.
+        (b) A 'reset_condition', that is, a function on a list of indices which
+            determines whether to increment the _previous_ (not the current)
+            index and to reset every index thereafter.
+
+    The intuitive idea is to visualize the loop as being controlled by a moving
+    head modifying a list of indices. The head begins at the last index. The
+    default action is to increment the last index by 1. However, while the
+    reset condition is satisfied, the head instead moves from the current
+    index to the one preceding it (i.e., to its left), increments the latter by
+    1 and resets all of the indices to the right. The iteration ends when the
+    head is at (the invalid) position -1. In the simplest situation where the
+    indices (i_0, ..., i_{m-1}) run through the product [0, N] x ... x [0, N],
+    the reset condition would be that one of the indices exceeds N. """
+
     m = len(indices)
     head = m - 1
+
     while head != -1:
         head = m - 1
         required_resetting = False
+
         while reset_condition(indices):
             required_resetting = True
             head -= 1
@@ -1174,6 +1201,10 @@ def general_loop(indices: list[int],
                 indices[head] += 1
                 for j in range(head + 1, m):
                     indices[j] = 0
+                    # TODO: Depending on the problem, one might instead wish to
+                    # modify the preceding line to set all indices to the right
+                    # of the head to indices[head], for example.
+
         else:
             if not required_resetting:
                 # TODO:
