@@ -51,6 +51,13 @@ def is_even(n: int) -> bool:
         return False
 
 
+def is_power_of_2(n: int) -> bool:
+    """ Decides whether the positive integer n is a power of 2 in O(log_2(n))
+    time. """
+    assert n >= 1
+    return n & (n - 1) == 0
+
+
 def gcd(a: int, b:  int) -> int:
     """ Computes the greatest common divisor (gcd) of integers a and b. """
     while b:
