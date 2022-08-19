@@ -43,19 +43,19 @@ class Die:
 #  FUNCTIONS INVOLVING PRIMES, FACTORIZATION, DIVISORS, ETC...  #
 #################################################################
 
+def is_power_of_2(n: int) -> bool:
+    """ Decides whether the positive integer n is a power of 2 in O(log_2(n))
+    time. """
+    assert n >= 1
+    return n & (n - 1) == 0
+
+
 def is_even(n: int) -> bool:
     """ Decides whether a number is even """
     if n % 2 == 0:
         return True
     else:
         return False
-
-
-def is_power_of_2(n: int) -> bool:
-    """ Decides whether the positive integer n is a power of 2 in O(log_2(n))
-    time. """
-    assert n >= 1
-    return n & (n - 1) == 0
 
 
 def gcd(a: int, b:  int) -> int:
@@ -656,14 +656,19 @@ def is_square(n: int) -> bool:
         return False
 
 
-def get_pythagorean_triples(N: int) -> set[int]:
-    """ Generates all Pythagorean triples (a, b, c) with a <= b <= c <= N.
-    Returns a set containing all such triples.
+def get_primitive_pythagorean_triples(N: int) -> set[int]:
+    """ Returns a set containing all _primitive_ Pythagorean triples (a, b, c)
+    with a <= b <= c <= N.
 
     Euclid's formula for Pythagorean triples states that any _primitive_
-    Pythagorean triple has the form:
-    a = m**2 - n**2, b = 2 * m * n and c = m**2 + n**2, where
-    (i) 0 < n < m; (ii) exactly one of m, n is even; (iii) gcd(m, n) = 1.
+    Pythagorean triple (a, b, c) has the form:
+        a = m**2 - n**2
+        b = 2 * m * n
+        c = m**2 + n**2
+    where
+        (i) 0 < n < m.
+        (ii) Exactly one of m, n is even.
+        (iii) gcd(m, n) = 1.
     """
     triples = set()
     for m in range(2, isqrt(N - 1) + 1):
@@ -672,9 +677,36 @@ def get_pythagorean_triples(N: int) -> set[int]:
                 a = m**2 - n**2
                 b = 2 * m * n
                 c = m**2 + n**2
-                k = 1
                 if a > b:
                     a, b = b, a
+                triples.add((a, b, c))
+    return triples
+
+
+def get_pythagorean_triples(N: int) -> set[int]:
+    """ Returns a set containing all (not necessarily primitive) Pythagorean
+    triples (a, b, c) with a <= b <= c <= N.
+
+    Euclid's formula for Pythagorean triples states that any _primitive_
+    Pythagorean triple (a, b, c) has the form:
+        a = m**2 - n**2
+        b = 2 * m * n
+        c = m**2 + n**2
+    where
+        (i) 0 < n < m.
+        (ii) Exactly one of m, n is even.
+        (iii) gcd(m, n) = 1.
+    """
+    triples = set()
+    for m in range(2, isqrt(N - 1) + 1):
+        for n in range(1, m):
+            if (m + n) % 2 == 1 and gcd(m, n) == 1:
+                a = m**2 - n**2
+                b = 2 * m * n
+                c = m**2 + n**2
+                if a > b:
+                    a, b = b, a
+                k = 1
                 while k * c <= N:
                     triples.add((k * a, k * b, k * c))
                     k += 1
