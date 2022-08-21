@@ -184,32 +184,27 @@ def hyper_exp(base: int, exponent: int, m: int) -> int:
 
 def get_primes_up_to(n: int) -> list[int]:
     """ Returns a list of all primes <= n using Eratosthenes' sieve """
-    primes = []
-    prime_flags = [True] * (n + 1)
+    prime_flags = [True for _ in range(n + 1)]
     prime_flags[0] = False
     prime_flags[1] = False
     for (k, is_prime) in enumerate(prime_flags):
         if is_prime:
-            primes.append(k)
             for multiple in range(k * k, n + 1, k):
                 prime_flags[multiple] = False
-    return primes
+    return [p for p in range(2, n + 1) if prime_flags[p]]
 
 
 def get_primes_up_to_greater_than(n: int, m: int) -> list[int]:
     """ Returns a list of all primes p such that m <= p <= n using
     Eratosthenes' sieve. """
-    primes = []
     prime_flags = [True] * (n + 1)
     prime_flags[0] = False
     prime_flags[1] = False
     for (k, is_prime) in enumerate(prime_flags):
         if is_prime:
-            if k >= m:
-                primes.append(k)
             for multiple in range(k * k, n + 1, k):
                 prime_flags[multiple] = False
-    return primes
+    return [p for p in range(m, n + 1) if prime_flags[p]]
 
 
 def get_prime_flags_up_to(n: int) -> list[bool]:
@@ -225,7 +220,7 @@ def get_prime_flags_up_to(n: int) -> list[bool]:
     return prime_flags
 
 
-def get_smallest_prime_factor(N: int) -> list[list[int]]:
+def get_smallest_prime_factor(N: int) -> list[int]:
     """ Using a sieving method, returns a list whose n-th entry is the smallest
     prime factor of n, for each n <= N. Takes O(N log(N)) time and O(N) memory.
     """
@@ -244,6 +239,69 @@ def get_smallest_prime_factor(N: int) -> list[list[int]]:
                 if smallest[multiple] == multiple:
                     smallest[multiple] = p
     return smallest
+
+
+def sieve_prime_factors(N: int) -> list[list[int]]:
+    """ For each integer n <= N, uses a sieving method to compute the list of
+    all prime factors of n, each prime being repeated as many times as its
+    multiplicity. For example:
+        sieve_prime_factors(6) = [[], [], [2], [3], [2, 2], [5], [2, 3]]
+    """
+    prime_flags = [True for _ in range(N + 1)]
+    prime_flags[0], prime_flags[1] = False, False
+    prime_factors = [[] for _ in range(N + 1)]
+
+    for (p, is_prime) in enumerate(prime_flags):
+        if is_prime:
+            for m in range(p, N + 1, p):
+                prime_factors[m].append(p)
+                prime_flags[m] = False
+            k = 2
+            while (q := p**k) <= N:
+                for m in range(q, N + 1, q):
+                    prime_factors[m].append(p)
+                k += 1
+    return prime_factors
+
+
+def sieve_proper_divisors(N: int) -> list[list[int]]:
+    """ For each integer n <= N, computes the list of all _proper_ divisors of
+    n, i.e., including 1 but excluding n. Requires the function
+    'sieve_prime_factors'. Example:
+        f(6) = [[], [1], [1], [1], [1, 2], [1], [1, 2, 3]]
+    """
+    list_of_prime_factors = sieve_prime_factors(N)
+    list_of_divisors = [[] for _ in range(N + 1)]
+    list_of_divisors[1] = [1]
+    for n in range(2, N + 1):
+        m = len(list_of_prime_factors[n])
+        tuples = set()
+        for k in range(0, m):
+            new_tuples = set(combinations(list_of_prime_factors[n], k))
+            tuples = tuples.union(new_tuples)
+        divisors_of_n = [prod(t) for t in tuples]
+        list_of_divisors[n] = divisors_of_n
+    return list_of_divisors
+
+
+def sieve_divisors(N: int) -> list[list[int]]:
+    """ For each integer n <= N, computes the list of all divisors of n
+    (including 1 and n). Requires the function 'sieve_prime_factors'. Example:
+        f(6) = [[], [1], [1, 2], [1, 3], [1, 2, 4], [1, 5], [1, 2, 3, 6]]
+    """
+    list_of_prime_factors = sieve_prime_factors(N)
+    list_of_divisors = [[] for _ in range(N + 1)]
+    list_of_divisors[1] = [1]
+    for n in range(2, N + 1):
+        m = len(list_of_prime_factors[n])
+        tuples = set()
+        for k in range(0, m):
+            new_tuples = set(combinations(list_of_prime_factors[n], k))
+            tuples = tuples.union(new_tuples)
+        divisors_of_n = [prod(t) for t in tuples]
+        divisors_of_n.append(n)
+        list_of_divisors[n] = divisors_of_n
+    return list_of_divisors
 
 
 def sieve_coprime_decomposition(N: int) -> list[list[int]]:

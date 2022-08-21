@@ -16,11 +16,11 @@ start = time.time()
 
 N = 10**6
 
-collatz_chain_lengths = {1: 1, 2: 2}
+collatz_chain_lengths = {1: 1}
 max_count = 1
 max_number = 1
 
-for n in range(1, N):
+for n in reversed(range(2, N)):
     if n in collatz_chain_lengths:
         continue
     # If the length of the Collatz chain of n has not yet been computed, we
