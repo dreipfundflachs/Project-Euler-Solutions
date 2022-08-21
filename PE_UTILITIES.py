@@ -225,7 +225,58 @@ def get_prime_flags_up_to(n: int) -> list[bool]:
     return prime_flags
 
 
-def composite_sieve(N: int) -> list[int]:
+def get_smallest_prime_factor(N: int) -> list[list[int]]:
+    """ Using a sieving method, returns a list whose n-th entry is the smallest
+    prime factor of n, for each n <= N. Takes O(N log(N)) time and O(N) memory.
+    """
+    assert N >= 1
+    S = isqrt(N)
+    prime_flags = [True for _ in range(S + 1)]
+    smallest = [n for n in range(N + 1)]
+    prime_flags[0], smallest[0] = False, 0
+    prime_flags[1], smallest[1] = False, 1
+
+    for (p, is_prime) in enumerate(prime_flags):
+        if is_prime:
+            for multiple in range(p * p, S + 1, p):
+                prime_flags[multiple] = False
+            for multiple in range(p, N + 1, p):
+                if smallest[multiple] == multiple:
+                    smallest[multiple] = p
+    return smallest
+
+
+def sieve_coprime_decomposition(N: int) -> list[list[int]]:
+    """ For each integer n <= N, uses a sieving method to compute the (unique)
+    decomposition of n as a product of prime powers, given as a list. Returns a
+    list of such decompositions for all n ranging from 0 to N. For example:
+        f(9)        = [[0], [1], [2], [3], [4], [5], [2, 3], [7], [8], [9]]
+        f(17)[17]   = [17]
+        f(30)[30]   = [2, 3, 5]
+        f(40)[40]   = [8, 5]
+        f(60)[60]   = [4, 3, 5]
+    where f denotes the present function. """
+
+    assert N >= 1
+    prime_flags = [True for _ in range(N + 1)]
+    decompositions = [[] for _ in range(N + 1)]
+    prime_flags[0], decompositions[0] = False, [0]
+    prime_flags[1], decompositions[1] = False, [1]
+
+    for (p, is_prime) in enumerate(prime_flags):
+        if is_prime:
+            for multiple in range(p, N + 1, p):
+                prime_flags[multiple] = False
+                decompositions[multiple].append(p)
+            k = 2
+            while (q := p**k) <= N:
+                for multiple in range(q, N + 1, q):
+                    decompositions[multiple][-1] *= p
+                k += 1
+    return decompositions
+
+
+def sieve_composite(N: int) -> list[int]:
     """ Returns a list of all composite numbers <= N, computed using
     Eratosthenes' sieve """
     flags = [True] * (N + 1)
