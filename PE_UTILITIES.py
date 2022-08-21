@@ -267,9 +267,9 @@ def sieve_prime_factors(N: int) -> list[list[int]]:
 def sieve_proper_divisors(N: int) -> list[list[int]]:
     """ For each integer n <= N, computes the list of all _proper_ divisors of
     n, i.e., including 1 but excluding n. Requires the function
-    'sieve_prime_factors'. Example:
-        f(6) = [[], [1], [1], [1], [1, 2], [1], [1, 2, 3]]
-    """
+    'sieve_prime_factors'. For example:
+        f(6) = [[[], [1], [1], [1], [1, 2], [1], [3, 1, 2]]
+    Note that the divisors are not necessarily listed in increasing order. """
     list_of_prime_factors = sieve_prime_factors(N)
     list_of_divisors = [[] for _ in range(N + 1)]
     list_of_divisors[1] = [1]
