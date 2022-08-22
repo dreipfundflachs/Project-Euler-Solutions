@@ -4,28 +4,34 @@
 import time
 
 
-def get_primes_up_to_greater_than(n: int, m: int) -> list[int]:
-    """ Returns a list of all primes >= m and <= n using Eratosthenes' sieve.
-    """
+def get_primes_up_to_greater_than(N: int, M: int) -> list[int]:
+    """ Returns a list of all primes p such that M <= p <= N using
+    Eratosthenes' sieve.  """
     primes = []
-    prime_flags = [True] * (n + 1)
+    prime_flags = [True] * (N + 1)
     prime_flags[0] = False
     prime_flags[1] = False
-    for (k, is_prime) in enumerate(prime_flags):
+    for (p, is_prime) in enumerate(prime_flags):
         if is_prime:
-            if k >= m:
-                primes.append(k)
-            for multiple in range(k * k, n + 1, k):
+            if p >= M:
+                primes.append(p)
+            for multiple in range(p * p, N + 1, p):
                 prime_flags[multiple] = False
     return primes
 
 
 def is_pandigital(n: int) -> bool:
-    """ Decides whether an integer is pandigital. """
-    n_string = str(n)
-    set_of_digits = {int(digit) for digit in n_string}
-    number_of_digits = len(set_of_digits)
-    return (len(n_string) == number_of_digits and
+    """ Decides whether an d-digit integer is such that each digit between 1
+    and d appears exactly once in the decimal representation of n. """
+    assert n >= 0 and type(n) == int
+    set_of_digits = set()
+    number_of_digits = 0
+    while n != 0:
+        set_of_digits.add(n % 10)
+        n //= 10
+        number_of_digits += 1
+    number_of_distinct_digits = len(set_of_digits)
+    return (number_of_digits == number_of_distinct_digits and
             set_of_digits == {d for d in range(1, number_of_digits + 1)})
 
 
@@ -44,8 +50,10 @@ def is_pandigital(n: int) -> bool:
 
 start = time.time()
 
-N = 7
-PRIMES = get_primes_up_to_greater_than(10**N, 10**(N - 1))
+D = 7
+N = 10**D
+M = 10**(D - 1)
+PRIMES = get_primes_up_to_greater_than(N, M)
 
 for prime in PRIMES[::-1]:
     if is_pandigital(prime):

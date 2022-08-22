@@ -194,17 +194,20 @@ def get_primes_up_to(n: int) -> list[int]:
     return [p for p in range(2, n + 1) if prime_flags[p]]
 
 
-def get_primes_up_to_greater_than(n: int, m: int) -> list[int]:
-    """ Returns a list of all primes p such that m <= p <= n using
-    Eratosthenes' sieve. """
-    prime_flags = [True] * (n + 1)
+def get_primes_up_to_greater_than(N: int, M: int) -> list[int]:
+    """ Returns a list of all primes p such that M <= p <= N using
+    Eratosthenes' sieve.  """
+    primes = []
+    prime_flags = [True] * (N + 1)
     prime_flags[0] = False
     prime_flags[1] = False
-    for (k, is_prime) in enumerate(prime_flags):
+    for (p, is_prime) in enumerate(prime_flags):
         if is_prime:
-            for multiple in range(k * k, n + 1, k):
+            if p >= M:
+                primes.append(p)
+            for multiple in range(p * p, N + 1, p):
                 prime_flags[multiple] = False
-    return [p for p in range(m, n + 1) if prime_flags[p]]
+    return primes
 
 
 def get_prime_flags_up_to(n: int) -> list[bool]:
@@ -1152,6 +1155,21 @@ def is_tail_pandigital(n: int) -> bool:
 def is_palindromic(string: str) -> bool:
     """ Checks if the given string is palindromic. """
     return (string == string[::-1])
+
+
+def is_pandigital(n: int) -> bool:
+    """ Decides whether an d-digit integer is such that each digit between 1
+    and d appears exactly once in the decimal representation of n. """
+    assert n >= 0 and type(n) == int
+    set_of_digits = set()
+    number_of_digits = 0
+    while n != 0:
+        set_of_digits.add(n % 10)
+        n //= 10
+        number_of_digits += 1
+    number_of_distinct_digits = len(set_of_digits)
+    return (number_of_digits == number_of_distinct_digits and
+            set_of_digits == {d for d in range(1, number_of_digits + 1)})
 
 
 def palindromes(n: int) -> list[int]:

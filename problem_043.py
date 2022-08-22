@@ -13,7 +13,7 @@ def is_substring_divisible(digits: list[str]) -> bool:
     return True
 
 
-def convert_list_of_digits_to_int(lst: list[int]) -> int:
+def convert_list_of_digits_to_int(lst: list[str]) -> int:
     return int(''.join(str(i) for i in lst))
 
 

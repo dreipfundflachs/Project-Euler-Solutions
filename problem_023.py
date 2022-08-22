@@ -68,8 +68,7 @@ number_of_abundants = len(abundants)
 for i in range(0, number_of_abundants):
     abundants_i = abundants[i]
     for j in range(i, number_of_abundants):
-        s = abundants_i + abundants[j]
-        if s < N:
+        if (s := abundants_i + abundants[j]) < N:
             sum_of_abundants_flags[s] = True
         else:
             break

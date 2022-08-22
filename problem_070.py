@@ -22,9 +22,8 @@ def get_sorted_digits(n: int) -> list[int]:
     """ Returns a sorted list of all the digits of n. """
     digits = []
     while n != 0:
-        r = n % 10
-        n = (n - r) // 10
-        digits.append(r)
+        digits.append(n % 10)
+        n //= 10
     return sorted(digits)
 
 
@@ -33,11 +32,14 @@ start = time.time()
 M = 10**4
 N = 10**7
 PRIMES = get_primes_up_to(M)
+L = len(PRIMES)
 
 min_ratio = 10
 
-for p in PRIMES:
-    for q in PRIMES:
+for i in range(L):
+    p = PRIMES[i]
+    for j in range(i + 1, L):
+        q = PRIMES[j]
         if p * q > N:
             break
         else:

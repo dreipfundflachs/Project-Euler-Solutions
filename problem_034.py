@@ -8,11 +8,15 @@ from math import factorial
 def is_sum_of_digit_factorials(n: int) -> bool:
     """ Decides whether an integer > 2 is the sum of the factorials of its
     digits. """
-    digits_of_n = [int(digit) for digit in str(n)]
-    sum_of_factorials_of_digits = 0
-    for digit in digits_of_n:
-        sum_of_factorials_of_digits += FACTORIAL_LIST[digit]
-    if sum_of_factorials_of_digits == n:
+    # Make a copy m of n and extract the digits of n by repeatedly dividing m
+    # by 10, storing the remainders:
+    sum_of_digit_factorials = 0
+    m = n
+    while m != 0:
+        sum_of_digit_factorials += FACTORIALS[(m % 10)]
+        m //= 10
+
+    if sum_of_digit_factorials == n:
         return True
     else:
         return False
@@ -20,18 +24,23 @@ def is_sum_of_digit_factorials(n: int) -> bool:
 
 start = time.time()
 
-FACTORIAL_LIST = [factorial(k) for k in range(0, 10)]
+FACTORIALS = [factorial(k) for k in range(0, 10)]
 
-# Find the least integer N such that 10**N > (9!) * N. If a number is greater
-# than N * (9!), then it will certainly be greater than the sum the
-# factorials of its digits.
+# Let N be the least integer such that 10**(N - 1) > (9!) * N. Then
+#   10**(D - 1) > (9!) * D for all D >= N.
+# If a number n is greater than (9!) * N, then either:
+#   (1) n has D > N digits, hence n >= 10**(D - 1) > (9!) * D.
+#   (2) n has exactly N digits, but the sum of the factorials of its digits
+#       must be less than (9!) * N, which in turn is less than n by hypothesis.
+# In any case, n will be greater than the sum of the factorials of its digits.
+
 for n in range(1, 10):
-    if 10**n > factorial(9) * n:
+    if 10**(n - 1) > FACTORIALS[9] * n:
         N = n
         break
 
 answer = 0
-for n in range(3, N * FACTORIAL_LIST[9]):
+for n in range(3, N * FACTORIALS[9]):
     if is_sum_of_digit_factorials(n):
         answer += n
 
