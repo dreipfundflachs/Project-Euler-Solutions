@@ -21,7 +21,7 @@ count = 0
 # increase the count by 1.
 for q in range(4, N + 1):
     for p in range((q // 3) + 1, (q // 2) + 1):
-        if gcd(p, q) == 1:
+        if gcd(q, p) == 1:
             count += 1
 
 print(count)

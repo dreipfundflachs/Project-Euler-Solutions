@@ -3,7 +3,7 @@
 ## Table of Contents
 1. [Solutions and auxiliary files](#top)
 2. [Description of features](#features)
-3. [Benchmarks](#benchmarks)
+3. [Benchmark runtimes](#benchmarks)
 4. [List of favorite problems](#favorite)
 5. [Badge and friend key](#badge)
 
@@ -29,7 +29,7 @@ corresponding folder `problems_100_plus` above.
 
 
 <a name="benchmarks"></a>
-## Benchmarks
+## Benchmark runtimes
 
 All of the solutions are original (in the sense of not having been taken from
 someone else). The following among them take more than 1 second to execute on
@@ -44,7 +44,7 @@ my computer:
 | 43 | 3.0s |
 | 60 | > 1m |
 | 72 | > 1m |
-| 73 | 6.2s |
+| 73 | 5.7s |
 | 74 | 1.9s |
 | 78 | 4.9s |
 | 82 | 1.1s |
