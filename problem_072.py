@@ -3,57 +3,53 @@
 #################################
 import time
 
+# The number of reduced proper fractions with denominator d > 1 is equal to the
+# count of numbers n between 1 and d - 1 which are relatively prime to d. That
+# is, it is given by phi(d), where phi is Euler's totient function. It is easy
+# to show that:
+#   (1) If p is prime, then phi(p) = p - 1.
+#   (2) More generally, if p is prime, then
+#           phi(p^k) = p^(k - 1) * (p - 1) for any k >= 1.
+#   (3) If m and n are relatively prime, then phi(m * n) = phi(m) * phi(n),
+#       that is, phi is a multiplicative function.
+# From (2) and (3) it follows that
+#   (4) If n = p_1^(k_1) ... p_r^(k_r) is the prime factorization of n, then
+#           phi(n) = p_1^(k_1 - 1) ... p_r^(k_r - 1) (p_1 - 1) ... (p_r - 1)
+#                  = n * product(p - 1 for p prime dividing n)
+#                    // product(p for p prime dividing n)
+#       where both products are over the _distinct_ prime factors of n, i.e.,
+#       without regard to their multiplicities.
+#
+# Therefore, the idea of the solution is to compute the distinct prime factors
+# of all integers n below N = one million, then use the formula in (4) to
+# compute the value of phi(n) for such n, and finally take the sum of the
+# latter values. We combine the first of these two steps in a single function
+# to speed up the computation.
 
-def get_primes_up_to(n: int) -> list[int]:
-    """ Returns a list of all primes <= n using Eratosthenes' sieve """
-    primes = []
-    prime_flags = [True] * (n + 1)
-    prime_flags[0] = False
-    prime_flags[1] = False
-    for (k, is_prime) in enumerate(prime_flags):
+
+def sieve_phis(N: int) -> list[int]:
+    """ Uses sieving to compute phi(n) for all n <= N. Returns the list
+        [phi(n) for n in range(N + 1)]. """
+
+    prime_flags = [True for _ in range(N + 1)]
+    prime_flags[0], prime_flags[1] = False, False
+    phis = [n for n in range(N + 1)]
+    phis[1] = 0
+
+    for (p, is_prime) in enumerate(prime_flags):
         if is_prime:
-            primes.append(k)
-            for multiple in range(k * k, n + 1, k):
-                prime_flags[multiple] = False
-    return primes
-
-
-def get_prime_tuples_given_primes(n: int, primes: list[int]) -> set[int]:
-    """ Returns the set of all prime factors of n in tuple form, given a list
-    that includes all primes less than n. Example:
-    prime_factors(60, [2, 3, 5, 7, 11]) -> {(2,2), (3,1), (5, 1)}. """
-    prime_tuples = set()
-    for p in primes:
-        if n == 1:
-            break
-        multiplicity = 0
-        while n % p == 0:
-            n = n // p
-            multiplicity += 1
-        if multiplicity > 0:
-            prime_tuples.add((p, multiplicity))
-    return prime_tuples
-
-
-def phi(n: int) -> int:
-    """ Computes phi(n), where phi is Euler's totient function."""
-    prime_factors = get_prime_tuples_given_primes(n, primes)
-    totient = 1
-    for (p, mult) in prime_factors:
-        totient *= p**(mult - 1) * (p - 1)
-    return totient
+            for n in range(p, N + 1, p):
+                phis[n] = (phis[n] // p) * (p - 1)
+                prime_flags[n] = False
+    return phis
 
 
 start = time.time()
+
 N = 10**6
 
-primes = get_primes_up_to(N)
-total = 0
-
-for n in range(2, N + 1):
-    total += phi(n)
-
-print(total)
+answer = sum(sieve_phis(N))
+print(answer)
 
 end = time.time()
 print(f"Program runtime: {end - start} seconds")

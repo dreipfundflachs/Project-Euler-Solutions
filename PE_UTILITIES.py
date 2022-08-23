@@ -267,6 +267,23 @@ def sieve_prime_factors(N: int) -> list[list[int]]:
     return prime_factors
 
 
+def sieve_distinct_prime_factors(N: int) -> list[list[int]]:
+    """ For each integer n <= N, uses a sieving method to compute the list of
+    all _distinct_ prime factors of n. For example:
+        sieve_prime_factors(8) = [[], [], [2], [3], [2], [5], [2, 3], [7], [2]]
+    """
+    prime_flags = [True for _ in range(N + 1)]
+    prime_flags[0], prime_flags[1] = False, False
+    prime_factors = [[] for _ in range(N + 1)]
+
+    for (p, is_prime) in enumerate(prime_flags):
+        if is_prime:
+            for m in range(p, N + 1, p):
+                prime_factors[m].append(p)
+                prime_flags[m] = False
+    return prime_factors
+
+
 def sieve_proper_divisors(N: int) -> list[list[int]]:
     """ For each integer n <= N, computes the list of all _proper_ divisors of
     n, i.e., including 1 but excluding n. Requires the function
@@ -349,6 +366,24 @@ def sieve_composite(N: int) -> list[int]:
                 flags[multiple] = False
     composite = [n for n in range(N + 1) if n > 1 and flags[n] is False]
     return composite
+
+
+def sieve_phis(N: int) -> list[int]:
+    """ Uses a sieving method to compute phi(n) for all n <= N, where phi
+    denotes Euler's totient function. Returns the list
+    [phi(n) for n in range(N + 1)]. """
+
+    prime_flags = [True for _ in range(N + 1)]
+    prime_flags[0], prime_flags[1] = False, False
+    phis = [n for n in range(N + 1)]
+    phis[1] = 0
+
+    for (p, is_prime) in enumerate(prime_flags):
+        if is_prime:
+            for n in range(p, N + 1, p):
+                phis[n] = (phis[n] // p) * (p - 1)
+                prime_flags[n] = False
+    return phis
 
 
 def is_prime_given_primes(n: int, primes: list[int]) -> bool:
