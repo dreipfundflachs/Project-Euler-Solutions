@@ -375,7 +375,7 @@ def is_prime(n: int) -> bool:
         return True
 
 
-def miller_rabin(n: int, k: int) -> bool:
+def miller_rabin(n: int, k: int = 40) -> bool:
     """ Verifies whether a number n is prime using by using k random
     numbers between 2 and n - 1. Requires 'randrange' from the module 'random'.
     A good value for k in general is k = 40.
