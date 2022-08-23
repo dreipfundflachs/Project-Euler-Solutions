@@ -761,11 +761,7 @@ def get_highest_power_in_binom(n: int, k: int, p: int) -> int:
 
 def is_square(n: int) -> bool:
     """ Decides whether an integer is the square of another integer. """
-    m = isqrt(n)  # Requires module 'math'.
-    if m**2 == n:
-        return True
-    else:
-        return False
+    return pow(n, 0.5) % 1 == 0
 
 
 def get_primitive_pythagorean_triples(N: int) -> set[int]:

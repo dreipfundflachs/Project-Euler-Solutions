@@ -2,7 +2,6 @@
 #  PROJECT EULER - PROBLEM 046  #
 #################################
 import time
-from math import isqrt
 
 
 def get_prime_flags_up_to(n: int) -> list[bool]:
@@ -20,11 +19,7 @@ def get_prime_flags_up_to(n: int) -> list[bool]:
 
 def is_square(n: int) -> bool:
     """ Decides whether an integer is the square of another integer. """
-    m = isqrt(n)
-    if m**2 == n:
-        return True
-    else:
-        return False
+    return pow(n, 0.5) % 1 == 0
 
 
 start = time.time()
