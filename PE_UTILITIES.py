@@ -849,7 +849,7 @@ def binary_search(target: int, numbers: list[int]) -> True:
     return False
 
 
-def frequencies(lst: list[int]) -> list[int]:
+def get_frequencies(lst: list[int]) -> list[int]:
     """ Given a list, returns a new list consisting of all the frequency counts
     of its unique elements. """
     return sorted([lst.count(x) for x in set(lst)])

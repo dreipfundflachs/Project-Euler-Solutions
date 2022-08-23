@@ -5,7 +5,7 @@ import time
 from random import randrange
 
 
-def get_primes_up_to(n: int) -> list[bool]:
+def get_primes_strings_up_to(n: int) -> list[bool]:
     """ Returns a list all primes from 3 to n, converted to strings. Uses
     Erathostenes' sieve. """
     primes = []
@@ -55,9 +55,19 @@ def miller_rabin(n: int, k: int = 40) -> bool:
 
 
 start = time.time()
-N = 10**4
-PRIME_STRINGS = get_primes_up_to(N)
+N = 9 * 10**3
+PRIME_STRINGS = get_primes_strings_up_to(N)
 M = len(PRIME_STRINGS)
+
+# For each set of five primes p_1 < p_2 < p_3 < p_4 < p_5 <= N, whenever some
+# pair of primes among them cannot be concatenated in some order to form
+# another prime, we break the iteration and move on to the next set of primes
+# to be tested.
+
+# When the first set of five primes such that any pair of them can be
+# concatenated to form a new prime is found, the program displays the answer
+# and quits. Note that it is conceivable that there could be an even smaller
+# sum which the program overlooked. Fortunately, this does not occur.
 
 for i_1 in range(M):
     p_1 = PRIME_STRINGS[i_1]
