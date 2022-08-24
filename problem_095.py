@@ -30,7 +30,7 @@ for n in range(N + 1):
         current_chain.append(k)
         k = sum_of_proper_divisors[k]
     # Store the chain and its length if the first (= n) and last (= k) of its
-    # members coincide and its length is greater than the current maximum.
+    # members coincide and if the length is greater than the current maximum.
     if k == n and len(current_chain) > max_length:
         max_length = len(current_chain)
         max_chain = current_chain
