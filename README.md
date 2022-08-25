@@ -48,10 +48,10 @@ my computer:
 | 78 | 4.9 s  |
 | 82 | 1.1 s  |
 | 86 | 1.4 s  |
-| 93 | 5.2 s  |
+| 93 | 4.6 s  |
 | 95 | 6.8 s  |
 | 96 | 3.2 s  |
-| 98 | 2.6 s  |
+| 98 | 2.7 s  |
 
 
 <a name="favorite"></a>
@@ -80,6 +80,7 @@ consecutive digits have a sum greater than a given value](https://projecteuler.n
 __178__: [Step numbers](https://projecteuler.net/problem=178)  
 __181__: [Investigating in how many ways objects of two different colours can
 be grouped](https://projecteuler.net/problem=181)  
+__185__: [Number Mind](https://projecteuler.net/problem=185)  
 __191__: [Prize strings](https://projecteuler.net/problem=191)  
 __202__: [Laserbeam](https://projecteuler.net/problem=202)  
 __208__: [Robot walks](https://projecteuler.net/problem=208)  

@@ -918,6 +918,22 @@ def insert_in_descending(n: int, a: list[int]) -> list[int]:
             return insert_in_descending(a[:m], n) + a[m:]
 
 
+def get_maximum_sublist_sum(numbers: list[int]) -> int:
+    """ Given a list [n_0, n_1, ..., n_{m-1}] of (possibly negative) integers,
+    returns the maximum sum
+        n_i + n_{i+1} + ... + n_{j-1} + n_j
+    among all sublists with 1 <= i <= j <= m - 1.
+    This is known as "Kadane's algorithm" and takes O(n) time and O(1) memory.
+    Note that if the list is empty or if all of its elements are negative, then
+    the function returns 0 (which is the sum of an empty sublist). """
+    maximum_sum = 0
+    current_sum = 0
+    for n in numbers:
+        current_sum = max(0, current_sum + n)
+        maximum_sum = max(current_sum, maximum_sum)
+    return maximum_sum
+
+
 #############################################
 #  FUNCTIONS INVOLVING MATRICES AND ARRAYS  #
 #############################################
@@ -1138,6 +1154,27 @@ def get_decimal_representation(n: int, d: int, precision: int) -> list[int]:
             decimals.append('r')
             break
     return decimals
+
+
+def generate_lagged_Fibonacci(N: int) -> list[int]:
+    """ Generates the lagged Fibonacci sequence. Returns a list 'sequence'
+    where sequence[0] = 0 for completeness (even though in the description, the
+    index usually starts at 1). """
+    L = 56
+    H = 24
+    A = 100003
+    B = 200003
+    C = 300007
+    D = 500000
+    MOD = 1000000
+    sequence = [0]
+    for n in range(1, L):
+        sequence.append((A -
+                        (n * (B - (C * (n**2 % MOD) % MOD)) % MOD)
+                        % MOD - D))
+    for n in range(L, N + 1):
+        sequence.append((sequence[n - H] + sequence[n - L + 1]) % MOD - D)
+    return sequence
 
 
 def fib_iter(n: int, a: int = 0, b: int = 1) -> int:

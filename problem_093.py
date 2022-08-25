@@ -95,8 +95,8 @@ for digit_combination in combinations(DIGITS, 4):
         m = n
         max_digits = list_of_digits
 
-print((f"Combining the digits in {max_digits} under all possible\n"
-       f"combinations of the elementary arithmetic operations yields each\n"
+print((f"Combining the digits in {max_digits} under all possible "
+       f"combinations of the\nelementary arithmetic operations yields each "
        f"natural number between 1 and {m}."))
 
 end = time.time()
