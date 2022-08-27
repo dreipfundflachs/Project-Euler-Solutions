@@ -90,6 +90,8 @@ __267__: [Billionaire](https://projecteuler.net/problem=267)
 __277__: [A Modified Collatz sequence](https://projecteuler.net/problem=277)  
 __301__: [Nim](https://projecteuler.net/problem=301)  
 __317__: [Firecracker](https://projecteuler.net/problem=317)  
+__323__: [Bitwise-OR operations on random
+integers](https://projecteuler.net/problem=323)  
 __329__: [Prime Frog](https://projecteuler.net/problem=329)  
 __345__: [Matrix Sum](https://projecteuler.net/problem=345)  
 __371__: [Licence plates](https://projecteuler.net/problem=371)  
