@@ -324,7 +324,7 @@ def sieve_divisors(N: int) -> list[list[int]]:
     return list_of_divisors
 
 
-def sieve_coprime_decomposition(N: int) -> list[list[int]]:
+def sieve_prime_decomposition(N: int) -> list[list[int]]:
     """ For each integer n <= N, uses a sieving method to compute the (unique)
     decomposition of n as a product of prime powers, given as a list. Returns a
     list of such decompositions for all n ranging from 0 to N. For example:
