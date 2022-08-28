@@ -324,10 +324,10 @@ def sieve_divisors(N: int) -> list[list[int]]:
     return list_of_divisors
 
 
-def sieve_prime_decomposition(N: int) -> list[list[int]]:
+def sieve_coprime_decomposition(N: int) -> list[list[int]]:
     """ For each integer n <= N, uses a sieving method to compute the (unique)
-    decomposition of n as a product of prime powers, given as a list. Returns a
-    list of such decompositions for all n ranging from 0 to N. For example:
+    decomposition of n as a product of prime _powers_, given as a list. Returns
+    a list of such decompositions for all n ranging from 0 to N. For example:
         f(9)        = [[0], [1], [2], [3], [4], [5], [2, 3], [7], [8], [9]]
         f(17)[17]   = [17]
         f(30)[30]   = [2, 3, 5]
@@ -412,9 +412,9 @@ def is_prime(n: int) -> bool:
 
 def miller_rabin(n: int, k: int = 40) -> bool:
     """ Verifies whether a number n is prime using by using k random
-    numbers between 2 and n - 1. Requires 'randrange' from the module 'random'.
-    A good value for k in general is k = 40.
+    numbers between 2 and n - 1. A good value for k in general is k = 40.
     """
+    from random import randrange
     # The only even prime is 2:
     assert n >= 2
     if n == 2 or n == 3:
@@ -505,10 +505,24 @@ def moebius_sieve(n: int) -> list[int]:
     return mu
 
 
+def has_prime_factors_taken_from(n: int, primes: list[int]) -> bool:
+    """ Decides whether all prime factors of n are elements of the given list
+    'primes'. """
+    assert n >= 1
+    for p in primes:
+        if n == 1:
+            return True
+        while n % p == 0:
+            n //= p
+
+    return n == 1
+
+
 def get_prime_factors(n: int) -> list[int]:
     """ Returns the list of all prime factors of n, each prime appearing as
     many times as its multiplicity indicates.  Determines all necessary primes
-    on the fly. Requires 'isqrt' from module 'math'. """
+    on the fly. """
+    from math import isqrt
     assert n >= 1
     prime_factors = []
     N = isqrt(n)
