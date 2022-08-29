@@ -1437,21 +1437,27 @@ def strings_match(str_1: str, str_2: str) -> bool:
 
 
 def bisection(f: Callable[[float], float],
-              a: float, b: float, eps: float, iterations: int,) -> float:
+              a: float, b: float, eps: float, iterations: int) -> float:
     """ Uses the bisection method to find a root of the real function f of a
     real variable, within a tolerance of eps. Assumes:
         (a) a < b
         (b) f(a) <= 0 <= f(b) or f(b) <= 0 <= f(a)
     Requires 'Callable' from the 'typing' module for the type annotation.
     """
+    # Check whether a is less than b and f(a), f(b) have opposite signs:
     assert a < b
     assert (f(a) < 0 and 0 < f(b)) or (f(b) < 0 and 0 < f(a))
+
     mid = (a + b) / 2
     if iterations == 0 or (b - a) / 2 < eps or f(mid) == 0:
         return mid
-    elif f(mid) < 0:
+    elif f(mid) * f(b) < 0:
+        # f(mid) and f(b) have opposite signs, so use mid and b in the next
+        # iteration:
         return bisection(f, mid, b, eps, iterations - 1)
     else:
+        # f(a) and f(mid) have opposite signs, so use a and mid in the next
+        # iteration:
         return bisection(f, a, mid, eps, iterations - 1)
 
 
