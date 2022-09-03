@@ -5,7 +5,6 @@
 from math import prod, isqrt
 from itertools import combinations
 from functools import reduce
-from random import randint, randrange
 from typing import Callable
 from scipy.special import comb
 
@@ -16,9 +15,7 @@ from scipy.special import comb
 
 class Memoize:
     """ Provides memoization for functions through the use of the @Memoize
-    decorator. Also consider using @functools.cache from the functools
-    module."""
-
+    decorator. Also consider using @functools.cache. """
     def __init__(self, f):
         self.f = f
         self.memo = {}
@@ -36,7 +33,8 @@ class Die:
         self.sides = sides
 
     def roll(self) -> int:
-        return randint(1, self.sides)  # Requires module 'random'
+        from random import randint
+        return randint(1, self.sides)  # Requires randint from module random
 
 
 #################################################################
@@ -1436,29 +1434,53 @@ def strings_match(str_1: str, str_2: str) -> bool:
 #######################
 
 
-def bisection(f: Callable[[float], float],
-              a: float, b: float, eps: float, iterations: int) -> float:
+def bisection(f: Callable[[float], float], a: float, b: float,
+              eps: float, max_iter: int) -> float:
     """ Uses the bisection method to find a root of the real function f of a
-    real variable, within a tolerance of eps. Assumes:
-        (a) a < b
-        (b) f(a) <= 0 <= f(b) or f(b) <= 0 <= f(a)
-    Requires 'Callable' from the 'typing' module for the type annotation.
-    """
-    # Check whether a is less than b and f(a), f(b) have opposite signs:
-    assert a < b
-    assert (f(a) < 0 and 0 < f(b)) or (f(b) < 0 and 0 < f(a))
+    real variable, within a tolerance of eps. Note that it is _not_ necessary
+    that the inputs a and b satisfy:
+        (a) a < b; nor
+        (b) f(a) < 0 < f(b).
+    However, if f(a)f(b) >= 0, then an error is returned.  Requires 'Callable'
+    from the 'typing' module for the type annotation.  """
 
-    mid = (a + b) / 2
-    if iterations == 0 or (b - a) / 2 < eps or f(mid) == 0:
-        return mid
-    elif f(mid) * f(b) < 0:
-        # f(mid) and f(b) have opposite signs, so use mid and b in the next
-        # iteration:
-        return bisection(f, mid, b, eps, iterations - 1)
+    def search(f: Callable[[float], float], neg_point: float, pos_point: float,
+               eps: float, max_iter: int) -> float:
+        """ Relying on the intermediate value theorem, uses interval halving
+        to find an approximation to a zero of f within the interval joining
+        neg_point and pos_point. It is assumed that
+            f(neg_point) < 0 < f(pos_point).
+        This condition is enforced before 'search' is called. """
+        midpoint = (neg_point + pos_point) / 2
+        f_mid = f(midpoint)
+        if max_iter == 0 or f_mid == 0 or abs(pos_point - midpoint) < eps:
+            print(f"Found the approximate zero {midpoint} where the", end=' ')
+            print(f"function takes the value {f_mid}.")
+            return midpoint
+        elif f_mid > 0:
+            return search(f, neg_point, midpoint, eps, max_iter - 1)
+        else:
+            return search(f, midpoint, pos_point, eps, max_iter - 1)
+
+    assert (eps > 0 and max_iter > 0)
+    f_a, f_b = f(a), f(b)
+    # Check the signs of f(a) and f(b), and call 'search' accordingly:
+    if f_a < 0 < f_b:
+        return search(f, a, b, eps, max_iter)
+    elif f_b < 0 < f_a:
+        return search(f, b, a, eps, max_iter)
     else:
-        # f(a) and f(mid) have opposite signs, so use a and mid in the next
-        # iteration:
-        return bisection(f, a, mid, eps, iterations - 1)
+        error_message = "The values of the function at the given arguments "
+        error_message += f"a = {a} and b = {b} do not have opposite signs; "
+        error_message += f"they are f(a) = {f(a)} and f(b) = {f(b)}."
+        raise ValueError(error_message)
+
+
+def dampening(f: Callable[[float], float]) -> Callable[[float], float]:
+    """ Given a function f of a real variable x, returns the function
+    f_dampened which maps x to the midpoint of x and f(x). Requires 'Callable'
+    from the 'typing' module for the type annotation. """
+    return lambda x: ((f(x) + x) / 2.0)
 
 
 def general_loop(indices: list[int],
@@ -1469,8 +1491,8 @@ def general_loop(indices: list[int],
         (a) An initial value 'indices' for all the indices, provided as a list
             of integers.
         (b) A 'reset_condition', that is, a function on a list of indices which
-            determines whether to increment the _previous_ (not the current)
-            index and to reset every index thereafter.
+            determines whether to increment the _previous_ (instead of the
+            current) index and to reset every index thereafter.
 
     The intuitive idea is to visualize the loop as being controlled by a moving
     head modifying a list of indices. The head begins at the last index. The
@@ -1481,6 +1503,10 @@ def general_loop(indices: list[int],
     head is at (the invalid) position -1. In the simplest situation where the
     indices (i_0, ..., i_{m-1}) run through the product [0, N] x ... x [0, N],
     the reset condition would be that one of the indices exceeds N. """
+
+    def reset_condition(indices: list[int]) -> bool:
+        # TODO: Implement the reset condition as nedeed.
+        return False
 
     m = len(indices)
     head = m - 1
@@ -1498,9 +1524,9 @@ def general_loop(indices: list[int],
                 indices[head] += 1
                 for j in range(head + 1, m):
                     indices[j] = 0
-                    # TODO: Depending on the problem, one might instead wish to
-                    # modify the preceding line to set all indices to the right
-                    # of the head to indices[head], for example.
+                    # TODO: Depending on the task at hand, one might instead
+                    # wish to modify the preceding line to set all indices to
+                    # the right of the head to indices[head], for example.
 
         else:
             if not required_resetting:

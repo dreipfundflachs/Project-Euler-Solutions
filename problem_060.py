@@ -6,8 +6,8 @@ from random import randrange
 
 
 def get_primes_strings_up_to(n: int) -> list[bool]:
-    """ Returns a list all primes from 3 to n, converted to strings. Uses
-    Erathostenes' sieve. """
+    """ Returns a list of all primes from 3 to n, converted to strings. Uses
+    Eratosthenes' sieve. """
     primes = []
     prime_flags = [True] * (n + 1)
     prime_flags[0] = False
@@ -27,8 +27,7 @@ def cannot_combine(p: str, q: str) -> bool:
 def miller_rabin(n: int, k: int = 40) -> bool:
     """ Verifies whether a number n is prime using by using k random
     numbers between 2 and n - 1. Requires 'randrange' from the module 'random'.
-    A good value for k in general is k = 40.
-    """
+    A good value for k in general is k = 40. """
     # The only even prime is 2:
     assert n >= 2
     if n == 2 or n == 3:

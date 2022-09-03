@@ -5,7 +5,7 @@ import time
 
 
 def decrypt(text: list[int], key: int) -> str:
-    """ Given a key (an integer) and a list of integers (representing ascii
+    """ Given a key (an integer) and a list of integers (representing ASCII
     characters), applies XOR to each pair (key, integer). """
     letters = []
     for i in text:
@@ -49,7 +49,7 @@ for k in range(3):
 
 # print(candidates)
 
-# Will hold all letters in each of the three lists.
+# The following will hold all letters in each of the three lists:
 letters: list[str] = ["", "", ""]
 
 # Since there is only one candidate for the key in each case, we can now
@@ -58,8 +58,7 @@ for i in range(2):
     for k in range(3):
         letters[k] = decrypt(lists[k], candidates[k][0])
 
-# Optional: Write the contents of the decrypted text to a file. Also, print the
-# answer.
+# Print the answer and write the contents of the decrypted text to a file.
 sum_of_ASCII_values = 0
 with open('p059_decrypted.txt', 'w') as file_object:
     for n in range(len(letters[0])):

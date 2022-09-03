@@ -24,15 +24,15 @@ It also includes:
   100); these are named `p0[0-9][0-9]_*.txt`.
 
 Solutions to some of the problems beyond the first one hundred are stored in a
-_private_ repository. Even though it is inaccessible, Github still lists the
-corresponding folder `problems_100_plus` above.
+_private_ repository. The corresponding folder `problems_100_plus` appears in
+the listing above even though it is publicly inaccessible.
 
 
 <a name="benchmarks"></a>
 ## Benchmark runtimes
 
 All of the solutions are original (in the sense of not having been taken from
-someone else). The following among them take more than 1 second to execute on
+someone else). The following among them take more than one second to execute on
 my computer:
 
 | Problem number   | Runtime (approx.)   |
