@@ -20,8 +20,8 @@ It also includes:
   had to write to solve these problems. It is however _not_ necessary to import
   it for any of the scripts to work.
 * A __template__ `SOLUTION_TEMPLATE.py` for the solution scripts.
-* All __auxiliary files__ linked to in the problem statements (among the first
-  100); these are named `p0[0-9][0-9]_*.txt` and stored in a single folder.
+* A folder `AUXILIARY_FILES` containing all __text files__ linked to in the problem statements (among the first
+  100) or created by myself to avoid cutting and pasting large numbers, matrices, etc.. These files are named `p0[0-9][0-9]_*.txt`.
 
 📝 Before running the solution to a problem involving an auxiliary file, it is necessary to move the latter to the same directory as the source code for the solution.
 
