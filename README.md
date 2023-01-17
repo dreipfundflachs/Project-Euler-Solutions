@@ -26,8 +26,7 @@ It also includes:
 📝 Before running the solution to a problem involving an auxiliary file, it is necessary to move the latter to the same directory as the source code for the solution.
 
 📝 Solutions to some of the problems beyond the first one hundred are stored in a
-_private_ repository. The corresponding folder `problems_100_plus` appears in
-the listing above even though it is publicly inaccessible.
+_private_ repository.
 
 
 <a name="benchmarks"></a>
